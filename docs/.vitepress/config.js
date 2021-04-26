@@ -1,5 +1,5 @@
 module.exports = {
-  title: '面试题集合',
+  title: '面试题集合 🍀',
   lang: 'zh-cn',
   description: '收集前后端常见面试题，以及自己学习 vue、react 源码过程的笔记',
   base: '/interview/',
@@ -41,40 +41,30 @@ function getGuideSidebar() {
     {
       text: 'js面试题',
       children: [
+        { text: '常见js面试题', link: '/js/' },
         { text: '手写 js 中 bind', link: '/js/bind' },
         { text: '手写 js 中 call 和 apply', link: '/js/call_apply' },
         { text: '手写 js 中 Promise api', link: '/js/promise' },
         { text: '手写 js 中数组 forEach', link: '/js/array/foreach' },
+        { text: 'js 中的类型和类型判断', link: '/js/typeof' },
+        { text: '手写 js 对象中的 create 函数', link: '/js/object/create' },
       ],
     },
     {
-      text: 'Advanced',
+      text: 'vue 相关面试题',
+      children: [{ text: '实现原理面试题', link: '/vue/原理相关面试题' }],
+    },
+    {
+      text: 'babel 面试题',
+      children: [{ text: 'babel 常见面试问点', link: '/babel' }],
+    },
+    {
+      text: '算法',
       children: [
-        { text: 'Frontmatter', link: '/guide/frontmatter' },
-        { text: 'Global Computed', link: '/guide/global-computed' },
-        { text: 'Global Component', link: '/guide/global-component' },
-        { text: 'Customization', link: '/guide/customization' },
         {
-          text: 'Differences from Vuepress',
-          link: '/guide/differences-from-vuepress',
+          text: '快速排序',
+          link: '/算法/quick_sort',
         },
-      ],
-    },
-  ];
-}
-
-function getConfigSidebar() {
-  return [
-    {
-      text: 'App Config',
-      children: [{ text: 'Basics', link: '/config/basics' }],
-    },
-    {
-      text: 'Theme Config',
-      children: [
-        { text: 'Homepage', link: '/config/homepage' },
-        { text: 'Algolia Search', link: '/config/algolia-search' },
-        { text: 'Carbon Ads', link: '/config/carbon-ads' },
       ],
     },
   ];
