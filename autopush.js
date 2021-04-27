@@ -59,9 +59,6 @@ class Uploader {
       '/' + path.resolve(buildRoot).split('/').slice(-2).join('/') + '/';
     try {
       for (let filePath of files) {
-        console.log('====================================');
-        console.log(filePath);
-        console.log('====================================');
         let ossFilePath = slash(
           path.join(ossPath, splitToken && filePath.split(splitToken)[1])
         );

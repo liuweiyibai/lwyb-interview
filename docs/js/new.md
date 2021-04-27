@@ -54,9 +54,8 @@ function new1(ctor) {
     } else {
       // 普通调用 this 是 window
     }
-
-    //if(this.constructor === arguments.callee){
-    // new 调用
-    //}
+    if (this.constructor === arguments.callee) {
+      console.log('new 调用');
+    }
   }
   ```

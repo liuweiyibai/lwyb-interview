@@ -48,11 +48,16 @@ function getGuideSidebar() {
         { text: '手写 js 中数组 forEach', link: '/js/array/foreach' },
         { text: 'js 中的类型和类型判断', link: '/js/typeof' },
         { text: '手写 js 对象中的 create 函数', link: '/js/object/create' },
+        { text: '定时器相关', link: '/js/setTimeout' },
+        { text: '手写 js new 操作符', link: '/js/new' },
       ],
     },
     {
       text: 'vue 相关面试题',
-      children: [{ text: '实现原理面试题', link: '/vue/原理相关面试题' }],
+      children: [
+        { text: 'vue 基础面试题', link: '/vue/基础面试题' },
+        { text: 'vue 高阶面试题', link: '/vue/原理相关面试题' },
+      ],
     },
     {
       text: 'babel 面试题',
@@ -62,22 +67,17 @@ function getGuideSidebar() {
       text: '算法',
       children: [
         {
-          text: '快速排序',
-          link: '/算法/quick_sort',
+          text: '排序',
+          link: '/算法/sort',
         },
-        { text: '手写 js new 操作符', link: '/js/new' },
       ],
     },
     {
       text: 'css 面试题',
-      children: [
-        { text: 'Frontmatter', link: '/guide/frontmatter' },
-        
-      ],
+      children: [{ text: 'Frontmatter', link: '/guide/frontmatter' }],
     },
     {
       text: 'html 面试题',
     },
   ];
 }
-
