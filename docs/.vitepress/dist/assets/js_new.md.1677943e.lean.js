@@ -1,1 +1,0 @@
-import{o as n,c as s,d as a}from"./app.6ada74fe.js";const t='{"title":"实现 js 中的 new 操作符","description":"","frontmatter":{},"relativePath":"js/new.md","lastUpdated":1619357941308}',p={},o=a('',3);p.render=function(a,t,p,e,c,r){return n(),s("div",null,[o])};export default p;export{t as __pageData};
