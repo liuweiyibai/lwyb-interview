@@ -4,6 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "ali-oss": "^6.15.2",
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "globby": "^11.0.3",
+    "slash": "3.0.0",
     "vitepress": "^0.13.0"
   },
   "scripts": {

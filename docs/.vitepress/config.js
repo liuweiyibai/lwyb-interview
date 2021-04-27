@@ -65,7 +65,19 @@ function getGuideSidebar() {
           text: '快速排序',
           link: '/算法/quick_sort',
         },
+        { text: '手写 js new 操作符', link: '/js/new' },
       ],
+    },
+    {
+      text: 'css 面试题',
+      children: [
+        { text: 'Frontmatter', link: '/guide/frontmatter' },
+        
+      ],
+    },
+    {
+      text: 'html 面试题',
     },
   ];
 }
+
