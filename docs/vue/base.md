@@ -51,7 +51,7 @@
 
    会更新，更新顺序是: 子组件 beforeUpdate->父组件 beforeUpdate->子组件 updated->父组件 updated
 
-## vue 路由面试题
+## 路由面试题
 
 1. vue-router 是什么?它有哪些组件
 

@@ -1,4 +1,6 @@
-# 实现对象 object.create 方法
+# 对象常见面试题
+
+## 实现对象 object.create 方法
 
 实现一个 object.create
 
@@ -13,3 +15,5 @@ function create(proto, des) {
   return newObj;
 }
 ```
+
+## js 继承，babel 转译的es6 class 使用哪种继承方式实现
