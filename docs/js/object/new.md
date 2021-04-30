@@ -15,6 +15,7 @@ function new1(ctor) {
     return;
   }
   // 指向构造函数
+  // new.target 可以用来判断是否是 new 方式调用的
   new1.target = ctor;
 
   // var newObject = {}
