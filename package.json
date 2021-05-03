@@ -9,7 +9,7 @@
     "dotenv": "^8.2.0",
     "globby": "^11.0.3",
     "slash": "3.0.0",
-    "vitepress": "^0.13.0"
+    "vitepress": "^0.13.2"
   },
   "scripts": {
     "start": "vitepress dev docs",
