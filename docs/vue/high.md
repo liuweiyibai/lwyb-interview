@@ -23,3 +23,19 @@
    如果是对象，则判断属性是否存在对象上，对象是不是 vue 实例，如果都不满足，则使用 delete key.value 删除后调用 target 上的 observe 对象通知依赖进行更新
 
    $set，判断 target 是数组还是对象，当是数组时，key 就是索引，比较 key 和 target 的 length 的大小，将 target.length 设置为大值，完后通过 splice 在`target[key]` 位置替换或者插入元素。如果是对象，如果 target 是响应式的，并且 key 在 target 上，直接`target[key] = value` 进行赋值，如果不是响应式的，则通过 `defineReactive` 定义为响应式然后通知依赖更新
+
+5. vue 实例挂载的过程
+
+   1. new Vue 的时候调用会调用 `_init` 方法
+   2. 定义 `$set`、`$get` 、`$delete`、`$watch` 等方法
+   3. 定义 `$on`、`$off`、`$emit`、`$off` 等事件
+   4. 定义 `_update`、`$forceUpdate`、`$destroy` 生命周期
+   5. 调用$mount 进行页面的挂载
+
+   挂载的时候主要是通过 mountComponent 方法
+
+   定义 updateComponent 更新函数
+
+   执行 render 生成虚拟 DOM
+
+   `_update` 将虚拟 DOM 生成真实 DOM 结构，并且渲染到页面中

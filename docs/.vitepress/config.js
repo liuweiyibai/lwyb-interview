@@ -10,6 +10,7 @@ module.exports = {
     editLinks: true,
     editLinkText: 'Edit this page on GitHub',
     lastUpdated: '上次更新时间',
+    sidebarDepth: 0,
     sidebar: {
       '/': getGuideSidebar(),
     },
@@ -42,6 +43,7 @@ function getGuideSidebar() {
         { text: '正则相关面试题', link: '/js/regexp' },
         { text: '定时器相关', link: '/js/setTimeout' },
         { text: 'js 中的数据类型和类型判断', link: '/js/typeof' },
+        { text: 'js 函数柯里化', link: '/js/curry' },
       ],
     },
     {
@@ -79,6 +81,7 @@ function getGuideSidebar() {
     },
     {
       text: 'HTTP 面试题',
+      link: '/http/index',
       children: [
         {
           text: '常见 HTTP 状态码',
@@ -93,6 +96,14 @@ function getGuideSidebar() {
     {
       text: 'css 面试题',
       link: '/css/index',
+    },
+    {
+      text: '小程序',
+      link: '/mini_progame',
+    },
+    {
+      text: '移动端开发',
+      link: '/h5_mobile',
     },
   ];
 }
