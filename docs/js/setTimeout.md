@@ -114,4 +114,34 @@
    // 只要在2500毫秒之内，用户再次击键，就会取消上一次的定时器，然后再新建一个定时器。这样就保证了回调函数之间的调用间隔，至少是2500毫秒。
    ```
 
-[参考地址](https://wangdoc.com/javascript/async/timer.html#settimeout?share_token=97955361-A294-4BC7-952B-B866A95B3070&tt_from=weixin&utm_source=weixin&utm_medium=toutiao_ios&utm_campaign=client_share&wxshare_count=1)
+8. 如何解决 setTimeout 不准时的问题
+
+   ```js
+   function timer() {
+     var speed = 500,
+       counter = 1,
+       start = new Date().getTime();
+
+     function instance() {
+       var ideal = counter * speed,
+         real = new Date().getTime() - start;
+
+       counter++;
+
+       var diff = real - ideal;
+       form.diff.value = diff;
+
+       window.setTimeout(function () {
+         instance();
+       }, speed - diff); // 通过系统时间进行修复
+     }
+
+     window.setTimeout(function () {
+       instance();
+     }, speed);
+   }
+   ```
+
+[JavaScript 教程-异步操作-定时器](https://wangdoc.com/javascript/async/timer.html#settimeout?share_token=97955361-A294-4BC7-952B-B866A95B3070&tt_from=weixin&utm_source=weixin&utm_medium=toutiao_ios&utm_campaign=client_share&wxshare_count=1)
+
+[字节面试官问粉丝，如何实现准时的setTimeout](https://mp.weixin.qq.com/s/5TTBRDAAqPhUvOkQGVbGUw)

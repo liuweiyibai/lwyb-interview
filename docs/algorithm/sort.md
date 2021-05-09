@@ -7,6 +7,30 @@
 1. 冒泡 O(n²)
 2. 快排 On()
 
+   ```js
+   // 最普通的快排比sort快30%，我之前自己在 chrome 上跑的(随机的数值)
+   function quickSort(arr) {
+     if (arr.length === 0) {
+       return [];
+     }
+     var flag = arr[0];
+     var left = [];
+     var right = [];
+     for (var i = 1; i < arr.length; i++) {
+       var item = arr[i];
+       if (item > flag) {
+         right.push(item);
+       } else {
+         left.push(item);
+       }
+     }
+
+     return quickSort(left).concat(flag, quickSort(right));
+   }
+   var arr = [95, 43, 43, 56, 55, 4, 2, 4, 424, 435, 90];
+   console.log(quickSort(arr)); // [2, 4, 4, 43, 43, 55, 56, 90, 95, 424, 435]
+   ```
+
 ## 搜索
 
 1. 二分查找
