@@ -26,7 +26,7 @@ function new1(ctor) {
   // var args = Array.from(arguments).slice(1)
 
   // 通过 apply 改变指向
-  // 如果构造函数中返回非null的对象，直接返回这个对象
+  // 如果构造函数中返回非null的对象或者函数，直接返回这个对象
   var newResult = ctor.apply(newObjectPrototype, args);
 
   var isObject = typeof newResult === 'object' && newResult !== null;

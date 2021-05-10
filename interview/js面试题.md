@@ -103,20 +103,18 @@
   function compose(...args) {
     // 等于零直接执行
     if (args.length === 0) {
-      return arg => arg;
+      return (arg) => arg;
     }
     if (args.length === 1) {
       return args[0]();
     }
-    return args.reduce((fn1, fn2) => args2 => fn1(fn2(args2)));
+    return args.reduce((fn1, fn2) => (args2) => fn1(fn2(args2)));
   }
   ```
 
 - 闭包的应用场景
 
-  定时器
-  for 循环
-  手写 bind
+  节流和防抖
 
 - 内置 new 的实现
 
@@ -222,7 +220,48 @@
 
 ## 防抖和节流
 
-使用场景以及其定义，手写一下
+主要用在避免重复触发某些事件行为或者频繁触发事件方法等
+
+1. 函数防抖
+
+   ```js
+   // 触发高频事件 N 秒后只会执行一次，如果 N 秒内事件再次触发，则会重新计时。
+   // 不论调用多少次 都是 在 wait 后执行
+   function debounce(fn, wait) {
+     // 总会在最后一次触发 + wait 后执行 fn
+     var timeout;
+     return function () {
+       var ctx = this;
+       var args = arguments;
+       clearTimeout(timeout);
+       timeout = setTimeout(function () {
+         fn.apply(ctx, args);
+       }, wait);
+     };
+   }
+   // 缺点1 不支持立刻执行
+   // 缺点2 没考虑如果函数有返回值
+   // 缺点3 没有考虑徐晓请求
+   ```
+
+2. 节流
+
+   ```js
+   function throttle(fn, wait) {
+     // 触发高频事件，且 N 秒内只执行一次。
+     var ctx, args, previous;
+     return function () {
+       var now = new Date();
+       ctx = this;
+       args = arguments;
+       // 现在 - 上一次执行的时间点 > wait ，表示可以执行
+       if (now - previous > wait) {
+         fn.apply(ctx, args);
+         previous = now;
+       }
+     };
+   }
+   ```
 
 ## ES6 面试题，ES6 新增方法面试题
 
@@ -279,10 +318,9 @@
 3. 实现一个函数 clone 可以对 Javascript 中的五种主要数据类型（Number、string、Object、Array、Boolean）进行复制
 
    ```js
-    function copy(obj){
-      let initVal = Array.isArray(obj)?[]:{}
-      
-    }
+   function copy(obj) {
+     let initVal = Array.isArray(obj) ? [] : {};
+   }
    ```
 
 4. 如何消除一个数组里面重复的元素
@@ -447,7 +485,7 @@
     var str = 'fdsfjkjkjjjkjkjkjjjkjkjjk';
     function findStr(str) {
       let obj = {};
-      str.split('').forEach(t => {
+      str.split('').forEach((t) => {
         if (obj[t]) {
           obj[t] += 1;
         } else {
@@ -455,7 +493,7 @@
         }
       });
       let max = Math.max.apply(null, Object.values(obj));
-      Object.keys(obj).forEach(t => {
+      Object.keys(obj).forEach((t) => {
         if (obj[t] === max) {
           console.log(t);
         }

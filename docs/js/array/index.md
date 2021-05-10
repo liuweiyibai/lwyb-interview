@@ -12,3 +12,21 @@
    parseInt(2, 1)
    parseInt(3, 2)
    对应的执行结果分别为 1、NaN、NaN。
+
+2. 数组去重
+
+   1. es5
+
+      ```js
+      function unique(arr) {
+        return arr.filter((t, i) => {
+          return arr.indexOf(t) === i;
+        });
+      }
+      ```
+
+   2. es6
+
+      ```js
+      var unique = (arr) => [...new Set(arr)];
+      ```

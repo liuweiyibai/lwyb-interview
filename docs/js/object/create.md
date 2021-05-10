@@ -5,6 +5,7 @@
 实现一个 object.create
 
 ```js
+// Object.create 实现的效果是将参数 proto 放在返回对象的 __proto__ 上
 function create(proto, des) {
   var Fn = function () {};
   Fn.prototype = proto;
