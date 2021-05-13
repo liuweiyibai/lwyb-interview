@@ -76,4 +76,39 @@
 
 ## 洗牌
 
+```js
+const shuffle = (arr) => {
+  var result = [],
+    random;
+  while (arr.length > 0) {
+    random = Math.floor(Math.random() * arr.length);
+    result.push(arr[random]);
+    arr.splice(random, 1);
+  }
+  return result;
+};
+
+let arr: number[] = [...new Array(100)].map((_, i) => i);
+
+/**
+ * 洗牌函数，对正序数组进行重排
+ */
+// arr = shuffle1<number>(arr);
+function shuffle1<T>(arr: T[]): T[] {
+  let length = arr.length,
+    element: T,
+    random: number;
+  while (length) {
+    random = Math.floor(Math.random() * length--);
+    element = arr[length];
+    [arr[length], arr[random]] = [arr[random], element];
+  }
+  return arr;
+}
+
+const shuffle2 = (arr = []) => arr.sort((a, b) => Math.random() - 0.5);
+
+shuffle(arr);
+```
+
 字典树

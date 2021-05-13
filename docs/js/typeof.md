@@ -1,14 +1,21 @@
 # js 数据类型
 
-## 基础数据类型
+- 常见数据类型
 
-## 判断数据类型有哪些方法
+null undefined number string boolean object symbol bigint
 
-```js
-typeof;
-  // 用来判断基础数据类型
-instenceof
-```
+- 判断数据类型有哪些方法
+
+  ```js
+  typeof;
+    // 用来判断基础数据类型
+  instenceof
+  Object.prototype.toString.call([])
+  ```
+
+- 使用 typeof 判断类型需要注意哪些问题
+
+  typeof 对 null 和数组其他非 function 的引用数据类型判断都是 object
 
 - 实现一个 instanceof
 

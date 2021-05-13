@@ -50,7 +50,7 @@
    哈希表的大小
    哈希冲突处理方式
 
-> 参考地址：[代码面试需要知道的8种数据结构(附面试题及答案链接)](https://blog.fundebug.com/2018/08/27/code-interview-data-structure/)
+> 参考地址：[代码面试需要知道的 8 种数据结构(附面试题及答案链接)](https://blog.fundebug.com/2018/08/27/code-interview-data-structure/)
 
 - 基础数据结构(抛开语言)
 
@@ -91,4 +91,12 @@
 
 - 什么是算法复杂度
 
-语言是数据结构实现的一种方式
+  语言是数据结构实现的一种方式
+
+- 生成指定长的的随机数数组
+
+  ```ts
+  const makeRandom = () => Math.floor(Math.random() * 10000);
+  export const makeArray = (len: number) =>
+    [...new Array(len)].map(() => makeRandom());
+  ```
