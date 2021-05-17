@@ -72,6 +72,7 @@ function getGuideSidebar() {
     },
     {
       text: '算法',
+      link: '/algorithm/index',
       children: [
         {
           text: '排序',
