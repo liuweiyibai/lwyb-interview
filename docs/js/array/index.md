@@ -4,7 +4,7 @@
 
    ['1', '2', '3'].map(parseInt) 的输出结果为 [1, NaN, NaN]。
 
-   因为 parseInt(string, radix) 将一个字符串 string 转换为 radix 进制的整数， radix 为介于 2-36 之间的数。
+   因为 parseInt(string, radix) 将一个字符串 string 转换为 radix 进制的整数，radix 为介于 2-36 之间的数。
 
    在数组的 map 方法的回调函数中会传入 item（遍历项） 和 index（遍历下标) 作为前两个参数，所以这里的 parseInt 执行了对应的三次分别是
 
@@ -31,6 +31,7 @@
       var unique = (arr) => [...new Set(arr)];
       ```
 
+<<<<<<< HEAD
 3. 数组降维
 
    ```js
@@ -44,4 +45,10 @@
        }
      });
    }
+=======
+3. 取数组最大值
+
+   ```js
+   let max = Math.max.apply(null, [2, 6, 7, 9, 4]);
+>>>>>>> ea8acf2c2b272f991bb6e56eaba93539f2192a15
    ```

@@ -112,3 +112,28 @@ shuffle(arr);
 ```
 
 字典树
+
+73. 快速排序
+
+74. 二分查找法，返回数组中某元素的位置
+
+    ```js
+    function binSearch(arr, data) {
+      let start = 0;
+      let end = arr.length - 1;
+      while (start <= end) {
+        var mid = Math.floor((end + start) / 2);
+        if (arr[mid] < data) {
+          start = mid + 1;
+        } else if (arr[mid] > data) {
+          end = mid - 1;
+        } else {
+          return mid;
+        }
+      }
+      return -1;
+    }
+    var test = [1, 2, 3, 4, 5, 6];
+
+    console.log(binSearch(test, 6));
+    ```
