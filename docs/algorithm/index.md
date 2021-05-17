@@ -100,3 +100,50 @@
   export const makeArray = (len: number) =>
     [...new Array(len)].map(() => makeRandom());
   ```
+
+- 实现一个 LUR 缓存函数
+
+  最近最常使用，每次存取都将 key 在插入到 keys 最后，超过 max 值后将第一个删除
+
+  ```js
+  class LRUCache {
+    constructor(max) {
+      this.max = max;
+      this.keys = [];
+      this.cache = {};
+    }
+    get = (k) => {
+      // 如果缓存存在
+      if (this.cache[k]) {
+        // 先将 keys 移除
+        this.remove(this.keys, k);
+        // 然后再加到keys中
+        this.keys.push(k);
+        return this.cache[k];
+      } else {
+        return -1;
+      }
+    };
+    put = (k, v) => {
+      // 如果 key值存在
+      if (this.cache[k]) return;
+
+      // 将key提前
+      this.keys.push(k);
+      if (this.keys.length > this.max) {
+        //
+        delete this.cache[this.keys[0]];
+        this.keys.shift();
+      }
+      this.cache[k] = v;
+    };
+    remove = (arr, item) => {
+      if (arr.length) {
+        const index = arr.indexOf(item);
+        if (index > -1) {
+          return arr.splice(index, 1);
+        }
+      }
+    };
+  }
+  ```

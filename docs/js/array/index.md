@@ -30,3 +30,18 @@
       ```js
       var unique = (arr) => [...new Set(arr)];
       ```
+
+3. 数组降维
+
+   ```js
+   let res = [];
+   function flatten(arr) {
+     arr.forEach((t) => {
+       if (Array.isArray(t)) {
+         flatten(t);
+       } else {
+         res.push(t);
+       }
+     });
+   }
+   ```

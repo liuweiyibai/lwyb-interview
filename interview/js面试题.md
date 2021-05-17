@@ -155,16 +155,9 @@
   }
   ```
 
-- 箭头函数为什么不能做构造函数
+- js 判断属性为空，判断是空对象
 
   ```js
-
-  ```
-
-- js 判断属性为空
-
-  ```js
-  var config = {};
   function isEmpty(obj) {
     for (let key in obj) {
       return false;
@@ -242,6 +235,35 @@
    // 缺点1 不支持立刻执行
    // 缺点2 没考虑如果函数有返回值
    // 缺点3 没有考虑徐晓请求
+   ```
+
+   版本 2
+
+   ```js
+   /*
+    * @Parma
+    *   func要执行的函数
+    *   wait间隔等待的时间
+    *   immediate在开始边界还是结束边界触发执行（true在开始边界）
+    * @return
+    *   可被调用的函数
+    */
+   function debounce(func, wait, immediate) {
+     let result = null,
+       timeout = null;
+     return function (...args) {
+       let context = this,
+         now = immediate && !timeout;
+       clearTimeout(timeout);
+       // 重点：在设置新的定时器之前，要把之前设置的定时器都清除，因为防抖的目的是等待时间内，只执行一次
+       timeout = setTimeout(() => {
+         if (!immediate) result = func.call(context, ...args);
+         clearTimeout(timeout);
+         timeout = null;
+       }, wait);
+       if (now) result = func.call(context, ...args);
+     };
+   }
    ```
 
 2. 节流
@@ -503,9 +525,7 @@
     findStr(str);
     ```
 
-85. 快速排序
-
-86. 二分查找法，返回数组中某元素的位置
+85. 二分查找法，返回数组中某元素的位置
 
     ```js
     function binSearch(arr, data) {

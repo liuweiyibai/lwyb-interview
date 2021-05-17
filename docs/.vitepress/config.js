@@ -44,6 +44,7 @@ function getGuideSidebar() {
         { text: '定时器相关', link: '/js/setTimeout' },
         { text: 'js 中的数据类型和类型判断', link: '/js/typeof' },
         { text: 'js 函数柯里化', link: '/js/curry' },
+        { text: 'js 事件循环面试题', link: '/js/eventLoop' },
       ],
     },
     {
