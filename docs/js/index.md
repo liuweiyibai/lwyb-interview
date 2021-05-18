@@ -223,20 +223,20 @@
     }
     ```
 
-- 讲讲 js 数据类型？基本和引用的区别？symbol 和 bigint 讲一讲应用场景
+22. 讲讲 js 数据类型？基本和引用的区别？symbol 和 bigint 讲一讲应用场景
 
-  null undefined string number boolean symbol bigint object
+    null undefined string number boolean symbol bigint object
 
-  Symbol 解决复杂对象属性名重复的问题，模拟私有方法，vue 的 inject 和 provide 时使用 Symbol
+    Symbol 解决复杂对象属性名重复的问题，模拟私有方法，vue 的 inject 和 provide 时使用 Symbol
 
-- 判断数据类型原理
+23. 判断数据类型原理
 
-  ```js
-  a instanceof b; // a 的原型链上是否存在 b
-  // typof null // object
-  // typeof NaN // number
-  // 使用 typeof 判断基础类型
-  ```
+    ```js
+    a instanceof b; // a 的原型链上是否存在 b
+    // typof null // object
+    // typeof NaN // number
+    // 使用 typeof 判断基础类型
+    ```
 
 - es6 中 let 暂时性死区详解
 
@@ -435,7 +435,7 @@
 
   1. 将代码字符串解析为 ast 抽象语法树
   2. 对 ast 进行处理，在这个阶段可以对 es6 的 ast 进行转换，转换为 es5 的 ast
-  3. 根据处理完后的 ast 生成代码符串
+  3. 根据处理完后的 ast 生成代码符串和 sourcemap
 
 ## 防抖和节流
 
@@ -534,6 +534,7 @@
 1. 简述同步和异步的区别
 
 2. 怎么添加、移除、复制、创建、和查找节点
+
 3. 实现一个函数 clone 可以对 js 中的五种主要数据类型（Number、string、Object、Array、Boolean）进行复制
 
    ```js
@@ -567,10 +568,11 @@
 5. 写一个返回闭包的函数
 
    ```js
+   // 记录某函数调用次数
    function a() {
      var u = 0;
-     return function bar() {
-       return u;
+     return function () {
+       return u++;
      };
    }
    ```
@@ -678,48 +680,105 @@
 47. typeof 和 instanceof()的用法区别
 48. 什么是变量提升
 49. call、apply 以及 bind 函数内部实现是怎么样的
+
+    ```js
+    function myCall(ctx) {
+      ctx = ctx || window;
+      // 判断是不是被函数调动 this 是不是 函数，否则抛出错误
+      var args = [];
+      var _this = this;
+      var context = {};
+      context.fn = _this;
+      for (var i = 1; i < arguments.length; i++) {
+        args.push('arguments[' + i + ']');
+      }
+      var result = eval('context.fn(' + args + ')');
+      delete context.fn;
+      return result;
+    }
+
+    function bind(ctx) {
+      ctx = ctx || window;
+      var _this = this;
+      var wrapArgs = Array.prototype.slice.call(argument, 1);
+      var instance = function () {
+        var innerArgs = Array.prototype.slice.call(argument);
+        // 如果 instance 被当做构造函数使用
+        if (this instanceof instance) {
+          return _this.apply(this, wrapArgs.concat(innerArgs));
+        }
+        return _this.apply(ctx, wrapArgs.concat(innerArgs));
+      };
+      return instance;
+    }
+    ```
+
 50. 为什么会出现 setTimeout 倒计时误差？如何减少
 51. 谈谈你对 js 执行上下文栈和作用域链的理解
 52. prototype 和 proto 区别是什么？
-53. 使用 es5 实现一个继承？
-54. es6 新的特性有哪些？
-55. Promise 有几种状态, Promise 有什么优缺点 ?
-56. Promise 构造函数是同步还是异步执行，then 呢 ?promise 如何实现 then 处理 ?
-57. Promise 和 setTimeout 的区别 ?
+53. Promise 有几种状态, Promise 有什么优缺点 ?
+54. Promise 构造函数是同步还是异步执行，then 呢 ?promise 如何实现 then 处理 ?
+55. Promise 和 setTimeout 的区别 ?
 
     微任务和宏任务，任务队列
 
-58. 如何实现 Promise.all ?
-59. 如何实现 Promise.finally ?
-60. 如何判断 img 加载完成
-61. 如何阻止冒泡？
-62. 如何阻止默认事件？
-63. ajax 请求时，如何解析 json 数据
-64. 如何用原生 js 给一个按钮绑定两个 onclick 事件？
+56. 如何实现 Promise.all?
+57. 如何实现 Promise.finally?
+58. 如何判断 img 加载完成
+
+    img 的 onload 事件
+
+59. 如何阻止冒泡？
+60. 如何阻止默认事件？
+61. 如何用原生 js 给一个按钮绑定两个 onclick 事件？
 
     使用 addEventlistener
 
-65. 拖拽会用到哪些事件
-66. document.write 和 innerHTML 的区别
-67. 浏览器是如何渲染页面的？
+62. 拖拽会用到哪些事件
+63. document.write 和 innerHTML 的区别
+64. 浏览器是如何渲染页面的？
 
     根据 http 请求拿回静态资源后，解析 html 和 css，分别生成 dom 树和 cssom 树，然后流式从上到下渲染
 
-68. 对前端路由的理解？前后端路由的区别？
+65. 对前端路由的理解？前后端路由的区别？
 
     就是通过前端控制 url 显示不同的视图
     后端就是不同的 url 对应不同的函数
 
-69. 手写一个类的继承
+66. 手写一个类的继承
 
-70. 合并两个有序数组
+    ```js
+    // 组合寄生继承
+    function Parent(name) {
+      this.name = name;
+    }
+    Parent.prototype.say = function () {
+      console.log(this.name);
+    };
+
+    function initial(subType, superType) {
+      var proto = Object.create(superType.prototype);
+      proto.constructor = subType;
+      subType.prototype = proto;
+    }
+    initial(Children, Parent);
+    function Children(name, age) {
+      Parent.apply(this, name);
+    }
+    Children.prototype.getAge = function () {
+      console.log(`my name is ${this.name} my age is ${this.age}`);
+    };
+    ```
+
+67. 合并两个有序数组
     可以合并后排序
 
     ```js
-   
+    arr = arr.concat(arr2);
+    arr.sort((a, b) => a - b);
     ```
 
-71. 简单的深拷贝
+68. 简单的深拷贝
 
     ```js
     function loop(obj) {
@@ -744,7 +803,7 @@
     console.log(a, b);
     ```
 
-72. 查找字符串中出现次数多的字符
+69. 查找字符串中出现次数多的字符
 
     ```js
     var str = 'fdsfjkjkjjjkjkjkjjjkjkjjk';
@@ -768,3 +827,25 @@
     findStr(str);
     ```
 
+70. 实现一个模板字符串的效果
+
+    ```js
+    function render(template, data) {
+      const reg = /\{\{(\w+)\}\}/; // 模板字符串正则
+      if (reg.test(template)) {
+        // 判断模板里是否有模板字符串
+        const name = reg.exec(template)[1]; // 查找当前模板里第一个模板字符串的字段
+        template = template.replace(reg, data[name]); // 将第一个模板字符串渲染
+        return render(template, data); // 递归的渲染并返回渲染后的结构
+      }
+      return template; // 如果模板没有模板字符串直接返回
+    }
+
+    // 测试
+    let template = '我是{{name}}，年龄{{age}}，性别{{sex}}';
+    let person = {
+      name: 'name',
+      age: 12,
+    };
+    render(template, person); // 我是name，年龄12，性别undefined
+    ```

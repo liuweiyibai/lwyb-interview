@@ -59,4 +59,10 @@ function new1(ctor) {
       console.log('new 调用');
     }
   }
+
+  // 也可以通过
+  function Person(){
+    console.log(new.target === Person) // true
+  } 
+  new Person()// 
   ```

@@ -17,4 +17,3 @@ function create(proto, des) {
 }
 ```
 
-## js 继承，babel 转译的es6 class 使用哪种继承方式实现

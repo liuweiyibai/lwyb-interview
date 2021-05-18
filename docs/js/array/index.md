@@ -31,24 +31,30 @@
       var unique = (arr) => [...new Set(arr)];
       ```
 
-<<<<<<< HEAD
 3. 数组降维
 
    ```js
-   let res = [];
    function flatten(arr) {
+     let res = [];
      arr.forEach((t) => {
        if (Array.isArray(t)) {
-         flatten(t);
+         res = res.concat(flatten(t));
        } else {
          res.push(t);
        }
      });
+     return res;
    }
-=======
-3. 取数组最大值
+
+   function flatten(arr) {
+     while (arr.some((t) => Array.isArray(t))) {
+       arr = [].concat(...arr);
+     }
+   }
+   ```
+
+4. 取数组最大值
 
    ```js
    let max = Math.max.apply(null, [2, 6, 7, 9, 4]);
->>>>>>> ea8acf2c2b272f991bb6e56eaba93539f2192a15
    ```

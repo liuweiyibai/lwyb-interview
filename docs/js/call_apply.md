@@ -1,4 +1,4 @@
-# 手写 js 中 call 和 apply 的实现
+# 手写 js 中 call 、apply 和 call 的实现
 
 [参考链接](https://www.cnblogs.com/echolun/p/12144344.html)
 
@@ -10,7 +10,7 @@ Function.prototype.call2 = function (context) {
 
   // 注意 i 从 1 开始，不算 context 参数
   for (var i = 1, len = arguments.length; i < len; i++) {
-    args.push("arguments[" + i + "]");
+    args.push('arguments[' + i + ']');
     // 到了 eval 的作用域中， eval 参数就是 arguments[1, argument.length-1]，可以保证参数的类型正确，在eval执行环境中对 arguments 通过索引直接取值传入
     // 因为直接 push arguments[i] 到数组里面的话，eval 解析时是没有引号的，都是按照变量去引用的，所以会报错找不到某个变量
   }
@@ -32,3 +32,68 @@ function bar(name, age) {
 //表示bar函数的执行环境是foo，即bar函数里面的this代表foo,this.value相当于foo.value,然后给bar函数传递两个参数
 bar.call2(foo, 'black', '18'); // black 18 1
 ```
+
+## 手写 bind 实现
+
+[参考地址](https://github.com/Raynos/function-bind/blob/master/implementation.js)
+
+bind 方法的定义， bind 方法创建一个新的函数，在 bind 被调用时，这个新函数的 this 被指定为 bind 的第一个参数，而其余参数将作为新函数的参数，供调用时使用
+
+```js
+/**
+ * @param {*} ctx
+ * var func2 = func.myBind(ctx, 函数参数)
+ * fun2(args2 , 函数参数)
+ */
+function myBind(ctx) {
+  // 必须被一个函数调用
+  if (typeof this !== 'function') {
+    throw new TypeError('调用者必须是一个函数');
+  }
+
+  var _this = this; // myBind 函数的调用者
+
+  // 截取第二个参数到最后一个参数
+  var args = Array.prototype.slice.call(arguments, 1);
+
+  // bind 返回一个函数
+  var instance = function () {
+    // 将 arguments 转为数组
+    var innerArgs = Array.prototype.slice.call(arguments);
+
+    // 当返回的函数被当做构造函数调用
+    if (this instanceof instance) {
+      // this 被指定为第一个参数
+      return _this.apply(this, args.concat(innerArgs));
+    }
+    // 非 new 模式调用
+    return _this.apply(ctx, args.concat(innerArgs));
+  };
+
+  instance.prototype = _this.prototype;
+  return instance;
+}
+
+Function.prototype.bind2 = myBind;
+
+function bb() {
+  console.log(this.a);
+  console.log(arguments);
+}
+
+var obj = {
+  a: '22',
+};
+
+// 当 bind 返回被用作构造函数
+var _b = bb.bind2(obj);
+
+var n_b = new _b();
+
+_b(222);
+```
+
+## 衍生面试题
+
+1. 为什么 bind 多次绑定无效
+2. bind 的第二个参数是什么

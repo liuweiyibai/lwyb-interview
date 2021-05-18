@@ -4,9 +4,9 @@
 
    在初始化 vue 实例时，遍历 data 这个对象，给每一个键值对利用 Object.definedProperty 对 data 的键值对新增 get 和 set 方法，利用了事件监听 DOM 的机制，让视图去改变数据。通过 Observer 来监听自己的 model 数据变化，通过 Compile 来解析编译模板指令，最终利用 Watcher 搭起 Observer 和 Compile 之间的通信桥梁，达到数据变化->视图更新。
 
-2. history 原理
+2. 前端路由原理
 
-   根据路由匹配组件
+   前端根据url变化显示不同视图
 
 3. vue data 更新过程，是如何触发到 dom 的
 
@@ -30,7 +30,7 @@
    2. 定义 `$set`、`$get` 、`$delete`、`$watch` 等方法
    3. 定义 `$on`、`$off`、`$emit`、`$off` 等事件
    4. 定义 `_update`、`$forceUpdate`、`$destroy` 生命周期
-   5. 调用$mount 进行页面的挂载
+   5. 调用 `$mount` 进行页面的挂载
 
    挂载的时候主要是通过 mountComponent 方法
 

@@ -24,3 +24,26 @@
    缺点就是会多调用一次父类构造函数
 
 3. 组合寄生继承
+
+   组合寄生继承是在子类构造函数中通过 call 调用超类一次，再通过 [`Object.create`](/js/object/create) 创建子类的原型
+
+   ```js
+   function Parent(name) {
+     this.name = name;
+   }
+   Parent.prototype.say = function () {
+     console.log(this.name);
+   };
+   function init(subType, superType) {
+     // proto.__proto__ = superType.prototype
+     var proto = Object.create(superType.prototype);
+     // 原型链查找，将父类的原型另存并且赋值给子类
+     proto.constructor = subType;
+     subType.prototype = proto;
+   }
+   function Child(name, age) {
+     Parent.call(this, name);
+     this.age = age;
+   }
+   init(Child, Parent);
+   ```

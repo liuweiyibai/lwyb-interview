@@ -20,13 +20,13 @@ module.exports = {
 function getGuideSidebar() {
   return [
     {
-      text: 'js-面试题',
+      text: 'js面试题',
+      link: '/js/',
       children: [
-        { text: '常见 js 面试题', link: '/js/' },
         {
           text: '数组',
+          link: '/js/array/index',
           children: [
-            { text: '数组常见面试题', link: '/js/array/index' },
             { text: '手写 js forEach 等方法', link: '/js/array/foreach' },
           ],
         },
@@ -35,10 +35,10 @@ function getGuideSidebar() {
           children: [
             { text: '手写 js 对象中的 create 函数', link: '/js/object/create' },
             { text: '手写 js new 操作符', link: '/js/object/new' },
+            { text: 'js 继承实现', link: '/js/object/extend' },
           ],
         },
-        { text: '手写 js 中 bind', link: '/js/bind' },
-        { text: '手写 js 中 call 和 apply', link: '/js/call_apply' },
+        { text: '手写 js 中 call、apply 和 bind', link: '/js/call_apply' },
         { text: '手写 js 中 Promise api', link: '/js/promise' },
         { text: '正则相关面试题', link: '/js/regexp' },
         { text: '定时器相关', link: '/js/setTimeout' },
