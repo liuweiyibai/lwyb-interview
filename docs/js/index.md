@@ -437,6 +437,22 @@
   2. 对 ast 进行处理，在这个阶段可以对 es6 的 ast 进行转换，转换为 es5 的 ast
   3. 根据处理完后的 ast 生成代码符串和 sourcemap
 
+- 手机号中间加\*号
+
+  ```js
+  function hiddenPhoneByStar(str, frontLen, endLen) {
+    //str：要进行隐藏的变量  frontLen: 前面需要保留几位   SendLen: 后面需要保留几位
+    var len = str.length - frontLen - endLen;
+    var xing = '';
+    for (var i = 0; i < len; i++) {
+      xing += '*';
+    }
+    return (
+      str.substring(0, frontLen) + xing + str.substring(str.length - endLen)
+    );
+  }
+  ```
+
 ## 防抖和节流
 
 主要用在避免重复触发某些事件行为或者频繁触发事件方法等

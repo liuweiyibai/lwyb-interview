@@ -1,4 +1,6 @@
-# 手写 js 中 call 、apply 和 call 的实现
+# 手写 js 中 call 、apply 和 bind 的实现
+
+## call 实现
 
 [参考链接](https://www.cnblogs.com/echolun/p/12144344.html)
 
@@ -37,7 +39,7 @@ bar.call2(foo, 'black', '18'); // black 18 1
 
 [参考地址](https://github.com/Raynos/function-bind/blob/master/implementation.js)
 
-bind 方法的定义， bind 方法创建一个新的函数，在 bind 被调用时，这个新函数的 this 被指定为 bind 的第一个参数，而其余参数将作为新函数的参数，供调用时使用
+bind 方法的定义，bind 方法创建一个新的函数，在 bind 被调用时，这个新函数的 this 被指定为 bind 的第一个参数，而其余参数将作为新函数的参数，供调用时使用
 
 ```js
 /**
@@ -64,6 +66,8 @@ function myBind(ctx) {
     // 当返回的函数被当做构造函数调用
     if (this instanceof instance) {
       // this 被指定为第一个参数
+      // 当使用 new 操作符调用绑定函数时，bind 的第一个参数无效
+      // 所以要用 直接直接指为 this
       return _this.apply(this, args.concat(innerArgs));
     }
     // 非 new 模式调用
@@ -96,4 +100,8 @@ _b(222);
 ## 衍生面试题
 
 1. 为什么 bind 多次绑定无效
+
+    bind
 2. bind 的第二个参数是什么
+
+   是 bind 调用者的参数

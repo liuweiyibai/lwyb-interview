@@ -6,7 +6,7 @@
 
 2. 前端路由原理
 
-   前端根据url变化显示不同视图
+   前端根据 url 变化显示不同视图
 
 3. vue data 更新过程，是如何触发到 dom 的
 
@@ -39,3 +39,8 @@
    执行 render 生成虚拟 DOM
 
    `_update` 将虚拟 DOM 生成真实 DOM 结构，并且渲染到页面中
+
+6. vue 性能优化
+
+   编码和工程化方向，vue 编码时需要注意,尽量减少 data 中的数据，data 中的数据不需要双向绑定的使用 object.freeze，减少深层级嵌套；v-if 和 v-for 不能连用；灵活使用 keep-alive 缓存组件和 component 动态组件，在更多的情况下，使用 v-if 替代 v-show，key 保证唯一，使用路由懒加载、异步组件。
+   工程化基于 webpack，减少构建体积，资源 cdn、gzip、splitChunk 拆包、第三方库按需引入
