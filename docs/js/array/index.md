@@ -31,7 +31,7 @@
       var unique = (arr) => [...new Set(arr)];
       ```
 
-3. 数组降维
+3. 数组降维，数组扁平化
 
    ```js
    function flatten(arr) {
