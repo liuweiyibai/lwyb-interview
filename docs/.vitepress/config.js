@@ -49,6 +49,7 @@ function getGuideSidebar() {
     },
     {
       text: 'vue 相关面试题',
+      link: '/vue/index',
       children: [
         { text: 'vue 基础面试题', link: '/vue/base' },
         { text: 'vue 高阶面试题', link: '/vue/high' },
@@ -65,11 +66,11 @@ function getGuideSidebar() {
     },
     {
       text: 'babel 面试题',
-      children: [{ text: 'babel 常见面试问点', link: '/babel' }],
+      link: '/babel',
     },
     {
       text: 'webpack 面试题',
-      link: '/webpack/index',
+      link: '/webpack',
     },
     {
       text: '算法',

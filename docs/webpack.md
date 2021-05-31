@@ -59,3 +59,8 @@
 8. 浏览器缓存
 9. 用过 vite 吗，vite 和 webpack 相比
 10. vite 为什么这么快
+
+你都用过哪些 webpack 的配置
+2、在你的项目里面用过哪些优化
+3、plugin 和 loader 的区别
+4、用过哪些 loader、plugin

@@ -385,22 +385,18 @@
 
     vue-server-render 基于服务端将 vue 代码解析为 html 文件，浏览器直接请求 html 文件
 
-60. 在 vue 中 watch 和 created 哪个先执行？为什么？
-
-    在 wacth 监控数据时，设置 immediate：true；会优先执行 watch,created 后执行;
-
-61. vuex 是什么？怎么使用？哪种功能场景使用它？
+60. vuex 是什么？怎么使用？哪种功能场景使用它？
 
     vuex 是专门为 vue.js 应用程序开发的状态管理工具，当我的组件信息、有一些数据需要响应式的在页面上展示时
 
-62. vuex 有哪几种属性
-63. 不使用 vuex 会带来什么问题
-64. vue.js 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
-65. vuex 一个例子方法
-66. Vuex 中如何异步修改状态
-67. Vuex 中 actions 和 mutations 的区别
-68. 为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
+61. vuex 有哪几种属性
+62. 不使用 vuex 会带来什么问题
+63. vue.js 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
+64. vuex 一个例子方法
+65. Vuex 中如何异步修改状态
+66. Vuex 中 actions 和 mutations 的区别
+67. 为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
 
     纯函数，给定同样的输入返回同样的输出，可预测性。
 
-69. vuex 的实现原理，vuex 中 state 如何促使视图更新
+68. vuex 的实现原理，vuex 中 state 如何促使视图更新

@@ -187,3 +187,21 @@
 
     有空格时候会有间隙。解决：移除空格。margin 正值的时候 解决：margin 使用负值
     使用 font-size 时候 解决：font-size:0、letter-spacing、word-spacing
+
+1、css 中 box-sizing 的属性
+2、一个元素居中的办法（不确定宽高的情况下如何用定位的办法实现）
+3、两栏布局，左侧固定，右侧自适应
+4、如何理解 BFC
+5、清除浮动 overflow:hidden 的原理，为什么可以清除
+6、了解 postcss 吗
+7、less 和 css 的区别
+8、看代码
+
+<style>
+.classA { color:blue; }
+.classB { color:red;}
+</style>
+<p class="classB classA">hello</p>
+元素p内的文字最终什么颜色...
+
+9、画一个三角形、扇形，将一个圆分为四部分，对角部分是相同颜色，相邻部分为不同颜色
