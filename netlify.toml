@@ -1,0 +1,16 @@
+[build]
+  base = "interview/"
+  publish = "docs/.vitepress/dist/"
+  command = "yarn build"
+
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+    cache-control = "max-age=7200"
+
+[[headers]]
+  for = "/assets/*"
+
+  [headers.values]
+    cache-control = "max-age=31536000"
