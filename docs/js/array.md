@@ -19,42 +19,46 @@
 
       ```js
       function unique(arr) {
-        return arr.filter((t, i) => {
-          return arr.indexOf(t) === i;
-        });
+       return arr.filter((t, i) => {
+        return arr.indexOf(t) === i
+       })
       }
       ```
 
    2. es6
 
       ```js
-      var unique = (arr) => [...new Set(arr)];
+      var unique = arr => [...new Set(arr)]
       ```
 
 3. 数组降维，数组扁平化
 
    ```js
    function flatten(arr) {
-     let res = [];
-     arr.forEach((t) => {
-       if (Array.isArray(t)) {
-         res = res.concat(flatten(t));
-       } else {
-         res.push(t);
-       }
-     });
-     return res;
+    let res = []
+    arr.forEach(t => {
+     if (Array.isArray(t)) {
+      res = res.concat(flatten(t))
+     } else {
+      res.push(t)
+     }
+    })
+    return res
    }
 
    function flatten(arr) {
-     while (arr.some((t) => Array.isArray(t))) {
-       arr = [].concat(...arr);
-     }
+    while (arr.some(t => Array.isArray(t))) {
+     arr = [].concat(...arr)
+    }
    }
    ```
 
 4. 取数组最大值
 
    ```js
-   let max = Math.max.apply(null, [2, 6, 7, 9, 4]);
+   let max = Math.max.apply(null, [2, 6, 7, 9, 4])
    ```
+
+## 手写数组常见方法
+
+- 手写数组 forEach 方法

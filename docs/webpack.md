@@ -1,8 +1,8 @@
 # webpack 面试题
 
-## 什么是 webpack
+- 什么是 webpack
 
-静态模块处理器，根据入口递归构建依赖图，完后根据配置的依赖关系生成产物包。
+  静态模块处理器，根据入口递归构建依赖图，完后根据配置的依赖关系生成产物包。
 
 - 核心概念
 
@@ -60,7 +60,8 @@
 9. 用过 vite 吗，vite 和 webpack 相比
 10. vite 为什么这么快
 
-你都用过哪些 webpack 的配置
-2、在你的项目里面用过哪些优化
-3、plugin 和 loader 的区别
-4、用过哪些 loader、plugin
+11. 你都用过哪些 webpack 的配置
+12. 在你的项目里面用过哪些优化
+13. plugin 和 loader 的区别
+14. webpack loader 执行顺序
+    从左到右，从下到上

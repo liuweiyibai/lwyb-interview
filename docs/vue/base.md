@@ -1,7 +1,5 @@
 # vue 基础面试题
 
-## 基础面试题
-
 1. 说说你对 vue 的理解
    完备的工程化开发、数据驱动视图、组件化开发、指令系统、基于模板开发、虚拟 dom 等
 
@@ -30,14 +28,12 @@
 
    jQuery 是以操作 dom 为主，做了数据处理之后还需要对 dom 进行操作。vue.js 是以操作数据为主，不操作 dom，也就是传说中的双向数据绑定，你只需要操作数据就好，dom 自动更新。这只是对初学者来说最大的不同。jQuery 只是一个类库，只是提供了很多的方法，不能算框架，而 vue.js 是一个框架，有一套完整的体系。
 
-## 生命周期
-
-1. 什么是 vue 生命周期
+5. 什么是 vue 生命周期
 
    - vue 每个组件从被创建、渲染、更新、销毁各个流程间被调用的函数
    - 包括 beforeCreate created beforeMount mounted beforeDestory destory beforeUpdate updated
 
-2. vue 生命周期的作用是什么
+6. vue 生命周期的作用是什么
    方便开发者在各个生命周期做不同的事情，在各个生命周期都有对组件可以做的事情
 
    - beforeCreate 组件创建前，此时数据监测和初始化事件还未开始
@@ -52,11 +48,11 @@
 
    - destroyed（销毁后），在实例销毁之后调用。调用后，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。
 
-3. 第一次页面加载会触发哪几个钩子
+7. 第一次页面加载会触发哪几个钩子
 
    - beforeCreated created beforeMounted mounted
 
-4. 简述每个周期具体适合哪些场景
+8. 简述每个周期具体适合哪些场景
 
    1. created:进行 ajax 请求异步数据的获取、初始化数据
    2. mounted:挂载元素 dom 节点的获取
@@ -64,22 +60,27 @@
    4. updated:任何数据的更新，如果要做统一的业务逻辑处理
    5. watch:监听数据变化，并做相应的处理
 
-5. created 和 mounted 的区别
+9. created 和 mounted 的区别
 
    - created 数据监听已经完成，属性的方法和运算已经完成，watch 事件回调完成，`$el` 属性不可访问，dom 不可访问，数据没有在 dom 上进行渲染
    - mounted ，此实例 `dom` 节点被渲染，`dom` 被渲染，可以访问到 `$el`
 
-6. vue 获取数据在哪个周期函数
+10. vue 获取数据在哪个周期函数
 
-   created 中，如果需要操作 dom 节点，可在 mounted 中进行
+    created 中，如果需要操作 dom 节点，可在 mounted 中进行
 
-7. 父子组件渲染顺序
+11. 父子组件渲染顺序
 
-   父组件 beforeMounted 到 mounted 这个过程是子组件 beforeCreated 到 mounted 的过程
+    父组件 beforeMounted 到 mounted 这个过程是子组件 beforeCreated 到 mounted 的过程
 
-8. 子组件更新父组件会更新吗，如果会，更新顺序是什么
+12. 子组件更新父组件会更新吗，如果会，更新顺序是什么
 
-   会更新，更新顺序是: 子组件 beforeUpdate->父组件 beforeUpdate->子组件 updated->父组件 updated
+    会更新，更新顺序是: 子组件 beforeUpdate->父组件 beforeUpdate->子组件 updated->父组件 updated
+
+13. 哪个生命周期可以可以获取真实 dom
+14. 修改 data 里的数据会触发哪些生命周期
+15. 为什么 data 是一个函数
+16. vue scoped 属性作用？实现原理？
 
 ## 路由面试题
 
@@ -181,9 +182,9 @@
     ```html
     <div v-on="{click:''}"></div>
     <script>
-      export default {
-        methods: {},
-      };
+    	export default {
+    		methods: {},
+    	}
     </script>
     ```
 
@@ -302,26 +303,26 @@
 
     ```js
     export default {
-      methods: {
-        //禁止滚动
-        stop() {
-          var mo = function (e) {
-            e.preventDefault();
-          };
-          document.body.style.overflow = 'hidden';
-          document.addEventListener('touchmove', mo, false);
-          // 禁止页面滑动
-        },
-        /***取消滑动限制***/
-        move() {
-          var mo = function (e) {
-            e.preventDefault();
-          };
-          document.body.style.overflow = ''; //出现滚动条
-          document.removeEventListener('touchmove', mo, false);
-        },
-      },
-    };
+    	methods: {
+    		//禁止滚动
+    		stop() {
+    			var mo = function (e) {
+    				e.preventDefault()
+    			}
+    			document.body.style.overflow = 'hidden'
+    			document.addEventListener('touchmove', mo, false)
+    			// 禁止页面滑动
+    		},
+    		/***取消滑动限制***/
+    		move() {
+    			var mo = function (e) {
+    				e.preventDefault()
+    			}
+    			document.body.style.overflow = '' //出现滚动条
+    			document.removeEventListener('touchmove', mo, false)
+    		},
+    	},
+    }
     ```
 
 48. vue 更新数组时触发视图更新的方法

@@ -130,7 +130,7 @@
   find
   findIndex
   map/filter/reduce 等函数式编程方法
-  还有一些原型链上的方法：toString/valudOf
+  还有一些原型链上的方法：toString/valueOf
 
 - 函数中的 arguments 是数组吗？类数组转数组的方法了解一下？
 
@@ -253,6 +253,69 @@
    2. 上下文 this
    3. 箭头函数隐式返回
    4. 箭头函数不能走构造器函数
+
+9. 简述一下 js 函数柯里化，柯里化的使用场景
+
+   柯里化是将多个相同函数的参数转为只传入一个参数的函数
+   柯里化不会调用函数。它只是对函数进行转换
+
+   ```js
+   function add(a, b) {
+    return a + b
+   }
+   function curry(func) {
+    return function (a) {
+     return function (b) {
+      return func(a, b)
+     }
+    }
+   }
+
+   var add2 = curry(add)
+   add(1)(2) // 3
+   ```
+
+10. 实现一个通用的柯里化函数
+
+    ```js
+    // var slice = Array.prototype.slice
+
+    function curry(func) {
+     // 返回具名函数-包装器
+     return function curried(...args) {
+      // 这里可以使用 args = Array.prototype.slice.call(arguments)
+      //var args = slice.apply(arguments)
+      // 对于传入全部参数的处理
+      // 如果我传入的参数大于或者等于被柯里化的函数需要的参数的话
+      // 就是传入全部参数一次调用，具体看下面的使用场景
+      // 现在调用
+      if (args.length >= func.length) {
+       return func.apply(this, args)
+      } else {
+       // 否则返回另外一个包装器
+       return function (...args2) {
+        // return curried.apply(this, args.concat(args2));
+        return curried.apply(this, [...args, ...args2])
+       }
+      }
+     }
+    }
+
+    function curry2(fn, ...args) {
+     // arugments slice(1)
+     return function curried(...args2) {
+      var currentArgs = [...args, ...args2]
+      if (currentArgs.length >= fn.length) {
+       return fn.apply(this, currentArgs)
+      }
+     }
+    }
+
+    function add(a, b, c) {
+     return a + b + c
+    }
+    var add2 = curry(add)
+    ```
 
 ## 原型和原型链、es6 类
 
@@ -545,106 +608,43 @@
    })
    ```
 
-8. 简述一下 js 函数柯里化，柯里化的使用场景
-
-   柯里化是将多个相同函数的参数转为只传入一个参数的函数
-   柯里化不会调用函数。它只是对函数进行转换
+8. 写一个闭包，每次调用的时候自加 1
 
    ```js
-   function add(a, b) {
-    return a + b
-   }
-   function curry(func) {
-    return function (a) {
-     return function (b) {
-      return func(a, b)
-     }
+   function b() {
+    var i = 0
+    return function () {
+     return i++
     }
    }
-
-   var add2 = curry(add)
-   add(1)(2) // 3
+   bid = b()
+   bid() // 0
+   bid() // 1
    ```
 
-9. 实现一个通用的柯里化函数
+9. 写一个函数，重复执行传入的函数指定次数，并且可以定义重复时间
 
    ```js
-   // var slice = Array.prototype.slice
-
-   function curry(func) {
-    // 返回具名函数-包装器
-    return function curried(...args) {
-     // 这里可以使用 args = Array.prototype.slice.call(arguments)
-     //var args = slice.apply(arguments)
-     // 对于传入全部参数的处理
-     // 如果我传入的参数大于或者等于被柯里化的函数需要的参数的话
-     // 就是传入全部参数一次调用，具体看下面的使用场景
-     // 现在调用
-     if (args.length >= func.length) {
-      return func.apply(this, args)
-     } else {
-      // 否则返回另外一个包装器
-      return function (...args2) {
-       // return curried.apply(this, args.concat(args2));
-       return curried.apply(this, [...args, ...args2])
+   function doRepeat(func, times, waits) {
+    let i = 0
+    return function () {
+     const args = arguments
+     const timer = setInterval(function () {
+      if (times === i) {
+       clearInterval(timer)
+       return
       }
-     }
+      i++
+      func(args[0])
+     }, waits)
     }
    }
-
-   function curry2(fn, ...args) {
-    // arugments slice(1)
-    return function curried(...args2) {
-     var currentArgs = [...args, ...args2]
-     if (currentArgs.length >= fn.length) {
-      return fn.apply(this, currentArgs)
-     }
-    }
-   }
-
-   function add(a, b, c) {
-    return a + b + c
-   }
-   var add2 = curry(add)
+   // 每间隔1s执行 console.log ，执行10次
+   var b = doRepeat(console.log, 10, 1000)
+   b('ff')
    ```
 
-10. 写一个闭包，每次调用的时候自加 1
-
-    ```js
-    function b() {
-     var i = 0
-     return function () {
-      return i++
-     }
-    }
-    bid = b()
-    bid() // 0
-    bid() // 1
-    ```
-
-11. 写一个函数，重复执行传入的函数指定次数，并且可以定义重复时间
-
-    ```js
-    function doRepeat(func, times, waits) {
-     let i = 0
-     return function () {
-      const args = arguments
-      const timer = setInterval(function () {
-       if (times === i) {
-        clearInterval(timer)
-        return
-       }
-       i++
-       func(args[0])
-      }, waits)
-     }
-    }
-    // 每间隔1s执行 console.log ，执行10次
-    var b = doRepeat(console.log, 10, 1000)
-    b('ff')
-    ```
-
-12. redux compose 函数的实现
+10. redux compose 函数的实现
 
     ```js
     // 传入多个函数，每个函数都有同样的输入和输出
@@ -661,7 +661,7 @@
     }
     ```
 
-13. 手机号中间加\*号
+11. 手机号中间加\*号
 
     ```js
     function hiddenPhoneByStar(str, frontLen, endLen) {
@@ -770,9 +770,7 @@
 
 1. 简述同步和异步的区别
 
-2. 怎么添加、移除、复制、创建、和查找节点
-
-3. 实现一个函数 clone 可以对 js 中的五种主要数据类型（Number、string、Object、Array、Boolean）进行复制
+2. 实现一个函数 clone 可以对 js 中的五种主要数据类型（Number、string、Object、Array、Boolean）进行复制
 
    ```js
    function clone(obj) {
@@ -815,7 +813,7 @@
    }
    ```
 
-4. 如何消除一个数组里面重复的元素
+3. 如何消除一个数组里面重复的元素
 
    数组去重
 
@@ -823,7 +821,7 @@
    var arr = Array.from(new Set(arr2))
    ```
 
-5. 写一个返回闭包的函数
+4. 写一个返回闭包的函数
 
    ```js
    // 记录某函数调用次数
@@ -835,7 +833,7 @@
    }
    ```
 
-6. 使用递归完成 1 到 100 的累加
+5. 使用递归完成 1 到 100 的累加
 
    ```js
    function sum(total) {
@@ -847,112 +845,112 @@
    sum(100)
    ```
 
-7. console.log(1+'2')和 console.log(1-'2')的打印结果
+6. console.log(1+'2')和 console.log(1-'2')的打印结果
 
    ```js
    console.log(1 + '2') // 12
    console.log(1 - '2') // -1
    ```
 
-8. js 的事件委托是什么，原理是什么
+7. js 的事件委托是什么，原理是什么
 
-9. 列举几种解决跨域问题的方式，且说明原理
-10. 谈谈垃圾回收机制的方式及内存管理
-11. 写一个 function ，清除字符串前后的空格
+8. 列举几种解决跨域问题的方式，且说明原理
+9. 谈谈垃圾回收机制的方式及内存管理
+10. 写一个 function ，清除字符串前后的空格
 
-12. 随机取 1-10 之间的整数
+11. 随机取 1-10 之间的整数
 
     ```js
     Math.floor(Math.random() * 10 + 1) // 生成 1-10 之间的随机正整数
     ```
 
-13. 模块化开发怎么做
-14. 异步加载 Js 的方式有哪些
-15. xml 和 json 的区别
-16. webpack 如何实现打包的
-17. 常见 web 安全及防护原理
-18. 用过哪些设计模式
+12. 模块化开发怎么做
+13. 异步加载 Js 的方式有哪些
+14. xml 和 json 的区别
+15. webpack 如何实现打包的
+16. 常见 web 安全及防护原理
+17. 用过哪些设计模式
 
     单例、工厂
 
-19. offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别
+18. offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别
 
-20. js 有哪些方法定义对象
+19. js 有哪些方法定义对象
 
-21. 说说你对 promise 的了解
+20. 说说你对 promise 的了解
 
-22. 谈谈你对 AMD、CMD 的理解
+21. 谈谈你对 AMD、CMD 的理解
 
-23. web 开发中会话跟踪的方法有哪些
+22. web 开发中会话跟踪的方法有哪些
 
     cookie 携带和 token 携带
 
-24. 介绍 js 有哪些内置对象？
+23. 介绍 js 有哪些内置对象？
 
     Array Object Function RegExp Date
 
-25. js 创建对象的几种方式？
-26. eval 是做什么的？
-27. null，undefined 的区别？
+24. js 创建对象的几种方式？
+25. eval 是做什么的？
+26. null，undefined 的区别？
 
-28. js 代码中的 "use strict"; 是什么意思 ? 使用它区别是什么？
-29. js 延迟加载的方式有哪些？
-30. defer 和 async
-31. 说说严格模式的限制
+27. js 代码中的 "use strict"; 是什么意思 ? 使用它区别是什么？
+28. js 延迟加载的方式有哪些？
+29. defer 和 async
+30. 说说严格模式的限制
 
-32. attribute 和 property 的区别是什么？
+31. attribute 和 property 的区别是什么？
 
-33. ECMAScript6 怎么写 class 么，为什么会出现 class 这种东西?
+32. ECMAScript6 怎么写 class 么，为什么会出现 class 这种东西?
 
-34. 函数防抖节流的原理
+33. 函数防抖节流的原理
 
-35. 原始类型有哪几种？null 是对象吗？
+34. 原始类型有哪几种？null 是对象吗？
 
-36. 0.1 + 0.2 === 0.3 嘛？为什么？
+35. 0.1 + 0.2 === 0.3 嘛？为什么？
 
     不相等，精度丢失可能出现在引擎的进制转换和对阶运算中
 
-37. 说一下 js 中类型转换的规则？
-38. 深拷贝和浅拷贝的区别？如何实现
-39. 如何判断 this？箭头函数的 this 是什么
-40. == 和 ===的区别
-41. js 原型，原型链 ? 有什么特点？
-42. typeof 和 instanceof()的用法区别
-43. 什么是变量提升
+36. 说一下 js 中类型转换的规则？
+37. 深拷贝和浅拷贝的区别？如何实现
+38. 如何判断 this？箭头函数的 this 是什么
+39. == 和 ===的区别
+40. js 原型，原型链 ? 有什么特点？
+41. typeof 和 instanceof()的用法区别
+42. 什么是变量提升
 
-44. 为什么会出现 setTimeout 倒计时误差？如何减少
-45. 谈谈你对 js 执行上下文栈和作用域链的理解
-46. prototype 和 proto 区别是什么？
-47. Promise 有几种状态, Promise 有什么优缺点 ?
-48. Promise 构造函数是同步还是异步执行，then 呢 ?promise 如何实现 then 处理 ?
-49. Promise 和 setTimeout 的区别 ?
+43. 为什么会出现 setTimeout 倒计时误差？如何减少
+44. 谈谈你对 js 执行上下文栈和作用域链的理解
+45. prototype 和 proto 区别是什么？
+46. Promise 有几种状态, Promise 有什么优缺点 ?
+47. Promise 构造函数是同步还是异步执行，then 呢 ?promise 如何实现 then 处理 ?
+48. Promise 和 setTimeout 的区别 ?
 
     微任务和宏任务，任务队列
 
-50. 如何实现 Promise.all?
-51. 如何实现 Promise.finally?
-52. 如何判断 img 加载完成
+49. 如何实现 Promise.all?
+50. 如何实现 Promise.finally?
+51. 如何判断 img 加载完成
 
     img 的 onload 事件
 
-53. 如何阻止冒泡？
-54. 如何阻止默认事件？
-55. 如何用原生 js 给一个按钮绑定两个 onclick 事件？
+52. 如何阻止冒泡？
+53. 如何阻止默认事件？
+54. 如何用原生 js 给一个按钮绑定两个 onclick 事件？
 
     使用 addEventlistener
 
-56. 拖拽会用到哪些事件
-57. document.write 和 innerHTML 的区别
-58. 浏览器是如何渲染页面的？
+55. 拖拽会用到哪些事件
+56. document.write 和 innerHTML 的区别
+57. 浏览器是如何渲染页面的？
 
     根据 http 请求拿回静态资源后，解析 html 和 css，分别生成 dom 树和 cssom 树，然后流式从上到下渲染
 
-59. 对前端路由的理解？前后端路由的区别？
+58. 对前端路由的理解？前后端路由的区别？
 
     就是通过前端控制 url 显示不同的视图
     后端就是不同的 url 对应不同的函数
 
-60. 合并两个有序数组
+59. 合并两个有序数组
     可以合并后排序
 
     ```js
@@ -960,7 +958,7 @@
     arr.sort((a, b) => a - b)
     ```
 
-61. 简单的深拷贝
+60. 简单的深拷贝
 
     ```js
     function loop(obj) {
@@ -985,7 +983,7 @@
     console.log(a, b)
     ```
 
-62. 查找字符串中出现次数多的字符
+61. 查找字符串中出现次数多的字符
 
     ```js
     var str = 'fdsfjkjkjjjkjkjkjjjkjkjjk'
@@ -1009,7 +1007,7 @@
     findStr(str)
     ```
 
-63. 实现一个模板字符串的效果
+62. 实现一个模板字符串的效果
 
     ```js
     function render(template, data) {
@@ -1031,3 +1029,12 @@
     }
     render(template, person) // 我是name，年龄12，性别undefined
     ```
+
+63. 实现数组去重，new Set 的数组去重和自己实现的哪个性能会更好
+64. 说一下跨域，jsonp 的原理是什么？node 中间件解决跨域问题的原理是什么？
+65. import 和 require 的区别
+66. 实现一个发布订阅，有订阅（on），发布（emit），一次订阅功能（once）
+67. 实现请求并发限制，具体为：封装一个函数，传递请求并发的个数为参数，实现对并发请求的限制
+68. 利用 async 和 await 如何处理异常事件
+69. 箭头函数和普通函数有什么区别？如果想改变箭头函数中绑定 this 怎么办
+70. 原生 js 判断鼠标在一个有对角线矩形的位置
