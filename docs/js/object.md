@@ -54,7 +54,7 @@
 
 3. 组合寄生继承
 
-   组合寄生继承是在子类构造函数中通过 call 调用超类一次，再通过 [`Object.create`](/js/object/create) 创建子类的原型
+   组合寄生继承是在子类构造函数中通过 call 调用超类一次，再通过 [`Object.create`](#手写-new) 创建子类的原型
 
    ```js
    function Parent(name) {
