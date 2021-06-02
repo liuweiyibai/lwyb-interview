@@ -2,7 +2,7 @@ module.exports = {
   title: '面试题集合 🍀',
   lang: 'zh-cn',
   description: '收集前后端常见面试题，以及自己学习 vue、react 源码过程的笔记',
-  base: '/interview/',
+  // base: '/interview/',
   head: [['link', { rel: 'icon', href: 'logo.webp' }]],
   themeConfig: {
     repo: 'liuweiyibai/lwyb-interview',
@@ -38,7 +38,7 @@ function getGuideSidebar() {
             { text: 'js 继承实现', link: '/js/object/extend' },
           ],
         },
-        { text: '手写 js 中 call、apply 和 bind', link: '/js/call_apply' },
+        // { text: '手写 js 中 call、apply 和 bind', link: '/js/call_apply' },
         { text: '手写 js 中 Promise api', link: '/js/promise' },
         { text: '正则相关面试题', link: '/js/regexp' },
         { text: '定时器相关', link: '/js/setTimeout' },
