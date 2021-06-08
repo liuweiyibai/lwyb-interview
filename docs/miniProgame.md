@@ -84,3 +84,4 @@
 79. new Date 跨平台兼容性问题
 80. wx.getSystemInfoSync 获取 windowHeight 不准确
 81. 图片本地资源名称，尽量使用小写命名
+82. 你写过小程序，说下和写 vue 有什么区别？

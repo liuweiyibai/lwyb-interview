@@ -83,10 +83,10 @@
 15. vue 中怎么重置 data？
 
     ```js
-    Object.assign() // 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象, 此方法是浅拷贝
-    this.$data // 获取当前状态下的data
-    this.$options.data() // 获取该组件初始状态下的 data。
-    Object.assign(this.$data, this.$options.data())
+    Object.assign(); // 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象, 此方法是浅拷贝
+    this.$data; // 获取当前状态下的data
+    this.$options.data(); // 获取该组件初始状态下的 data。
+    Object.assign(this.$data, this.$options.data());
     ```
 
 16. Vue.observable 你有了解过吗？
@@ -138,3 +138,14 @@
 27. 说说你对 keep-alive 的理解是什么？
 
     保留内部组件状态，避免第二次加载时重复渲染，内置 actived,beforeActived 钩子，使用 lru 算法缓存组件 options
+
+28. 怎么看待 virtual dom？
+29. ast 语法树了解吗？
+30. vue-loader 做了哪些事情？
+31. vue diff？
+32. vue computed 和 watch 区别？
+33. computed 怎么实现的缓存（dirty）？
+34. vue3 双向数据绑定实现？
+35. createRender？和 vue2 有哪些不同，提到了函数式编程
+36. 说下对函数式编程对的理解。
+37. 对 MVC （react） MVVM（vue）的了解

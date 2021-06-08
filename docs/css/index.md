@@ -189,3 +189,4 @@
     使用 font-size 时候 解决：font-size:0、letter-spacing、word-spacing
 
 30. 画一个三角形、扇形，将一个圆分为四部分，对角部分是相同颜色，相邻部分为不同颜色
+31. 项目怎么做的移动端适配？ flexible 原理（1px 问题，通过 viewport）
