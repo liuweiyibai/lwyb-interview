@@ -161,3 +161,9 @@
   输入："aaa"
   输出：6
   解释：6 个回文子串: "a", "a", "a", "aa", "aa", "aaa"
+
+- [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
+- 尾递归优化
+- [猴子吃香蕉](https://leetcode-cn.com/problems/koko-eating-bananas/)
+- [回文字符串个数](https://leetcode-cn.com/problems/palindromic-substrings/)
+- 时针和分针的夹角？

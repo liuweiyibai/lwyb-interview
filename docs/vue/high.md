@@ -140,3 +140,13 @@
     保留内部组件状态，避免第二次加载时重复渲染，内置 actived,beforeActived 钩子，使用 lru 算法缓存组件 options
 
 28. vue scoped 属性作用？实现原理？
+29. 怎么看待 virtual dom？
+30. ast 语法树了解吗？
+31. vue-loader 做了哪些事情？
+32. vue diff？
+33. vue computed 和 watch 区别？
+34. computed 怎么实现的缓存（dirty）？
+35. vue3 双向数据绑定实现？
+36. createRender？和 vue2 有哪些不同，提到了函数式编程
+37. 说下对函数式编程对的理解。
+38. 对 MVC （react） MVVM（vue）的了解
