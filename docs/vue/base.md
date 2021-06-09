@@ -37,9 +37,13 @@
    方便开发者在各个生命周期做不同的事情，在各个生命周期都有对组件可以做的事情
 
    - beforeCreate 组件创建前，此时数据监测和初始化事件还未开始
+  
    - created 组件创建后，完成数据监测，属性和方法的运算，初始化事件，`$el` 还没有，不可以访问 dom，真实 dom 不可访问
+  
    - beforeMount 挂载真实 dom 前，在挂载开始前被调用，相关的 render 函数首次被调用，实例已经完成以下配置: 包括模板编译、把 data 里面的数据生成模板 html，此时组件还没有挂载到页面上
+  
    - mounted 载入后，`$el` 可以访问到组件实例 dom，实例已经完成以下配置：将编译好的 HTML 内容替换 `$el` 指向的 dom 对象，完成组件 HTML 展示到真实页面上。
+  
    - beforeUpdate（更新前），在数据更新之前调用，发生在虚拟 DOM 重新渲染和打补丁之前。可以在该钩子中进一步地更改状态，不会触发附加的重渲染过程。
 
    - updated（更新后），在由于数据更改导致的虚拟 DOM 重新渲染和打补丁之后调用。调用时，组件 DOM 已经更新，所以可以执行依赖于 DOM 的操作。然而在大多数情况下，应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。
@@ -78,9 +82,14 @@
     会更新，更新顺序是: 子组件 beforeUpdate->父组件 beforeUpdate->子组件 updated->父组件 updated
 
 13. 哪个生命周期可以可以获取真实 dom
+
+      mounted
+
 14. 修改 data 里的数据会触发哪些生命周期
+
 15. 为什么 data 是一个函数
-16. vue scoped 属性作用？实现原理？
+
+    函数创建新的作用域，避免组件复用时data被共享
 
 ## 路由面试题
 
@@ -102,7 +111,7 @@
 
 5. 组件 route 和 router 的区别
 
-   route 是组件路由，router 是全局路由
+   route 是组件路由对象，获取当前路由实例，包括当前路由的参数等。router 是全局路由对象，包括提供全局路由跳转等。
 
 6. vue-router 响应路由参数的变化
 
@@ -110,53 +119,53 @@
 
 7. vue-router 传参
 
+   query 方式和 params 方式
+
 8. vue-router 的两种模式
 
    history 和 hash，区别体现在 url 的显示，是否需要后端配合以及兼容性
 
 9. vue-router 实现路由懒加载（ 动态加载路由 ）
 
-   通过 `import` 的方式动态引入，同时使用 webpack 魔法注释命名拆包，或者使用 webpack 提供的 `require.ensure`
+通过 `import` 的方式动态引入，同时使用 webpack 魔法注释命名拆包，或者使用 webpack 提供的 `require.ensure`
 
 ## vue 常见面试题
 
-1. mvvm 框架是什么？
-
-2. v-if 和 v-show 区别
+1. v-if 和 v-show 区别
 
    是否在 dom 树中产生真实的 dom。v-if 切换有一个局部编译/卸载的过程，切换过程中合适地销毁和重建内部的事件监听和子组件；v-show 只是简单的基于 css 切换
 
    v-if 是真正的条件渲染，它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。只有渲染条件为假时，并不做操作，直到为真才渲染
 
-3. 为什么 v-for 要加 key
+2. 为什么 v-for 要加 key
 
-4. 为什么 vue 不建议 v-for 不能和 v-if 一起使用
+3. 为什么 vue 不建议 v-for 不能和 v-if 一起使用
 
-5. vue 优点
+4. vue 优点
 
-6. 如何让 CSS 只在当前组件中起作用
+5. 如何让 CSS 只在当前组件中起作用
 
    scope
 
-7. 如何获取 dom
+6. 如何获取 dom
 
-8. 说出几种 vue 当中的指令和它的用法？
+7. 说出几种 vue 当中的指令和它的用法？
 
-9. vue-loader 是什么？使用它的用途有哪些？
+8. vue-loader 是什么？使用它的用途有哪些？
 
-10. v-for 中的 key 是什么作用
+9. v-for 中的 key 是什么作用
 
-11. axios 及安装
+10. axios 及安装
 
-12. axios 解决跨域
+11. axios 解决跨域
 
-13. v-modal 的使用
+12. v-modal 的使用
 
-14. scss 的安装以及使用
+13. scss 的安装以及使用
 
-15. 请说出 vue-cli 项目中 src 目录每个文件夹和文件的用法？
+14. 请说出 vue-cli 项目中 src 目录每个文件夹和文件的用法？
 
-16. 分别简述 computed 和 watch 的使用场景
+15. 分别简述 computed 和 watch 的使用场景
 
     computed 可以简化多个组件内变量的判断条件，比如我有个 div，它需要满足三个变量的条件，可以通过 computed 简化，computed 可以帮助 watch 实现监听多个变量的效果
     watch 主动监听某个变量，然后出发某个函数，常见的监听 props, computed 可以简化模板中的运算
@@ -175,64 +184,64 @@
     }
     ```
 
-17. v-on 可以监听多个方法吗
+16. v-on 可以监听多个方法吗
 
     可以
 
     ```html
     <div v-on="{click:''}"></div>
     <script>
-    	export default {
-    		methods: {},
-    	}
+      export default {
+        methods: {},
+      };
     </script>
     ```
 
-18. `$nextTick` 的使用
+17. `$nextTick` 的使用
 
     dom 响应数据更新，dom 更新结束后，下一轮事件循环的回调
 
-19. vue 组件中 data 为什么必须是一个函数
+18. vue 组件中 data 为什么必须是一个函数
 
     形成作用域，组件多次复用时达到内部状态隔离的目的
 
-20. vue 事件对象的使用
+19. vue 事件对象的使用
 
     $event 绑定事件时函数第一个参数就是 $event
 
-21. 渐进式框架的理解
+20. 渐进式框架的理解
 
-22. 单页面应用和多页面应用区别及优缺点
+21. 单页面应用和多页面应用区别及优缺点
 
-23. vue 中过滤器有什么作用及详解
+22. vue 中过滤器有什么作用及详解
 
-24. v-if 和 v-for 的优先级
+23. v-if 和 v-for 的优先级
 
-25. assets 和 static 的区别
+24. assets 和 static 的区别
 
     assets 目录中的文件会被 webpack loader 处理，static 不会，static 会被直接复制到打包目录
 
-26. 列举常用的指令
-27. vue 常用的修饰符
-28. 数组更新检测
+25. 列举常用的指令
+26. vue 常用的修饰符
+27. 数组更新检测
 
     重写数组方法
 
-29. Vue.set 视图更新
-30. 自定义指令详解
+28. Vue.set 视图更新
+29. 自定义指令详解
 
-31. 引进组件的步骤
-32. Vue-cli 打包命令是什么？打包后导致路径问题，应该在哪里修改
+30. 引进组件的步骤
+31. Vue-cli 打包命令是什么？打包后导致路径问题，应该在哪里修改
 
     是否二级目录，修改 publicPath 和 vue-router 的 base
 
-33. 跨组件双向数据绑定
+32. 跨组件双向数据绑定
 
     .sync 的实现，还是自定义 v-model
 
-34. delete 和 Vue.delete 删除数组的区别
+33. delete 和 Vue.delete 删除数组的区别
 
-35. SPA 首屏加载慢如何解决
+34. SPA 首屏加载慢如何解决
 
     首屏主要是对入口文件进行瘦身，路由懒加载、组件按需加载。具体包括 gzip 压缩，剔除 log 日志，使用 svg 或者 雪碧图，第三方库、静态资源 cdn，利用 http 缓存，路由懒加载，splitChunks 提取公共代码。
 
@@ -245,7 +254,7 @@
 
     webpack5 增量构建
 
-36. vue-router 跳转和 location.href 有什么区别
+35. vue-router 跳转和 location.href 有什么区别
 
     vue-router 跳转无状态刷新更改
     location.href 修改页面会进行刷新
@@ -253,33 +262,33 @@
     vue-router 跳转是内部 match 后渲染对应组件
     location.href 是刷新页面后重新执行了 vue-router 的逻辑渲染匹配出来的页面
 
-37. vue slot
-38. 你们 vue 项目是打包了一个 js 文件，一个 css 文件，还是有多个文件？
+36. vue slot
+37. 你们 vue 项目是打包了一个 js 文件，一个 css 文件，还是有多个文件？
 
     多个，打包到一个文件会导致体积过大，网站体验不好
 
-39. Vue 里面 router-link 在 pc 上有用，在安卓上没反应怎么解决？
+38. Vue 里面 router-link 在 pc 上有用，在安卓上没反应怎么解决？
 
     vue-router 兼容性问题，使用 babel-polyfill 解决
 
-40. vue2 中注册在 router-link 上事件无效解决方法
+39. vue2 中注册在 router-link 上事件无效解决方法
 
     使⽤@click.native。原因：router-link 会阻⽌ click 事件，.native 指直接监听⼀ 个原⽣事件。
 
-41. RouterLink 在 IE 和 Firefox 中不起作用（路由不跳转）的问题
+40. RouterLink 在 IE 和 Firefox 中不起作用（路由不跳转）的问题
 
     只⽤ a 标签，不使用 button 标签；
     使⽤ button 标签和 Router.navigate ⽅法
 
-42. axios 的特点有哪些
+41. axios 的特点有哪些
 
     支持 promise 方式发送请求，请求拦截器
 
-43. 请说下封装 vue 组件的过程？
+42. 请说下封装 vue 组件的过程？
 
     高内聚低耦合结合业务，定义组件属性，是否使用 ts，哪种 css 方案，打包工具选择，lint 验证、prettier、持续集成等，单元测试
 
-44. vue 各种组件通信方法（父子 子父 兄弟 爷孙 毫无关系的组件）
+43. vue 各种组件通信方法（父子 子父 兄弟 爷孙 毫无关系的组件）
 
     $emit 和 props 属性
     $attr $props $listeners 属性和事件透传
@@ -287,11 +296,11 @@
     vuex
     $parent $children ref
 
-45. vue mock 数据
+44. vue mock 数据
 
     通过 dev-server 的 before 钩子和 mockjs 生成的数据来进行数据 mock
 
-46. vue 初始化页面闪动问题
+45. vue 初始化页面闪动问题
 
     使用 vue 开发时，在 vue 没有初始化之前，div 是不归 vue 管的，所以我们写的代码在没有解析完的情况下，会出现一个花屏闪烁的问题，这个时候就可以在 css 里写一个
 
@@ -299,55 +308,55 @@
 
     如果没有彻底解决，可以再根元素上加
 
-47. vue 禁止弹窗后的屏幕滚动
+46. vue 禁止弹窗后的屏幕滚动
 
     ```js
     export default {
-    	methods: {
-    		//禁止滚动
-    		stop() {
-    			var mo = function (e) {
-    				e.preventDefault()
-    			}
-    			document.body.style.overflow = 'hidden'
-    			document.addEventListener('touchmove', mo, false)
-    			// 禁止页面滑动
-    		},
-    		/***取消滑动限制***/
-    		move() {
-    			var mo = function (e) {
-    				e.preventDefault()
-    			}
-    			document.body.style.overflow = '' //出现滚动条
-    			document.removeEventListener('touchmove', mo, false)
-    		},
-    	},
-    }
+      methods: {
+        //禁止滚动
+        stop() {
+          var mo = function (e) {
+            e.preventDefault();
+          };
+          document.body.style.overflow = 'hidden';
+          document.addEventListener('touchmove', mo, false);
+          // 禁止页面滑动
+        },
+        /***取消滑动限制***/
+        move() {
+          var mo = function (e) {
+            e.preventDefault();
+          };
+          document.body.style.overflow = ''; //出现滚动条
+          document.removeEventListener('touchmove', mo, false);
+        },
+      },
+    };
     ```
 
-48. vue 更新数组时触发视图更新的方法
+47. vue 更新数组时触发视图更新的方法
 
     通过 `$set` 或者将该变量重新赋值
 
-49. vue 常用的 UI 组件库
-50. vue 如何引进本地背景图片
+48. vue 常用的 UI 组件库
+49. vue 如何引进本地背景图片
 
     webpack alias 使用，或者绕过 webpack 构建直接引入
 
-51. vue 如何引进 sass
+50. vue 如何引进 sass
 
     搭建项目时使用，或者安装 dart-sass，
 
-52. vue 修改打包后静态资源路径的修改
+51. vue 修改打包后静态资源路径的修改
 
     assetsDir 和 outputDir 还是 publicPath
 
-53. 组件封装
+52. 组件封装
 
     - props 验证、默认值
     - 插槽，react 的话就是 children 和 React.Children
 
-54. vue 和 react 区别
+53. vue 和 react 区别
 
     相同点，都是基于 vdom 生成 dom 元素，都支持组件化开发
 
@@ -365,39 +374,39 @@
 
     首先，下面会说到的 template 中无法很好 linting、type 推断，代码迁移过去很多 bug 无法及时发现。其次代码迁移很大部分都是 js 逻辑的迁移（这个更重要），迁移到 vue 中，你需要填鸭式拆分原先代码，放到 computed、menthods 中，工作量不小且代码和 Vue 强绑定。最后，原代码 class、@click 这些东西，有现代化的编辑器，批量 replace 成 className、onClick 不是很简单的事情吗？
 
-55. vue props 会触发哪个生命周期函数
+54. vue props 会触发哪个生命周期函数
 
     如果 porps 或者 porps 关联的 computed 绑定到 dom 上，会触发 beforeUpdate 和 updated
 
-56. vue3 为什么会使用 proxy 来代替 object.defineproperty
+55. vue3 为什么会使用 proxy 来代替 object.defineproperty
 
     2.0 的问题，给对象新增属性时，obj.a = 10 无法被拦截到
     给数组按照索引赋值，通过修改 length 的方式修改数组都无被拦截到，都需要用到`$set` 来手动解决
 
     但是使用 proxy 就可以完美解决上述问题
 
-57. vue3 是如何通过 proxy 来代理数据的
+56. vue3 是如何通过 proxy 来代理数据的
 
-58. 谈谈你对 keep-alive 的理解
+57. 谈谈你对 keep-alive 的理解
 
     缓存每次被激活的第一个组件，判断组件是否在 exclude 里，如果在则取缓存里的，如果不在则放入缓存，缓存基于 lru 算法规则，最近最少使用，具体缓存实现是将最近访问的节点 push 到数组并且删除其原来在的位置，然后在数组前面删除，当数组超过 max 值时，则默认删除第一个
 
-59. vue-ssr 原理，不依赖框架如何实现
+58. vue-ssr 原理，不依赖框架如何实现
 
     vue-server-render 基于服务端将 vue 代码解析为 html 文件，浏览器直接请求 html 文件
 
-60. vuex 是什么？怎么使用？哪种功能场景使用它？
+59. vuex 是什么？怎么使用？哪种功能场景使用它？
 
     vuex 是专门为 vue.js 应用程序开发的状态管理工具，当我的组件信息、有一些数据需要响应式的在页面上展示时
 
-61. vuex 有哪几种属性
-62. 不使用 vuex 会带来什么问题
-63. vue.js 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
-64. vuex 一个例子方法
-65. Vuex 中如何异步修改状态
-66. Vuex 中 actions 和 mutations 的区别
-67. 为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
+60. vuex 有哪几种属性
+61. 不使用 vuex 会带来什么问题
+62. vue.js 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
+63. vuex 一个例子方法
+64. Vuex 中如何异步修改状态
+65. Vuex 中 actions 和 mutations 的区别
+66. 为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
 
     纯函数，给定同样的输入返回同样的输出，可预测性。
 
-68. vuex 的实现原理，vuex 中 state 如何促使视图更新
+67. vuex 的实现原理，vuex 中 state 如何促使视图更新
