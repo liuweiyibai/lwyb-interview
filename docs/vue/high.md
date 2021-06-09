@@ -140,7 +140,15 @@
     保留内部组件状态，避免第二次加载时重复渲染，内置 actived,beforeActived 钩子，使用 lru 算法缓存组件 options
 
 28. vue scoped 属性作用？实现原理？
+
+    达到 css 样式不互相污染的作用，原理是依赖 postcss 给每一个 dom 元素增加独一无二的恶属性
+
+    [参考链接](https://blog.csdn.net/fujiaran/article/details/108760419)
+
 29. 怎么看待 virtual dom？
+
+    通过虚拟 dom 对比真实 dom ，来进行真实 dom 的最小更新，主要是为了跨平台方便
+
 30. ast 语法树了解吗？
 31. vue-loader 做了哪些事情？
 32. vue diff？

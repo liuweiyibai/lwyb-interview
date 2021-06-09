@@ -37,13 +37,13 @@
    方便开发者在各个生命周期做不同的事情，在各个生命周期都有对组件可以做的事情
 
    - beforeCreate 组件创建前，此时数据监测和初始化事件还未开始
-  
+
    - created 组件创建后，完成数据监测，属性和方法的运算，初始化事件，`$el` 还没有，不可以访问 dom，真实 dom 不可访问
-  
+
    - beforeMount 挂载真实 dom 前，在挂载开始前被调用，相关的 render 函数首次被调用，实例已经完成以下配置: 包括模板编译、把 data 里面的数据生成模板 html，此时组件还没有挂载到页面上
-  
+
    - mounted 载入后，`$el` 可以访问到组件实例 dom，实例已经完成以下配置：将编译好的 HTML 内容替换 `$el` 指向的 dom 对象，完成组件 HTML 展示到真实页面上。
-  
+
    - beforeUpdate（更新前），在数据更新之前调用，发生在虚拟 DOM 重新渲染和打补丁之前。可以在该钩子中进一步地更改状态，不会触发附加的重渲染过程。
 
    - updated（更新后），在由于数据更改导致的虚拟 DOM 重新渲染和打补丁之后调用。调用时，组件 DOM 已经更新，所以可以执行依赖于 DOM 的操作。然而在大多数情况下，应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。
@@ -83,13 +83,13 @@
 
 13. 哪个生命周期可以可以获取真实 dom
 
-      mounted
+    mounted
 
 14. 修改 data 里的数据会触发哪些生命周期
 
 15. 为什么 data 是一个函数
 
-    函数创建新的作用域，避免组件复用时data被共享
+    函数创建新的作用域，避免组件复用时 data 被共享
 
 ## 路由面试题
 
@@ -400,13 +400,17 @@
     vuex 是专门为 vue.js 应用程序开发的状态管理工具，当我的组件信息、有一些数据需要响应式的在页面上展示时
 
 60. vuex 有哪几种属性
-61. 不使用 vuex 会带来什么问题
-62. vue.js 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
-63. vuex 一个例子方法
-64. Vuex 中如何异步修改状态
-65. Vuex 中 actions 和 mutations 的区别
-66. 为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
+
+    state getter mutation actions
+
+61. vue.js 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
+62. Vuex 中如何异步修改状态
+63. Vuex 中 actions 和 mutations 的区别
+
+    同步异步，纯函数
+
+64. 为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
 
     纯函数，给定同样的输入返回同样的输出，可预测性。
 
-67. vuex 的实现原理，vuex 中 state 如何促使视图更新
+65. vuex 的实现原理，vuex 中 state 如何使视图更新
