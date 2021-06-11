@@ -52,7 +52,7 @@
 
 8. 实现垂直居中的方式
 
-   flex 、grid、定位 + transform、display:table
+   flex 、grid、定位 + transform、display:table + vertical:align
 
 9. display:none 和 visibility:hidden 的区别？
 
@@ -147,6 +147,8 @@
     CSS 选择器的解析是从右向左解析的。若从左向右的匹配，发现不符合规则，需要进行回溯，会损失很多性能。若从右向左匹配，先找到所有的最右节点，对于每一个节点，向上寻找其父节点直到找到根元素或满足条件的匹配规则，则结束这个分支的遍历。两种匹配规则的性能差别很大，是因为从右向左的匹配在第一步就筛选掉了大量的不符合条件的最右节点（叶子节点），而从左向右的匹配规则的性能都浪费在了失败的查找上面。而在 CSS 解析完毕后，需要将解析的结果与 DOM Tree 的内容一起进行分析建立一棵 Render Tree，最终用来进行绘图。在建立 Render Tree 时（WebKit 中的「Attachment」过程），浏览器就要为每个 DOM Tree 中的元素根据 CSS 的解析结果（Style Rules）来确定生成怎样的 Render Tree。
 
 22. 怎么让 Chrome 支持小于 12px 的文字？
+
+    文本缩放
 
     ```CSS
     p{font-size:10px;-webkit-transform:scale(0.8);}
