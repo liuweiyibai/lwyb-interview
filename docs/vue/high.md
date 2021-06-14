@@ -153,6 +153,9 @@
 31. vue-loader 做了哪些事情？
 32. vue diff？
 33. vue computed 和 watch 区别？
+
+    都可以监听 data 或者 props 并且执行对应逻辑，watch 适合监听数据后执行某些逻辑，computed 适合简化 data 和 props 的计算，因为其有缓存结果的特性，当依赖不发生变化时，结果不会重新计算
+
 34. computed 怎么实现的缓存（dirty）？
 35. vue3 双向数据绑定实现？
 36. createRender？和 vue2 有哪些不同，提到了函数式编程
