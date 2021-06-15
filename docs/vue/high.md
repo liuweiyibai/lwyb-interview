@@ -121,43 +121,44 @@
 
     proxy 是 es6 中推出的新 api，可以弥补以上两个缺点，所以 vue3.x 版本用 proxy 替换 object.defineproperty
 
-23. vue 性能优化
-
-24. 说说你觉得认为的 vue 开发规范有哪些？
+23. 说说你觉得认为的 vue 开发规范有哪些？
 
     看一下 vue 风格指南
 
-25. vue 在 created 和 mounted 这两个生命周期中请求数据有什么区别呢?
+24. vue 在 created 和 mounted 这两个生命周期中请求数据有什么区别呢?
 
     主要区别看请求中是否涉及到 dom 操作，比如图表渲染
 
-26. 说说你对 extend 的理解
+25. 说说你对 extend 的理解
 
     extend：创建、复用组件，使用 extend 时，data 选项必须是函数
 
-27. 说说你对 keep-alive 的理解是什么？
+26. 说说你对 keep-alive 的理解是什么？
 
     保留内部组件状态，避免第二次加载时重复渲染，内置 actived,beforeActived 钩子，使用 lru 算法缓存组件 options
 
-28. vue scoped 属性作用？实现原理？
+27. vue scoped 属性作用？实现原理？
 
-    达到 css 样式不互相污染的作用，原理是依赖 postcss 给每一个 dom 元素增加独一无二的恶属性
+    达到 css 样式不互相污染的作用，原理是依赖 postcss 给每一个 dom 元素增加独一无二的属性
 
     [参考链接](https://blog.csdn.net/fujiaran/article/details/108760419)
 
-29. 怎么看待 virtual dom？
+28. 怎么看待 virtual dom？
 
     通过虚拟 dom 对比真实 dom ，来进行真实 dom 的最小更新，主要是为了跨平台方便
 
-30. ast 语法树了解吗？
-31. vue-loader 做了哪些事情？
-32. vue diff？
-33. vue computed 和 watch 区别？
+29. ast 语法树了解吗？
+30. vue-loader 做了哪些事情？
+31. vue diff？
+32. vue computed 和 watch 区别？
 
     都可以监听 data 或者 props 并且执行对应逻辑，watch 适合监听数据后执行某些逻辑，computed 适合简化 data 和 props 的计算，因为其有缓存结果的特性，当依赖不发生变化时，结果不会重新计算
 
-34. computed 怎么实现的缓存（dirty）？
-35. vue3 双向数据绑定实现？
-36. createRender？和 vue2 有哪些不同，提到了函数式编程
-37. 说下对函数式编程对的理解。
-38. 对 MVC （react） MVVM（vue）的了解
+33. computed 怎么实现的缓存（dirty）？
+34. vue3 双向数据绑定实现？
+35. createRender？和 vue2 有哪些不同，提到了函数式编程
+36. 说下对函数式编程对的理解。
+37. 对 MVC （react） MVVM（vue）的了解?
+38. vue 静态标记了解过吗？
+
+    vue 静态标记会在解析 template 时标记静态节点、比如没有指令的 html 标签、文本节点等，好在更新时跳过这些节点
