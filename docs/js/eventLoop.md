@@ -1,5 +1,46 @@
 # 事件循环相关
 
+1. js 是单线程还是多线程的
+
+   单线程，因为 dom 操作或者事件绑定，只能同时做一件事，但是单线程会导致任务会等待执行，所以引入了浏览器的事件循环机制。
+
+2. 什么是事件循环机制
+
+   因为 js 是单线程，所以为了保证 js 代码执行时不会阻塞住，所以会引入了事件循环机制，事件循环机制即将一些任务放到异步任务队列，等到异步任务完成后再将其函数或者回到放到同步任务队列等待执行。JS 主线程不断的循环往复的从任务队列中读取任务，执行任务，这种运行机制称为事件循环（event loop）。
+
+   js 有一个基于事件循环的并发模型，事件循环负责执行代码、收集和处理事件以及执行队列中的子任务。
+
+3. 什么是微任务、宏任务
+
+   浏览器的事件循环（event loop）中分成宏任务和微任务。js 中任务分成同步任务和异步任务。可以理解为执行优先级不同的异步任务。
+
+4. 哪些是宏任务，哪些是微任务
+
+   js 中主栈执行的大多数的任务，例如：定时器，事件绑定，ajax，回调函数，node 中 fs 操作模块等就是宏任务
+
+   微任务(micro task)，promise, async/await, process.nextTick 等就是微任务。
+
+5. 为什么要引入微任务队列呢
+
+   微任务的引入是为了解决异步回调的问题，假设只有宏任务，那么每一个宏任务执行完后回调函数也放入宏任务队列，这样会造成队列多长，回调的时间变长，这样会造成页面的卡顿，所以引入了微任务。
+
+6. 说出下面 log 的顺序
+
+   ```js
+   console.log(1);
+   new Promise((resolve, reject) => {
+     console.log(2);
+     resolve();
+   }).then((res) => {
+     console.log(3);
+   });
+   console.log(4);
+   /* 输出
+    * 1 -> 2 -> 4 ->3
+    */
+   //解答：第一轮宏任务就是主栈中的同步任务，先输出1，js 代码执行到promise立即执行输出2， resolve将.then() 中的代码放入到微任务队列，宏任务结束后输出 4，最后执行微任务队列输出3
+   ```
+
 - 下面代码输出顺序
 
   [从一道面试题谈谈对 EventLoop 的理解](https://mp.weixin.qq.com/s/3WLuVR4NWnDUOsVQuTSYJw)
@@ -25,202 +66,7 @@
 
 ## Promise
 
-1. 手写 Promise 系列 api
-
-   ```js
-   const PENDING = 'pending';
-   const FULFILLED = 'fulfilled';
-   const REJECTED = 'rejected';
-
-   class Promise {
-     constructor(executor) {
-       this.status = PENDING;
-       this.value = undefined;
-       this.reason = undefined;
-       this.onResolvedCallbacks = [];
-       this.onRejectedCallbacks = [];
-
-       let resolve = (value) => {
-         if (this.status === PENDING) {
-           this.status = FULFILLED;
-           this.value = value;
-           this.onResolvedCallbacks.forEach((fn) => fn());
-         }
-       };
-
-       let reject = (reason) => {
-         if (this.status === PENDING) {
-           this.status = REJECTED;
-           this.reason = reason;
-           this.onRejectedCallbacks.forEach((fn) => fn());
-         }
-       };
-
-       try {
-         executor(resolve, reject);
-       } catch (error) {
-         reject(error);
-       }
-     }
-
-     then(onFulfilled = (v) => v, onRejected = (err) => throw err) {
-       // 解决 onFufilled，onRejected 没有传值的问题
-       onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (v) => v;
-       // 因为错误的值要让后面访问到，所以这里也要抛出错误，不然会在之后 then 的 resolve 中捕获
-       onRejected =
-         typeof onRejected === 'function' ? onRejected : (err) => throw err;
-       // 每次调用 then 都返回一个新的 promise
-       let promise2 = new Promise((resolve, reject) => {
-         if (this.status === FULFILLED) {
-           //Promise/A+ 2.2.4 --- setTimeout
-           setTimeout(() => {
-             try {
-               let x = onFulfilled(this.value);
-               // x可能是一个proimise
-               resolvePromise(promise2, x, resolve, reject);
-             } catch (e) {
-               reject(e);
-             }
-           }, 0);
-         }
-
-         if (this.status === REJECTED) {
-           //Promise/A+ 2.2.3
-           setTimeout(() => {
-             try {
-               let x = onRejected(this.reason);
-               resolvePromise(promise2, x, resolve, reject);
-             } catch (e) {
-               reject(e);
-             }
-           }, 0);
-         }
-
-         if (this.status === PENDING) {
-           this.onResolvedCallbacks.push(() => {
-             setTimeout(() => {
-               try {
-                 let x = onFulfilled(this.value);
-                 resolvePromise(promise2, x, resolve, reject);
-               } catch (e) {
-                 reject(e);
-               }
-             }, 0);
-           });
-
-           this.onRejectedCallbacks.push(() => {
-             setTimeout(() => {
-               try {
-                 let x = onRejected(this.reason);
-                 resolvePromise(promise2, x, resolve, reject);
-               } catch (e) {
-                 reject(e);
-               }
-             }, 0);
-           });
-         }
-       });
-
-       return promise2;
-     }
-
-     static resolve(value) {
-       if (value instanceof Promise) {
-         return value;
-       }
-       return new Promise((resolve) => resolve(value));
-     }
-
-     static reject(reason) {
-       return Promise((_, reject) => reject(reason));
-     }
-   }
-   const resolvePromise = (promise2, x, resolve, reject) => {
-     // 自己等待自己完成是错误的实现，用一个类型错误，结束掉 promise  Promise/A+ 2.3.1
-     if (promise2 === x) {
-       return reject(
-         new TypeError('Chaining cycle detected for promise #<Promise>')
-       );
-     }
-     // Promise/A+ 2.3.3.3.3 只能调用一次
-     let called;
-     // 后续的条件要严格判断 保证代码能和别的库一起使用
-     if ((typeof x === 'object' && x != null) || typeof x === 'function') {
-       try {
-         // 为了判断 resolve 过的就不用再 reject 了（比如 reject 和 resolve 同时调用的时候）  Promise/A+ 2.3.3.1
-         let then = x.then;
-         if (typeof then === 'function') {
-           // 不要写成 x.then，直接 then.call 就可以了 因为 x.then 会再次取值，Object.defineProperty  Promise/A+ 2.3.3.3
-           then.call(
-             x,
-             (y) => {
-               // 根据 promise 的状态决定是成功还是失败
-               if (called) return;
-               called = true;
-               // 递归解析的过程（因为可能 promise 中还有 promise） Promise/A+ 2.3.3.3.1
-               resolvePromise(promise2, y, resolve, reject);
-             },
-             (r) => {
-               // 只要失败就失败 Promise/A+ 2.3.3.3.2
-               if (called) return;
-               called = true;
-               reject(r);
-             }
-           );
-         } else {
-           // 如果 x.then 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.3.4
-           resolve(x);
-         }
-       } catch (e) {
-         // Promise/A+ 2.3.3.2
-         if (called) return;
-         called = true;
-         reject(e);
-       }
-     } else {
-       // 如果 x 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.4
-       resolve(x);
-     }
-   };
-   ```
-
-2. Promise 有几种状态, Promise 有什么优缺点 ?
-3. Promise 构造函数是同步还是异步执行，then 呢 ?promise 如何实现 then 处理 ?
-
-   够造函数只同步执行，then 是微任务，等待事件循环结束
-
-4. Promise 和 setTimeout 的区别 ?
-
-   微任务和宏任务，任务队列
-
-5. 如何实现 Promise.all?
-
-   ```js
-   Promise.prototype.all = function (promises) {
-     promises = Array.from(promises);
-     let len = promises.length;
-     let arrs = [];
-     return new Promise((resolve, reject) => {
-       for (let i = 0; i < len; i++) {
-         // 确保 promises 里每一项都是 Promise 对象
-         let item = promises[i];
-         Promise.resolve(item)
-           .then((p) => {
-             arrs[i] = p;
-             // 如果全部执行完毕则返回所有
-             if (arrs.length === len) {
-               resolve(arrs);
-             }
-           })
-           .catch((err) => {
-             reject(err);
-           });
-       }
-     });
-   };
-   ```
-
-6. 如何实现 Promise.finally?
+Promise 的东西有点多，单独拿出来 [地址](/js/promise)
 
 ## setTimeout
 

@@ -23,8 +23,6 @@
 21. jsbrige 原理
 22. 如何实现同一个浏览器多个标签页之间的通信
 
-    postMessage 和 storage 的增改事件
-
-23. data-属性的作用
-
-    html 自定义属性，可以被 getAttribute 获取到，可以有属性选择器实现 css 私有化
+    - websocket
+    - localStorage 的 storage 事件
+    - postMessage

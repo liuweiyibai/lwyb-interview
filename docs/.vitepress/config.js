@@ -41,7 +41,10 @@ function getGuideSidebar() {
           text: '事件循环',
           link: '/js/eventLoop',
         },
-
+        {
+          text: 'Promise',
+          link: '/js/promise',
+        },
         { text: '正则表达式', link: '/js/regexp' },
       ],
     },
