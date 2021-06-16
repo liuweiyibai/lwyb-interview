@@ -110,36 +110,6 @@
   let a; // 如果是使用 var 声明就不会报错
   ```
 
-## 数组和对象
-
-- Object.create
-
-  `Object.create()` 方法创建一个新的对象，并以方法的第一个参数作为新对象的`__proto__`属性的值（以第一个参数作为新对象的构造函数的原型对象）
-
-  `Object.create()` 方法还有第二个可选参数，是一个对象，对象的每个属性都会作为新对象的自身属性，对象的属性值以 descriptor（Object.getOwnPropertyDescriptor(obj, 'key')）的形式出现，且 enumerable 默认为 false
-
-- 数组常用的函数有哪些
-
-  push
-  pop
-  splice
-  slice
-  shift
-  unshift
-  sort
-  find
-  findIndex
-  map/filter/reduce 等函数式编程方法
-  还有一些原型链上的方法：toString/valueOf
-
-- 函数中的 arguments 是数组吗？类数组转数组的方法了解一下？
-
-  是类数组，是属于鸭子类型的范畴，长得像数组。
-
-  ... 运算符
-  Array.from
-  Array.prototype.slice.apply(arguments)
-
 ## 函数
 
 1. new 操作符具体干了什么呢?
@@ -178,6 +148,7 @@
    - 作用域：每一个变量、函数都有其作用的范围，超出作用不得使用，这个叫做作用域
 
    - 作用域链：查找变量的过程。先找自己局部环境有没有声明变量或者是函数，如果有，则查看声明有无赋值或者是函数的内容，如果没有，则向上一级查找，从内部向外部扩散的查找方式
+   - 函数作用域在函数调用时形成
 
 5. 闭包是什么
 
@@ -417,14 +388,14 @@
       function () {
         alert('父级 冒泡');
       },
-      false
+      false,
     );
     parEle.addEventListener(
       'click',
       function () {
         alert('父级 捕获');
       },
-      true
+      true,
     );
 
     sonEle.addEventListener(
@@ -432,14 +403,14 @@
       function () {
         alert('子级冒泡');
       },
-      false
+      false,
     );
     sonEle.addEventListener(
       'click',
       function () {
         alert('子级捕获');
       },
-      true
+      true,
     );
   </script>
   ```
@@ -453,17 +424,6 @@
   - DOM0 级事件，直接在 html 元素上绑定 on-someEvent，比如 onclick，取消的话，dom.onclick = null，同一个事件只能有一个处理程序，后面的会覆盖前面的。
   - DOM2 级事件，通过 addEventListener 注册事件，通过 removeEventListener 来删除事件，一个事件可以有多个事件处理程序，按顺序执行，捕获事件和冒泡事件。
   - DOM3 级事件，增加了事件类型，比如 UI 事件，焦点事件，鼠标事件。
-
-## 异步和事件循环
-
-- 简单说一下事件循环机制 （Event Loop）
-
-  事件循环机制从整体上告诉了我们 JavaScript 代码的执行顺序。Event Loop 即事件循环，是指浏览器或 Node 的一种解决 javaScript 单线程运行时不会阻塞的一种机制，也就是我们经常使用异步的原理。执行顺序是先执行 Script 脚本，然后清空微任务队列，然后开始下一轮事件循环，继续先执行宏任务，再清空微任务队列，如此往复。
-
-  - 宏任务：Script/setTimeout/setInterval/setImmediate/ I/O / UI Rendering
-  - 微任务：process.nextTick()/Promise
-
-  ps: 上述的 setTimeout 和 setInterval 等都是任务源，真正进入任务队列的是他们分发的任务
 
 ## 零散知识点
 
@@ -736,17 +696,7 @@
    }
    ```
 
-## ES6 面试题，ES6 新增方法面试题
-
-1. Object.assign ()原对象的属性和方法都合并到了目标对象
-2. for...of 循环
-3. import 和 export
-4. 解构赋值
-5. set 数据结构（可用于快速去重）
-6. Spread Operator 展开运算符(...)
-7. 字符串新增方法
-
-## ES6 编程题
+## ES6 相关
 
 1. 使用解构，实现两个变量的值的交换
 
@@ -764,6 +714,20 @@
    let arr = [1,2,3,4]
    let b = [i * 2 for (i of arr)];
    ```
+
+3. Object.assign
+
+   原对象的属性和方法都合并到了目标对象
+
+4. for...of 循环
+
+   for of 可以迭代迭代器对象类型的数据
+
+5. import 和 export
+6. 解构赋值
+7. set 数据结构（可用于快速去重）
+8. Spread Operator 展开运算符(...)
+9. 字符串新增方法
 
 ## 常见 js 面试题
 
@@ -853,9 +817,21 @@
 
 7. js 的事件委托是什么，原理是什么
 
+   子元素可以将事件委托给外层元素
+
 8. 列举几种解决跨域问题的方式，且说明原理
+
+   iframe 跨域，cors
+
 9. 谈谈垃圾回收机制的方式及内存管理
+
+   js gc 有一个后台程序会一直监听当前执行上下文中的所有变量，当变量引用为 0，并且被标记为清除，自动进行回收，回收算法包括 标记清除、引用计数。闭包就使一个变量不会被垃圾回收所回收。
+
 10. 写一个 function ，清除字符串前后的空格
+
+    ```js
+    return str.replace(/(^\s+)|(\s+$)/g, '');
+    ```
 
 11. 随机取 1-10 之间的整数
 
@@ -864,13 +840,19 @@
     ```
 
 12. 模块化开发怎么做
+
+    amd、commonjs、es6modules 模块化方案
+
 13. 异步加载 Js 的方式有哪些
+
+    defer 和 async
+
 14. xml 和 json 的区别
 15. webpack 如何实现打包的
 16. 常见 web 安全及防护原理
 17. 用过哪些设计模式
 
-    单例、工厂
+    单例、工厂、策略、代理、发布订阅
 
 18. offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别
 

@@ -41,6 +41,17 @@
    //解答：第一轮宏任务就是主栈中的同步任务，先输出1，js 代码执行到promise立即执行输出2， resolve将.then() 中的代码放入到微任务队列，宏任务结束后输出 4，最后执行微任务队列输出3
    ```
 
+7. 简单说一下事件循环机制 （Event Loop）
+
+   事件循环机制从整体上告诉了我们 JavaScript 代码的执行顺序。Event Loop 即事件循环，是指浏览器或 Node 的一种解决 javaScript 单线程运行时不会阻塞的一种机制，也就是我们经常使用异步的原理。执行顺序是先执行 Script 脚本，然后清空微任务队列，然后开始下一轮事件循环，继续先执行宏任务，再清空微任务队列，如此往复。
+
+   - 宏任务：Script/setTimeout/setInterval/setImmediate/ I/O / UI Rendering
+   - 微任务：process.nextTick()/Promise
+
+   ps: 上述的 setTimeout 和 setInterval 等都是任务源，真正进入任务队列的是他们分发的任务
+
+## 应用题
+
 - 下面代码输出顺序
 
   [从一道面试题谈谈对 EventLoop 的理解](https://mp.weixin.qq.com/s/3WLuVR4NWnDUOsVQuTSYJw)
@@ -211,6 +222,8 @@ Promise 的东西有点多，单独拿出来 [地址](/js/promise)
      }, speed);
    }
    ```
+
+## 巨人的肩膀
 
 [JavaScript 教程-异步操作-定时器](https://wangdoc.com/javascript/async/timer.html#settimeout?share_token=97955361-A294-4BC7-952B-B866A95B3070&tt_from=weixin&utm_source=weixin&utm_medium=toutiao_ios&utm_campaign=client_share&wxshare_count=1)
 

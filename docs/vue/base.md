@@ -127,7 +127,7 @@
 
 9. vue-router 实现路由懒加载（ 动态加载路由 ）
 
-通过 `import` 的方式动态引入，同时使用 webpack 魔法注释命名拆包，或者使用 webpack 提供的 `require.ensure`
+   通过 `import` 的方式动态引入，同时使用 webpack 魔法注释命名拆包，或者使用 webpack 提供的 `require.ensure`
 
 ## vue 常见面试题
 
@@ -199,7 +199,7 @@
 
 17. `$nextTick` 的使用
 
-    dom 响应数据更新，dom 更新结束后，下一轮事件循环的回调
+    dom 响应数据更新，dom 更新结束后，下一轮事件循环的回，向下使用 Promise setTimeout、setImmdeiate、Mutationobserve 等 api 实现
 
 18. vue 组件中 data 为什么必须是一个函数
 
@@ -211,6 +211,8 @@
 
 20. 渐进式框架的理解
 
+    就是你可以只是用我的一部分功能，比如 observe，比如事件机制，不一定使用整个框架，vue3 中支持 treeshaking
+
 21. 单页面应用和多页面应用区别及优缺点
 
 22. vue 中过滤器有什么作用及详解
@@ -221,27 +223,36 @@
 
     assets 目录中的文件会被 webpack loader 处理，static 不会，static 会被直接复制到打包目录
 
-25. 列举常用的指令
-26. vue 常用的修饰符
-27. 数组更新检测
+25. vue 常用的修饰符
+26. 数组更新检测
 
     重写数组方法
 
-28. Vue.set 视图更新
-29. 自定义指令详解
+27. Vue.set 视图更新
 
-30. 引进组件的步骤
-31. Vue-cli 打包命令是什么？打包后导致路径问题，应该在哪里修改
+    就是触发数据的响应式更新
+
+28. 自定义指令详解
+
+    看文档吧
+
+29. 引进组件的步骤
+
+    引入，使用，使用可以通过插件注册、组件注册的方式，主要是看通过什么接口定义
+
+30. Vue-cli 打包命令是什么？打包后导致路径问题，应该在哪里修改
 
     是否二级目录，修改 publicPath 和 vue-router 的 base
 
-32. 跨组件双向数据绑定
+31. 跨组件双向数据绑定
 
     .sync 的实现，还是自定义 v-model
 
-33. delete 和 Vue.delete 删除数组的区别
+32. delete 和 Vue.delete 删除数组的区别
 
-34. SPA 首屏加载慢如何解决
+    delete 可能无法触发视图更新，Vue.delete 一定会触发视图更新
+
+33. SPA 首屏加载慢如何解决
 
     首屏主要是对入口文件进行瘦身，路由懒加载、组件按需加载。具体包括 gzip 压缩，剔除 log 日志，使用 svg 或者 雪碧图，第三方库、静态资源 cdn，利用 http 缓存，路由懒加载，splitChunks 提取公共代码。
 
@@ -254,7 +265,7 @@
 
     webpack5 增量构建
 
-35. vue-router 跳转和 location.href 有什么区别
+34. vue-router 跳转和 location.href 有什么区别
 
     vue-router 跳转无状态刷新更改
     location.href 修改页面会进行刷新
@@ -262,33 +273,33 @@
     vue-router 跳转是内部 match 后渲染对应组件
     location.href 是刷新页面后重新执行了 vue-router 的逻辑渲染匹配出来的页面
 
-36. vue slot
-37. 你们 vue 项目是打包了一个 js 文件，一个 css 文件，还是有多个文件？
+35. vue slot
+36. 你们 vue 项目是打包了一个 js 文件，一个 css 文件，还是有多个文件？
 
     多个，打包到一个文件会导致体积过大，网站体验不好
 
-38. Vue 里面 router-link 在 pc 上有用，在安卓上没反应怎么解决？
+37. Vue 里面 router-link 在 pc 上有用，在安卓上没反应怎么解决？
 
     vue-router 兼容性问题，使用 babel-polyfill 解决
 
-39. vue2 中注册在 router-link 上事件无效解决方法
+38. vue2 中注册在 router-link 上事件无效解决方法
 
     使⽤@click.native。原因：router-link 会阻⽌ click 事件，.native 指直接监听⼀ 个原⽣事件。
 
-40. RouterLink 在 IE 和 Firefox 中不起作用（路由不跳转）的问题
+39. RouterLink 在 IE 和 Firefox 中不起作用（路由不跳转）的问题
 
     只⽤ a 标签，不使用 button 标签；
     使⽤ button 标签和 Router.navigate ⽅法
 
-41. axios 的特点有哪些
+40. axios 的特点有哪些
 
     支持 promise 方式发送请求，请求拦截器
 
-42. 请说下封装 vue 组件的过程？
+41. 请说下封装 vue 组件的过程？
 
     高内聚低耦合结合业务，定义组件属性，是否使用 ts，哪种 css 方案，打包工具选择，lint 验证、prettier、持续集成等，单元测试
 
-43. vue 各种组件通信方法（父子 子父 兄弟 爷孙 毫无关系的组件）
+42. vue 各种组件通信方法（父子 子父 兄弟 爷孙 毫无关系的组件）
 
     $emit 和 props 属性
     $attr $props $listeners 属性和事件透传
@@ -296,11 +307,11 @@
     vuex
     $parent $children ref
 
-44. vue mock 数据
+43. vue mock 数据
 
     通过 dev-server 的 before 钩子和 mockjs 生成的数据来进行数据 mock
 
-45. vue 初始化页面闪动问题
+44. vue 初始化页面闪动问题
 
     使用 vue 开发时，在 vue 没有初始化之前，div 是不归 vue 管的，所以我们写的代码在没有解析完的情况下，会出现一个花屏闪烁的问题，这个时候就可以在 css 里写一个
 
@@ -308,7 +319,7 @@
 
     如果没有彻底解决，可以再根元素上加
 
-46. vue 禁止弹窗后的屏幕滚动
+45. vue 禁止弹窗后的屏幕滚动
 
     ```js
     export default {
@@ -334,29 +345,29 @@
     };
     ```
 
-47. vue 更新数组时触发视图更新的方法
+46. vue 更新数组时触发视图更新的方法
 
     通过 `$set` 或者将该变量重新赋值
 
-48. vue 常用的 UI 组件库
-49. vue 如何引进本地背景图片
+47. vue 常用的 UI 组件库
+48. vue 如何引进本地背景图片
 
     webpack alias 使用，或者绕过 webpack 构建直接引入
 
-50. vue 如何引进 sass
+49. vue 如何引进 sass
 
     搭建项目时使用，或者安装 dart-sass，
 
-51. vue 修改打包后静态资源路径的修改
+50. vue 修改打包后静态资源路径的修改
 
     assetsDir 和 outputDir 还是 publicPath
 
-52. 组件封装
+51. 组件封装
 
     - props 验证、默认值
     - 插槽，react 的话就是 children 和 React.Children
 
-53. vue 和 react 区别
+52. vue 和 react 区别
 
     相同点，都是基于 vdom 生成 dom 元素，都支持组件化开发
 
@@ -374,45 +385,53 @@
 
     首先，下面会说到的 template 中无法很好 linting、type 推断，代码迁移过去很多 bug 无法及时发现。其次代码迁移很大部分都是 js 逻辑的迁移（这个更重要），迁移到 vue 中，你需要填鸭式拆分原先代码，放到 computed、menthods 中，工作量不小且代码和 Vue 强绑定。最后，原代码 class、@click 这些东西，有现代化的编辑器，批量 replace 成 className、onClick 不是很简单的事情吗？
 
-54. vue props 会触发哪个生命周期函数
+53. vue props 会触发哪个生命周期函数
 
     如果 porps 或者 porps 关联的 computed 绑定到 dom 上，会触发 beforeUpdate 和 updated
 
-55. vue3 为什么会使用 proxy 来代替 object.defineproperty
+54. vue3 为什么会使用 proxy 来代替 object.defineproperty
 
     2.0 的问题，给对象新增属性时，obj.a = 10 无法被拦截到
     给数组按照索引赋值，通过修改 length 的方式修改数组都无被拦截到，都需要用到`$set` 来手动解决
 
     但是使用 proxy 就可以完美解决上述问题
 
-56. vue3 是如何通过 proxy 来代理数据的
+55. vue3 是如何通过 proxy 来代理数据的
 
-57. 谈谈你对 keep-alive 的理解
+56. 谈谈你对 keep-alive 的理解
 
     缓存每次被激活的第一个组件，判断组件是否在 exclude 里，如果在则取缓存里的，如果不在则放入缓存，缓存基于 lru 算法规则，最近最少使用，具体缓存实现是将最近访问的节点 push 到数组并且删除其原来在的位置，然后在数组前面删除，当数组超过 max 值时，则默认删除第一个
 
-58. vue-ssr 原理，不依赖框架如何实现
+57. vue-ssr 原理，不依赖框架如何实现
 
     vue-server-render 基于服务端将 vue 代码解析为 html 文件，浏览器直接请求 html 文件
 
-59. vuex 是什么？怎么使用？哪种功能场景使用它？
+58. vuex 是什么？怎么使用？哪种功能场景使用它？
 
     vuex 是专门为 vue.js 应用程序开发的状态管理工具，当我的组件信息、有一些数据需要响应式的在页面上展示时
 
-60. vuex 有哪几种属性
+59. vuex 有哪几种属性
 
     state getter mutation actions
 
-61. vue.js 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
-62. Vuex 中如何异步修改状态
-63. Vuex 中 actions 和 mutations 的区别
+60. vue.js 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
+61. Vuex 中如何异步修改状态
+62. Vuex 中 actions 和 mutations 的区别
 
     同步异步，纯函数
 
-64. 为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
+63. 为什么 Vuex 的 mutation 和 Redux 的 reducer 中不能做异步操作？
 
     纯函数，给定同样的输入返回同样的输出，可预测性。
 
-65. vuex 的实现原理，vuex 中 state 如何使视图更新
+64. vuex 的实现原理，vuex 中 state 如何使视图更新
 
     同 data 一样，存在依赖收集，数据更新会更新到视图上
+
+65. 简单说一下 vuex 和 redux 的区别
+
+    分别是 react 和 vue 的全局共享状态插件，但是 react 和 redux 并不是强相关，redux 也可以用在其他框架中，需要做集成。而 vuex 是和 vue 强相关的，redux 是讲究函数式变成，所以他的 actions 异步操作需要由第三方中间件来做，vuex 自带 mutations 和 action 分别做同步异步操作
+
+66. computed 原理
+
+    computed 对依赖发生变化时重新计算，根据一个内部变量，当依赖数据变化时将内部变量设置为 true，重新计算

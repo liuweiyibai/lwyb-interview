@@ -59,6 +59,28 @@
    let max = Math.max.apply(null, [2, 6, 7, 9, 4]);
    ```
 
+- 数组常用的函数有哪些
+
+  push
+  pop
+  splice
+  slice
+  shift
+  unshift
+  sort
+  find
+  findIndex
+  map/filter/reduce 等函数式编程方法
+  还有一些原型链上的方法：toString/valueOf
+
+- 函数中的 arguments 是数组吗？类数组转数组的方法了解一下？
+
+  是类数组，是属于鸭子类型的范畴，长得像数组。
+
+  ... 运算符
+  Array.from
+  Array.prototype.slice.apply(arguments)
+
 ## 手写数组常见方法
 
 - 手写数组 forEach 方法
