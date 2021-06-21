@@ -239,4 +239,28 @@
 
 39. 有一个高度自适应的 div，里面有两个 div，一个高度 100px，希望另一个填满剩下的高度
 
-    定位还有 flex1
+    定位还有 flex1 和 定位+margin
+
+40. flex 1 具体是什么意思
+
+    首先明确一点是， flex 是 flex-grow、flex-shrink、flex-basis 的缩写。
+
+    flex-grow 属性定义项目的放大比例，默认为 0，即如果存在剩余空间，也不放大。
+
+    flex-shrink 属性定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小。
+
+    flex-basis 属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为 auto，即项目的本来大小。
+
+    当 flex 取值为一个非负数字，则该数字为 flex-grow 值，flex-shrink 取 1，flex-basis 取 0%，如下是等同的：
+
+    ```css
+    .item {
+      flex: 1;
+    }
+    /*等同于*/
+    .item {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0%;
+    }
+    ```
