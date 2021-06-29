@@ -29,41 +29,20 @@ function getGuideSidebar() {
           text: '数组',
           link: '/js/array',
         },
-        {
-          text: '对象',
-          link: '/js/object',
-        },
-        {
-          text: '函数',
-          link: '/js/function',
-        },
-        {
-          text: '事件循环',
-          link: '/js/eventLoop',
-        },
-        {
-          text: 'Promise',
-          link: '/js/promise',
-        },
+        { text: '对象', link: '/js/object' },
+        { text: '函数', link: '/js/function' },
+        { text: '事件循环', link: '/js/eventLoop' },
+        { text: 'Promise', link: '/js/promise' },
         { text: '正则表达式', link: '/js/regexp' },
       ],
     },
     {
       text: 'vue 相关面试题',
-      link: '/vue/index',
-      children: [
-        { text: 'vue 基础面试题', link: '/vue/base' },
-        { text: 'vue 高阶面试题', link: '/vue/high' },
-      ],
+      link: '/vue',
     },
     {
       text: 'react 相关面试题',
-      children: [
-        {
-          text: 'react 基础面试题',
-          link: '/react/base',
-        },
-      ],
+      link: '/react',
     },
     {
       text: 'babel 面试题',
@@ -85,11 +64,11 @@ function getGuideSidebar() {
     },
     {
       text: 'HTTP 面试题',
-      link: '/http/index',
+      link: '/http',
     },
     {
       text: 'css 面试题',
-      link: '/css/index',
+      link: '/css',
     },
     {
       text: '小程序',

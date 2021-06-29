@@ -84,6 +84,7 @@
 
 6. react diff 原理（常考，大厂必考）
 
+   说说 React diff 的原理是什么？
    react 16 之前，节点的遍历是深度优先遍历
    react 16 之后，链表，同层节点是单向链表
 
@@ -152,6 +153,9 @@
 ### react 性能比较面试题
 
 1. vue 和 react 的区别
+
+   [vue 基础面试题](/vue)
+
 2. react 性能优化的方案
 3. react 项目用过什么脚手架
 
@@ -161,15 +165,14 @@
 
    配置第三方 cdn、修改 publicPath ，反代配置，修改 loader 配置，添加 loader，添加 webpack-plugin
 
-5. 介绍一下 webpack
-6. 为什么我们需要使用 React 提供的 Children API 而不是 JavaScript 的 map？
-7. react fiber 架构
-8. react hooks 原理
+5. 为什么我们需要使用 React 提供的 Children API 而不是 JavaScript 的 map？
+6. react fiber 架构
+7. react hooks 原理
 
-```js
-const [state, setState] = useState(1);
-// 为什么 const 定义的 state 可以被 setState 修改，因为每次调用setState后会重新执行该函数组件，所以相当于重新赋值
-```
+   ```js
+   const [state, setState] = useState(1);
+   // 为什么 const 定义的 state 可以被 setState 修改，因为每次调用setState后会重新执行该函数组件，所以相当于重新赋值
+   ```
 
 ## react hooks
 
@@ -185,32 +188,31 @@ React 只会根据 vdom 的 diff 结果更新 DOM 真正发生改变的部分
 
 避免 effect 的重复调用，通过依赖，不变函数使用 useCallback
 
-什么时候使用状态管理器？
-render 函数中 return 如果没有使用()会有什么问题？
-componentWillUpdate 可以直接修改 state 的值吗？
-说说你对 React 的渲染原理的理解
-什么渲染劫持？
-React Intl 是什么原理？
-你有使用过 React Intl 吗？
-怎么实现 React 组件的国际化呢？
-说说 Context 有哪些属性？
-怎么使用 Context 开发组件？
-为什么 React 并不推荐我们优先考虑使用 Context？
-除了实例的属性可以获取 Context 外哪些地方还能直接获取 Context 呢？
-childContextTypes 是什么？它有什么用？
-contextType 是什么？它有什么用？
-Consumer 向上找不到 Provider 的时候怎么办？
-有使用过 Consumer 吗？
-在 React 怎么使用 Context？
-React15 和 16 别支持 IE 几以上？
-说说你对 windowing 的了解
-举例说明 React 的插槽有哪些运用场景？
-你有用过 React 的插槽(Portals)吗？怎么用？
-React 的严格模式有什么用处？
-React 如何进行代码拆分？拆分的原则是什么？
-React 组件的构造函数有什么作用？
-React 组件的构造函数是必须的吗？
-React 中在哪捕获错误？
+- 什么时候使用状态管理器？
+- render 函数中 return 如果没有使用()会有什么问题？
+- componentWillUpdate 可以直接修改 state 的值吗？
+- 说说你对 React 的渲染原理的理解
+- 什么渲染劫持？
+- React Intl 是什么原理？
+- 你有使用过 React Intl 吗？
+- 怎么实现 React 组件的国际化呢？
+- 说说 Context 有哪些属性？
+- 怎么使用 Context 开发组件？
+- 为什么 React 并不推荐我们优先考虑使用 Context？
+- 除了实例的属性可以获取 Context 外哪些地方还能直接获取 Context 呢？
+- childContextTypes 是什么？它有什么用？
+- contextType 是什么？它有什么用？
+- Consumer 向上找不到 Provider 的时候怎么办？
+- 有使用过 Consumer 吗？
+- 在 React 怎么使用 Context？
+- 说说你对 windowing 的了解
+- 举例说明 React 的插槽有哪些运用场景？
+- 你有用过 React 的插槽(Portals)吗？怎么用？
+- React 的严格模式有什么用处？
+- React 如何进行代码拆分？拆分的原则是什么？
+- React 组件的构造函数有什么作用？
+- React 组件的构造函数是必须的吗？
+- React 中在哪捕获错误？
 React 怎样引入 svg 的文件？
 说说你对 Relay 的理解
 在 React 中你有经常使用常量吗？
@@ -344,7 +346,7 @@ React16 跟之前的版本生命周期有哪些变化？
 为什么建议不要过渡使用 Refs？
 在 React 使用高阶组件(HOC)有遇到过哪些问题？如何解决？
 在使用 React 过程中什么时候用高阶组件(HOC)？
-说说 React diff 的原理是什么？
+
 React 怎么提高列表渲染的性能？
 使用 ES6 的 class 定义的组件不支持 mixins 了，那用什么可以替代呢？
 为何说虚拟 DOM 会提高性能？

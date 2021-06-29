@@ -254,8 +254,41 @@
   输出：6
   解释：6 个回文子串: "a", "a", "a", "aa", "aa", "aaa"
 
+  ```js
+  // 动态规划算法
+  ```
+
 - [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 - 尾递归优化
 - [猴子吃香蕉](https://leetcode-cn.com/problems/koko-eating-bananas/)
 - [回文字符串个数](https://leetcode-cn.com/problems/palindromic-substrings/)
 - 时针和分针的夹角？
+
+- 输入一个字符串，实现字符串翻转输出
+
+  ```js
+  const reverseString = (s) => {
+    const len = s.length;
+    let left = 0,
+      right = len - 1;
+    while (left < right) {
+      [s[left], s[right]] = [s[right], s[left]];
+      left++;
+      right--;
+    }
+    return s;
+  };
+  // 内存占用小于上面的
+  const reverseString = (s) => {
+    let i = 0;
+    l = s.length - 1;
+    for (; i < l; i++, l--) {
+      [s[i], s[l]] = [s[l], s[i]];
+    }
+    return s
+  };
+  ```
+
+- 从数组中找出所有相同元素，并且做出分类。
+
+- 希尔排序

@@ -142,3 +142,38 @@
 
   _b(222);
   ```
+
+## 函数柯里化
+
+什么是函数柯里化，接收多参的函数转化成可以逐个调用单个参数并返回接收剩下参数的函数
+
+```js
+function curry(fn, ...curryArgs) {
+  return (...callbackArgs) => {
+    // 最终的参数
+    const totalArgs = [...curryArgs, ...callbackArgs];
+
+    // 1. fn.length === totalArgs.length 参数和被修饰的函数参数相同，停止递归
+    // 2. callbackArgs.length === 0 curry 修饰后直接执行返回的函数未传递参数调用，则停止递归
+    return fn.length === totalArgs.length || callbackArgs.length === 0
+      ? fn(...totalArgs)
+      : curry(fn, ...totalArgs);
+  };
+}
+
+var add = function (a, b) {
+  return a + b;
+};
+
+// 上述 1.的情况
+var add1 = curry(add, 1, 2); // 直接执行 add
+add1();
+
+// 上述 2. 的情况
+var add2 = curry(add);
+add2(); // 直接执行 add
+
+// 上述1. 的情况
+var add3 = curry(add, 1);
+add3(2);
+```
