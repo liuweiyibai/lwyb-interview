@@ -53,6 +53,10 @@ function getGuideSidebar() {
       link: '/webpack',
     },
     {
+      text: '前端工程化',
+      link: '/engineering',
+    },
+    {
       text: '算法',
       link: '/algorithm/index',
       children: [
