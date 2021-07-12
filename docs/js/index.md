@@ -388,14 +388,14 @@
       function () {
         alert('父级 冒泡');
       },
-      false,
+      false
     );
     parEle.addEventListener(
       'click',
       function () {
         alert('父级 捕获');
       },
-      true,
+      true
     );
 
     sonEle.addEventListener(
@@ -403,14 +403,14 @@
       function () {
         alert('子级冒泡');
       },
-      false,
+      false
     );
     sonEle.addEventListener(
       'click',
       function () {
         alert('子级捕获');
       },
-      true,
+      true
     );
   </script>
   ```
@@ -817,11 +817,11 @@
 
 7. js 的事件委托是什么，原理是什么
 
-   子元素可以将事件委托给外层元素
+   子元素可以将事件委托给外层元素，事件向上冒泡
 
 8. 列举几种解决跨域问题的方式，且说明原理
 
-   iframe 跨域，cors
+   iframe 跨域 jsonp，cors
 
 9. 谈谈垃圾回收机制的方式及内存管理
 
@@ -841,13 +841,20 @@
 
 12. 模块化开发怎么做
 
-    amd、commonjs、es6modules 模块化方案
+    amd、commonjs、es6modules 模块化方案，主要了解 commonjs 和 es6modules.
 
-13. 异步加载 Js 的方式有哪些
+    - CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用（重点）
+
+    - CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。
+
+13. 异步加载 JS 的方式有哪些
 
     defer 和 async
 
 14. xml 和 json 的区别
+
+    数据格式
+
 15. webpack 如何实现打包的
 16. 常见 web 安全及防护原理
 17. 用过哪些设计模式
