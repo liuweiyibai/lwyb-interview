@@ -110,6 +110,31 @@
   let a; // 如果是使用 var 声明就不会报错
   ```
 
+- 实现一个通用的类型判断函数
+
+  ```js
+  function getType(obj) {
+    let type = typeof obj;
+    if (type !== 'object') {
+      // 先进行typeof判断，如果是基础数据类型，直接返回
+      return type;
+    }
+    // 对于typeof返回结果是object的，再进行如下的判断，正则返回结果
+    return Object.prototype.toString
+      .call(obj)
+      .replace(/^\[object (\S+)\]$/, '$1'); // 注意正则中间有个空格
+  }
+  /* 代码验证，需要注意大小写，哪些是typeof判断，哪些是toString判断？思考下 */
+  getType([]); // "Array" typeof []是object，因此toString返回
+  getType('123'); // "string" typeof 直接返回
+  getType(window); // "Window" toString返回
+  getType(null); // "Null"首字母大写，typeof null是object，需toString来判断
+  getType(undefined); // "undefined" typeof 直接返回
+  getType(); // "undefined" typeof 直接返回
+  getType(function () {}); // "function" typeof能判断，因此首字母小写
+  getType(/123/g); //"RegExp" toString返回
+  ```
+
 ## 函数
 
 1. new 操作符具体干了什么呢?
@@ -189,7 +214,7 @@
    ```js
    function myCall(ctx) {
      ctx = ctx || window;
-     // 判断是不是被函数调动 this 是不是 函数，否则抛出错误
+     // 判断是不是被函数调用的 this 是不是 函数，否则抛出错误
      var args = [];
      var _this = this;
      var context = {};
@@ -478,9 +503,12 @@
 1. 实现 sleep 函数
 
    ```js
-   function sleep(ms) {
-     var start = Date.now();
-     while (Date.now() - start > ms) {}
+   // 利用时间戳
+   function sleep(delay) {
+     var start = +new Date();
+     while (+new Date() - start < delay) {
+       continue;
+     }
    }
 
    function sleep2(ms) {
@@ -637,7 +665,7 @@
     }
     ```
 
-## 测试
+## 进阶
 
 - ajax 和 fetch 区别
 
@@ -650,6 +678,14 @@
   1. 将代码字符串解析为 ast 抽象语法树
   2. 对 ast 进行处理，在这个阶段可以对 es6 的 ast 进行转换，转换为 es5 的 ast
   3. 根据处理完后的 ast 生成代码符串和 sourcemap
+
+- requestAnimationFrame
+
+  将一定时间内的动画放在一次回流或者重绘中完成，减少 cpu/gpu 调用的次数，常用动画或者大数据量渲染时使用。
+
+- requestIdleCallback
+
+  requestIdleCallback 是在浏览器空闲来执行任务。react fiber 架构中实现了一个类似的任务调度器。
 
 ## 防抖和节流
 
@@ -827,19 +863,23 @@
 
    js gc 有一个后台程序会一直监听当前执行上下文中的所有变量，当变量引用为 0，并且被标记为清除，自动进行回收，回收算法包括 标记清除、引用计数。闭包就使一个变量不会被垃圾回收所回收。
 
-10. 写一个 function ，清除字符串前后的空格
+10. 为什么闭包会造成内存泄露
+
+    因为被引用变量一直没有被回收，依然还占据内存空间。
+
+11. 写一个 function ，清除字符串前后的空格
 
     ```js
     return str.replace(/(^\s+)|(\s+$)/g, '');
     ```
 
-11. 随机取 1-10 之间的整数
+12. 随机取 1-10 之间的整数
 
     ```js
     Math.floor(Math.random() * 10 + 1); // 生成 1-10 之间的随机正整数
     ```
 
-12. 模块化开发怎么做
+13. 模块化开发怎么做
 
     amd、commonjs、es6modules 模块化方案，主要了解 commonjs 和 es6modules.
 
@@ -847,89 +887,97 @@
 
     - CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。
 
-13. 异步加载 JS 的方式有哪些
+14. 异步加载 JS 的方式有哪些
 
     defer 和 async
 
-14. xml 和 json 的区别
+15. xml 和 json 的区别
 
     数据格式
 
-15. webpack 如何实现打包的
-16. 常见 web 安全及防护原理
-17. 用过哪些设计模式
+16. webpack 如何实现打包的
+17. 常见 web 安全及防护原理
+18. 用过哪些设计模式
+19. 异步加载 Js 的方式有哪些
+
+    defer 和 async
+
+20. xml 和 json 的区别
+21. webpack 如何实现打包的
+22. 常见 web 安全及防护原理
+23. 用过哪些设计模式
 
     单例、工厂、策略、代理、发布订阅
 
-18. offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别
+24. offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别
 
-19. js 有哪些方法定义对象
+25. js 有哪些方法定义对象
 
-20. 谈谈你对 AMD、CMD 的理解
+26. 谈谈你对 AMD、CMD 的理解
 
-21. web 开发中会话跟踪的方法有哪些
+27. web 开发中会话跟踪的方法有哪些
 
     cookie 携带和 token 携带
 
-22. 介绍 js 有哪些内置对象？
+28. 介绍 js 有哪些内置对象？
 
     Array Object Function RegExp Date
 
-23. js 创建对象的几种方式？
-24. eval 是做什么的？
-25. null，undefined 的区别？
+29. js 创建对象的几种方式？
+30. eval 是做什么的？
+31. null，undefined 的区别？
 
-26. js 代码中的 "use strict"; 是什么意思 ? 使用它区别是什么？
-27. js 延迟加载的方式有哪些？
-28. defer 和 async
-29. 说说严格模式的限制
+32. js 代码中的 "use strict"; 是什么意思 ? 使用它区别是什么？
+33. js 延迟加载的方式有哪些？
+34. defer 和 async
+35. 说说严格模式的限制
 
-30. attribute 和 property 的区别是什么？
+36. attribute 和 property 的区别是什么？
 
-31. ECMAScript6 怎么写 class 么，为什么会出现 class 这种东西?
+37. ECMAScript6 怎么写 class 么，为什么会出现 class 这种东西?
 
-32. 函数防抖节流的原理
+38. 函数防抖节流的原理
 
-33. 原始类型有哪几种？null 是对象吗？
+39. 原始类型有哪几种？null 是对象吗？
 
-34. 0.1 + 0.2 === 0.3 嘛？为什么？
+40. 0.1 + 0.2 === 0.3 嘛？为什么？
 
     不相等，精度丢失可能出现在引擎的进制转换和对阶运算中
 
-35. 说一下 js 中类型转换的规则？
-36. 深拷贝和浅拷贝的区别？如何实现
-37. 如何判断 this？箭头函数的 this 是什么
-38. == 和 ===的区别
-39. js 原型，原型链 ? 有什么特点？
-40. typeof 和 instanceof()的用法区别
-41. 什么是变量提升
+41. 说一下 js 中类型转换的规则？
+42. 深拷贝和浅拷贝的区别？如何实现
+43. 如何判断 this？箭头函数的 this 是什么
+44. == 和 ===的区别
+45. js 原型，原型链 ? 有什么特点？
+46. typeof 和 instanceof()的用法区别
+47. 什么是变量提升
 
-42. 为什么会出现 setTimeout 倒计时误差？如何减少
-43. 谈谈你对 js 执行上下文栈和作用域链的理解
-44. prototype 和 proto 区别是什么？
+48. 为什么会出现 setTimeout 倒计时误差？如何减少
+49. 谈谈你对 js 执行上下文栈和作用域链的理解
+50. prototype 和 proto 区别是什么？
 
-45. 如何判断 img 加载完成
+51. 如何判断 img 加载完成
 
     img 的 onload 事件
 
-46. 如何阻止冒泡？
-47. 如何阻止默认事件？
-48. 如何用原生 js 给一个按钮绑定两个 onclick 事件？
+52. 如何阻止冒泡？
+53. 如何阻止默认事件？
+54. 如何用原生 js 给一个按钮绑定两个 onclick 事件？
 
     使用 addEventlistener
 
-49. 拖拽会用到哪些事件
-50. document.write 和 innerHTML 的区别
-51. 浏览器是如何渲染页面的？
+55. 拖拽会用到哪些事件
+56. document.write 和 innerHTML 的区别
+57. 浏览器是如何渲染页面的？
 
     根据 http 请求拿回静态资源后，解析 html 和 css，分别生成 dom 树和 cssom 树，然后流式从上到下渲染
 
-52. 对前端路由的理解？前后端路由的区别？
+58. 对前端路由的理解？前后端路由的区别？
 
     就是通过前端控制 url 显示不同的视图
     后端就是不同的 url 对应不同的函数
 
-53. 合并两个有序数组
+59. 合并两个有序数组
     可以合并后排序
 
     ```js
@@ -937,7 +985,7 @@
     arr.sort((a, b) => a - b);
     ```
 
-54. 简单的深拷贝
+60. 简单的深拷贝
 
     ```js
     function loop(obj) {
@@ -962,7 +1010,7 @@
     console.log(a, b);
     ```
 
-55. 查找字符串中出现次数多的字符
+61. 查找字符串中出现次数多的字符
 
     ```js
     var str = 'fdsfjkjkjjjkjkjkjjjkjkjjk';
@@ -986,7 +1034,7 @@
     findStr(str);
     ```
 
-56. 实现一个模板字符串的效果
+62. 实现一个模板字符串的效果
 
     ```js
     function render(template, data) {
@@ -1009,11 +1057,18 @@
     render(template, person); // 我是name，年龄12，性别undefined
     ```
 
-57. 实现数组去重，new Set 的数组去重和自己实现的哪个性能会更好
-58. 说一下跨域，jsonp 的原理是什么？node 中间件解决跨域问题的原理是什么？
-59. import 和 require 的区别
-60. 实现一个发布订阅，有订阅（on），发布（emit），一次订阅功能（once）
-61. 实现请求并发限制，具体为：封装一个函数，传递请求并发的个数为参数，实现对并发请求的限制
-62. 利用 async 和 await 如何处理异常事件
-63. 箭头函数和普通函数有什么区别？如果想改变箭头函数中绑定 this 怎么办
-64. 原生 js 判断鼠标在一个有对角线矩形的位置
+63. 实现数组去重，new Set 的数组去重和自己实现的哪个性能会更好
+64. 说一下跨域，jsonp 的原理是什么？node 中间件解决跨域问题的原理是什么？
+
+    服务端没有跨域问题，node 中间件同域，或者中间件配置了 cors
+
+65. import 和 require 的区别
+66. 实现一个发布订阅，有订阅（on），发布（emit），一次订阅功能（once）
+67. 实现请求并发限制，具体为：封装一个函数，传递请求并发的个数为参数，实现对并发请求的限制
+68. 利用 async 和 await 如何处理异常事件
+
+    try catch 或者 catch await 后面的函数
+
+69. 箭头函数和普通函数有什么区别？如果想改变箭头函数中绑定 this 怎么办
+
+70. 原生 js 判断鼠标在一个有对角线矩形的位置
