@@ -358,14 +358,14 @@
       function () {
         alert('父级 冒泡');
       },
-      false,
+      false
     );
     parEle.addEventListener(
       'click',
       function () {
         alert('父级 捕获');
       },
-      true,
+      true
     );
 
     sonEle.addEventListener(
@@ -373,14 +373,14 @@
       function () {
         alert('子级冒泡');
       },
-      false,
+      false
     );
     sonEle.addEventListener(
       'click',
       function () {
         alert('子级捕获');
       },
-      true,
+      true
     );
   </script>
   ```
@@ -798,11 +798,11 @@
 
 7. js 的事件委托是什么，原理是什么
 
-   子元素可以将事件委托给外层元素
+   子元素可以将事件委托给外层元素，事件向上冒泡
 
 8. 列举几种解决跨域问题的方式，且说明原理
 
-   iframe 跨域，cors
+   iframe 跨域 jsonp，cors
 
 9. 谈谈垃圾回收机制的方式及内存管理
 
@@ -826,88 +826,103 @@
 
 13. 模块化开发怎么做
 
-    amd、commonjs、es6modules 模块化方案
+    amd、commonjs、es6modules 模块化方案，主要了解 commonjs 和 es6modules.
 
-14. 异步加载 Js 的方式有哪些
+    - CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用（重点）
+
+    - CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。
+
+14. 异步加载 JS 的方式有哪些
 
     defer 和 async
 
 15. xml 和 json 的区别
+
+    数据格式
+
 16. webpack 如何实现打包的
 17. 常见 web 安全及防护原理
 18. 用过哪些设计模式
+19. 异步加载 Js 的方式有哪些
+
+    defer 和 async
+
+20. xml 和 json 的区别
+21. webpack 如何实现打包的
+22. 常见 web 安全及防护原理
+23. 用过哪些设计模式
 
     单例、工厂、策略、代理、发布订阅
 
-19. offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别
+24. offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别
 
-20. js 有哪些方法定义对象
+25. js 有哪些方法定义对象
 
-21. 谈谈你对 AMD、CMD 的理解
+26. 谈谈你对 AMD、CMD 的理解
 
-22. web 开发中会话跟踪的方法有哪些
+27. web 开发中会话跟踪的方法有哪些
 
     cookie 携带和 token 携带
 
-23. 介绍 js 有哪些内置对象？
+28. 介绍 js 有哪些内置对象？
 
     Array Object Function RegExp Date
 
-24. js 创建对象的几种方式？
-25. eval 是做什么的？
-26. null，undefined 的区别？
+29. js 创建对象的几种方式？
+30. eval 是做什么的？
+31. null，undefined 的区别？
 
-27. js 代码中的 "use strict"; 是什么意思 ? 使用它区别是什么？
-28. js 延迟加载的方式有哪些？
-29. defer 和 async
-30. 说说严格模式的限制
+32. js 代码中的 "use strict"; 是什么意思 ? 使用它区别是什么？
+33. js 延迟加载的方式有哪些？
+34. defer 和 async
+35. 说说严格模式的限制
 
-31. attribute 和 property 的区别是什么？
+36. attribute 和 property 的区别是什么？
 
-32. ECMAScript6 怎么写 class 么，为什么会出现 class 这种东西?
+37. ECMAScript6 怎么写 class 么，为什么会出现 class 这种东西?
 
-33. 函数防抖节流的原理
+38. 函数防抖节流的原理
 
-34. 原始类型有哪几种？null 是对象吗？
+39. 原始类型有哪几种？null 是对象吗？
 
-35. 0.1 + 0.2 === 0.3 嘛？为什么？
+40. 0.1 + 0.2 === 0.3 嘛？为什么？
 
     不相等，精度丢失可能出现在引擎的进制转换和对阶运算中
 
-36. 说一下 js 中类型转换的规则？
-37. 深拷贝和浅拷贝的区别？如何实现
-38. 如何判断 this？箭头函数的 this 是什么
-39. == 和 ===的区别
-40. js 原型，原型链 ? 有什么特点？
-41. typeof 和 instanceof()的用法区别
-42. 什么是变量提升
+41. 说一下 js 中类型转换的规则？
+42. 深拷贝和浅拷贝的区别？如何实现
+43. 如何判断 this？箭头函数的 this 是什么
+44. == 和 ===的区别
+45. js 原型，原型链 ? 有什么特点？
+46. typeof 和 instanceof()的用法区别
+47. 什么是变量提升
 
-43. 为什么会出现 setTimeout 倒计时误差？如何减少
-44. 谈谈你对 js 执行上下文栈和作用域链的理解
-45. prototype 和 proto 区别是什么？
+48. 为什么会出现 setTimeout 倒计时误差？如何减少
+49. 谈谈你对 js 执行上下文栈和作用域链的理解
+50. prototype 和 proto 区别是什么？
 
-46. 如何判断 img 加载完成
+51. 如何判断 img 加载完成
 
     img 的 onload 事件
 
-47. 如何阻止冒泡？
-48. 如何阻止默认事件？
-49. 如何用原生 js 给一个按钮绑定两个 onclick 事件？
+52. 如何阻止冒泡？
+53. 如何阻止默认事件？
+54. 如何用原生 js 给一个按钮绑定两个 onclick 事件？
 
     使用 addEventlistener
 
-50. 拖拽会用到哪些事件
-51. document.write 和 innerHTML 的区别
-52. 浏览器是如何渲染页面的？
+55. 拖拽会用到哪些事件
+56. document.write 和 innerHTML 的区别
+57. 浏览器是如何渲染页面的？
 
     根据 http 请求拿回静态资源后，解析 html 和 css，分别生成 dom 树和 cssom 树，然后流式从上到下渲染
 
-53. 对前端路由的理解？前后端路由的区别？
+58. 对前端路由的理解？前后端路由的区别？
 
     就是通过前端控制 url 显示不同的视图
     后端就是不同的 url 对应不同的函数
 
-54. 合并两个有序数组
+59. 合并两个有序数组
     可以合并后排序
 
     ```js
@@ -915,7 +930,7 @@
     arr.sort((a, b) => a - b);
     ```
 
-55. 简单的深拷贝
+60. 简单的深拷贝
 
     ```js
     function loop(obj) {
@@ -940,7 +955,7 @@
     console.log(a, b);
     ```
 
-56. 查找字符串中出现次数多的字符
+61. 查找字符串中出现次数多的字符
 
     ```js
     var str = 'fdsfjkjkjjjkjkjkjjjkjkjjk';
@@ -964,7 +979,7 @@
     findStr(str);
     ```
 
-57. 实现一个模板字符串的效果
+62. 实现一个模板字符串的效果
 
     ```js
     function render(template, data) {
@@ -987,18 +1002,18 @@
     render(template, person); // 我是name，年龄12，性别undefined
     ```
 
-58. 实现数组去重，new Set 的数组去重和自己实现的哪个性能会更好
-59. 说一下跨域，jsonp 的原理是什么？node 中间件解决跨域问题的原理是什么？
+63. 实现数组去重，new Set 的数组去重和自己实现的哪个性能会更好
+64. 说一下跨域，jsonp 的原理是什么？node 中间件解决跨域问题的原理是什么？
 
     服务端没有跨域问题，node 中间件同域，或者中间件配置了 cors
 
-60. import 和 require 的区别
-61. 实现一个发布订阅，有订阅（on），发布（emit），一次订阅功能（once）
-62. 实现请求并发限制，具体为：封装一个函数，传递请求并发的个数为参数，实现对并发请求的限制
-63. 利用 async 和 await 如何处理异常事件
+65. import 和 require 的区别
+66. 实现一个发布订阅，有订阅（on），发布（emit），一次订阅功能（once）
+67. 实现请求并发限制，具体为：封装一个函数，传递请求并发的个数为参数，实现对并发请求的限制
+68. 利用 async 和 await 如何处理异常事件
 
     try catch 或者 catch await 后面的函数
 
-64. 箭头函数和普通函数有什么区别？如果想改变箭头函数中绑定 this 怎么办
+69. 箭头函数和普通函数有什么区别？如果想改变箭头函数中绑定 this 怎么办
 
-65. 原生 js 判断鼠标在一个有对角线矩形的位置
+70. 原生 js 判断鼠标在一个有对角线矩形的位置
