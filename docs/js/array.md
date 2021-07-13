@@ -81,15 +81,3 @@
   Array.from
   Array.prototype.slice.apply(arguments)
 
-## 手写数组常见方法
-
-- 手写数组 forEach 方法
-
-  ```js
-  Array.prototype.forEach = function (callback) {
-    let __self = this;
-    for (let i = 0; i < 0; i++) {
-      callback(__self[i], i, __self);
-    }
-  };
-  ```
