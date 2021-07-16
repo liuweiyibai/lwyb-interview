@@ -1,4 +1,6 @@
-# js 面试题
+# JavaScript 面试题
+
+JavaScript 中基础面试题
 
 ## 数据类型
 

@@ -129,3 +129,20 @@
 
     webp 谷歌开发的图片文件格式，在相同质量的情况下体积更小
     通过 Image 对象，设置 src 为 webp 格式图片，如果可以获取到图片的宽高信息，则支持
+
+19. 导入样式使用中 link 和 @import 的区别是？
+
+    1. link 属于 HTML 标签中的属性，而 @import 是 CSS 提供的;
+    2. 功能不同，link 还可以定义 rss、rel 连接属性，引入网站图标
+    3. 页面被加载的时，link 会同时被加载，而@import 引用的 CSS 会等到页面被加载完再加载;
+    4. import 只在 IE5 以上才能识别，而 link 是 HTML 标签，无兼容问题;
+    5. link 方式的样式的权重 高于 @import 的权重;
+
+20. 简述浏览器渲染原理
+
+    浏览器在接收到 html 文件后，从上到下解析，head 标签中解析样式，解析生成 cssom 树和 dom 树，两棵树组合成为渲染树，渲染树会渲染 dom 树中除了 display:none 的所有元素，然后布局，然后，然后转化到屏幕上。还有就是资源的加载顺序
+
+    [简述浏览器渲染原理](https://blog.csdn.net/xcg132566/article/details/108004965)
+
+21. html5 的 form 的 autocomplete 功能
+22. 多标签间通信

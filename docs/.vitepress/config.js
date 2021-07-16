@@ -19,26 +19,30 @@ module.exports = {
 function getGuideSidebar() {
   return [
     {
-      text: 'js面试题',
+      text: 'JavaScript 面试题',
+      link: '/JavaScript/index',
       children: [
         {
-          text: '基础中的基础',
-          link: '/js/index',
-        },
-        {
           text: '数组',
-          link: '/js/array',
+          link: '/JavaScript/array',
         },
-        { text: '对象', link: '/js/object' },
-        { text: '函数', link: '/js/function' },
-        { text: '事件循环', link: '/js/eventLoop' },
-        { text: 'Promise', link: '/js/promise' },
-        { text: '正则表达式', link: '/js/regexp' },
+        { text: '对象', link: '/JavaScript/object' },
+        { text: '函数', link: '/JavaScript/function' },
+        { text: '事件循环', link: '/JavaScript/eventLoop' },
+        { text: 'Promise', link: '/JavaScript/promise' },
+        { text: '正则表达式', link: '/JavaScript/regexp' },
+        { text: '手写代码', link: '/JavaScript/手写代码' },
       ],
     },
     {
       text: 'vue 相关面试题',
       link: '/vue',
+      children: [
+        {
+          text: 'vue3 面试题',
+          link: '/vue3/index',
+        },
+      ],
     },
     {
       text: 'react 相关面试题',
@@ -58,11 +62,11 @@ function getGuideSidebar() {
     },
     {
       text: '算法',
-      link: '/algorithm/index',
+      link: '/算法/index',
       children: [
         {
-          text: '排序',
-          link: '/algorithm/sort',
+          text: '排序相关',
+          link: '/算法/排序',
         },
       ],
     },
