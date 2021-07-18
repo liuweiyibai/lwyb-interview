@@ -1,4 +1,4 @@
-# 常见 html 面试题
+# 常见 HTML 面试题
 
 1. 说说你对网页标准和 W3C 重要性的理解
 
@@ -85,7 +85,7 @@
            var x2 = e.clientX;
            var y2 = e.clientY;
            var distance = Math.abs(
-             Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)),
+             Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
            );
            if (distance <= 50) alert('Yes!');
          });

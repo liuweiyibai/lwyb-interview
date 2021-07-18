@@ -77,6 +77,12 @@
    init(Child, Parent);
    ```
 
+4. ES5 的继承和 ES6 的继承
+
+   ES5 的继承通过原型链来实现。通过 call 或者 apply 来实现父类在子类上的初始化。
+
+   ES6 中通过 extends 来实现继承，通过调用 super 父类够造函数。
+
 ## 手写 new
 
 [参考地址](https://juejin.cn/post/6844903704663949325#heading-6)
