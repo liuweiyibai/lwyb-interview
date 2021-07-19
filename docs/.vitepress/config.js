@@ -10,9 +10,7 @@ module.exports = {
     editLinkText: '在 GitHub 编辑',
     lastUpdated: '上次更新时间',
     sidebarDepth: 0,
-    sidebar: {
-      '/': getGuideSidebar(),
-    },
+    sidebar: getGuideSidebar(),
   },
 };
 
@@ -35,30 +33,47 @@ function getGuideSidebar() {
       ],
     },
     {
-      text: 'vue 相关面试题',
-      link: '/vue',
+      text: 'Vue 相关面试题',
       children: [
         {
-          text: 'vue3 面试题',
-          link: '/vue3/index',
+          text: 'Vue3 面试题',
+          link: '/vue/v3',
+        },
+        {
+          text: 'Vue2 面试题',
+          link: '/vue/v2',
         },
       ],
     },
     {
-      text: 'react 相关面试题',
+      text: 'React 相关面试题',
       link: '/react',
     },
     {
-      text: 'babel 面试题',
+      text: 'HTML 面试题',
+      link: '/HTML 面试题',
+      children: [
+        {
+          text: 'H5 移动端开发',
+          link: '/HTML5',
+        },
+      ],
+    },
+    {
+      text: 'CSS 面试题',
+      link: '/css',
+    },
+    {
+      text: 'Babel 面试题',
       link: '/babel',
     },
     {
-      text: 'webpack 面试题',
+      text: 'Webpack 面试题',
       link: '/webpack',
     },
     {
       text: '前端工程化',
-      link: '/engineering',
+      link: '/前端工程化',
     },
     {
       text: '算法',
@@ -75,8 +90,8 @@ function getGuideSidebar() {
       link: '/http',
     },
     {
-      text: 'css 面试题',
-      link: '/css',
+      text: 'Node.js 面试题',
+      link: '/nodejs',
     },
     {
       text: '小程序',

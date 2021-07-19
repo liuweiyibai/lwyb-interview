@@ -62,7 +62,7 @@
       static getDerivedStateFromError 从错误中获取 state。
       componentDidCatch 捕获错误并进行处理。
 
-### React 基础面试题
+## React 基础面试题
 
 1. React 中 keys 的作用是什么？
 
@@ -118,8 +118,11 @@
 15. 如何告诉 React 它应该编译生产环境版本？
 16. 受控组件 Component 与 非受控组件 Component 之间的区别是什么？
 17. React 自测性能的手段
+18. React v16.3 为什么要替换掉一些生命周期？
 
-### React 组件面试题
+    xx
+
+## React 组件面试题
 
 1. 展示组件(Presentational component)和容器组件(Container component)之间有何不同
 2. 类组件(Class component)和函数式组件(Functional component)之间有何不同

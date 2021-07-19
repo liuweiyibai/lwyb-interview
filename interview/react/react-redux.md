@@ -1,15 +1,18 @@
 # react-redux
+
 react-redux 是 redux 官方 React 绑定库。它帮助我们连接UI层和数据层
 
 - Provider：接受store挂载到context上，使子孙可以获取
 - Connect：连接store和组件
-    - 获取store：state保存所需要的store数据
-    - 改变store：dispatch修改store
-    - 监听store改变：当store改变时，setState配合this.props更改当前组件的state
-    - 卸载时移除监听
+  - 获取store：state保存所需要的store数据
+  - 改变store：dispatch修改store
+  - 监听store改变：当store改变时，setState配合this.props更改当前组件的state
+  - 卸载时移除监听
 
 ## 1.Provider
+
 ### 1.1 使用
+
 ```typescript jsx
 import React, { Component } from 'react';
 import { Provider } from '../react-redux';
@@ -28,6 +31,7 @@ export default class App extends Component {
 ```
 
 ### 1.2 原理
+
 ```typescript jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -56,11 +60,13 @@ export default class Provider extends Component {
 ```
 
 ## 2.Connect
+
 - mapStateToProps：组件需要绑定的store状态
 - mapDispatchToProps：组件需要绑定的修改store的动作
 - Component：渲染组件
 
 ### 2.1 使用
+
 ```typescript jsx
 import React, { Component } from 'react';
 import { connect } from '../react-redux';
@@ -95,6 +101,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Counter);
 ```
 
 ### 2.2 原理
+
 ```typescript jsx
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
@@ -109,7 +116,7 @@ export default function connect(mapStateToProps, mapDispatchToProps) {
   // 默认
   if(!mapStateToProps) mapStateToProps = state => ({})
   if(!mapDispatchToProps) mapDispatchToProps = dispatch => ({ dispatch })
-  
+
   return function wrapWithConnect (WrappedComponent) {
     return class Connect extends Component {
       static contextTypes = storeShape;
@@ -145,5 +152,6 @@ export default function connect(mapStateToProps, mapDispatchToProps) {
 ```
 
 ## 参考
+
 - [react-redux](https://github.com/reduxjs/react-redux)
 - [【React系列】动手实现一个react-redux](https://juejin.im/post/5d9ca65be51d45782c23fab7#heading-0)

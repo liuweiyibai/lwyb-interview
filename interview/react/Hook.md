@@ -1,4 +1,5 @@
 # Hook基础使用
+
 React Hooks 的设计目的，就是加强版函数组件，完全不使用"类"，就能写出一个全功能的组件。
 
 - useState
@@ -24,6 +25,7 @@ export default function Button() {
 ```
 
 ## useContext：共享状态钩子
+
 ```typescript jsx
 import React, { useContext } from "react";
 import ReactDOM from "react-dom";
@@ -72,6 +74,7 @@ ReactDOM.render(<App />, rootElement);
 ```
 
 ## useReducer：action 钩子
+
 useReducers()钩子用来引入 Reducer 功能。
 它没法提供中间件（middleware）和时间旅行（time travel），如果你需要这两个功能，还是要用 Redux。
 
@@ -110,6 +113,7 @@ ReactDOM.render(<App />, rootElement);
 ```
 
 ## useEffect：副作用钩子
+
 useEffect()接受两个参数。
 第一个参数是一个函数，异步操作的代码放在里面。
 第二个参数是一个数组，用于给出 Effect 的依赖项，只要这个数组发生变化，useEffect()就会执行
@@ -166,6 +170,7 @@ ReactDOM.render(<App />, rootElement);
 ```
 
 ## 创建自己的 Hooks
+
 ```typescript jsx
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
@@ -222,4 +227,5 @@ ReactDOM.render(<App />, rootElement);
 ```
 
 ## 参考
+
 [React Hooks 入门教程](http://www.ruanyifeng.com/blog/2019/09/react-hooks.html)
