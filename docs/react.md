@@ -218,42 +218,42 @@ React 只会根据 vdom 的 diff 结果更新 DOM 真正发生改变的部分
 - React 组件的构造函数有什么作用？
 - React 组件的构造函数是必须的吗？
 - React 中在哪捕获错误？
-  React 怎样引入 svg 的文件？
-  说说你对 Relay 的理解
-  在 React 中你有经常使用常量吗？
-  为什么说 React 中的 props 是只读的？
-  你有使用过 formik 库吗？说说它的优缺点
-  你有用过哪些 React 的表单库吗？说说它们的优缺点
-  如果组件的属性没有传值，那么它的默认值是什么？
-  可以使用 TypeScript 写 React 应用吗？怎么操作？
-  super()和 super(props)有什么区别？
-  你有使用过 loadable 组件吗？它帮我们解决了什么问题？
-  你有使用过 suspense 组件吗？它帮我们解决了什么问题？
-  怎样动态导入组件？
-  如何给非控组件设置默认的值？
-  怎么在 React 中引入其它的 UI 库，例如 Bootstrap
-  怎样将事件传递给子组件？
-  怎样使用 Hooks 获取服务端数据？
-  使用 Hooks 要遵守哪些原则？
-  render 方法的原理你有了解吗？它返回的数据类型是什么？
-  useEffect 和 useLayoutEffect 有什么区别？
-  在 React 项目中你用过哪些动画的包？
-  React 必须使用 JSX 吗？
-  自定义组件时 render 是可选的吗？为什么？
-  需要把 keys 设置为全局唯一吗？
-  怎么定时更新一个组件？
-  React 根据不同的环境打包不同的域名？
-  使用 webpack 打包 React 项目，怎么减小生成的 js 大小？
-  在 React 中怎么使用 async/await？
-  你阅读了几遍 React 的源码？都有哪些收获？你是怎么阅读的？
-  什么是 React.forwardRef？它有什么作用？
-  写个例子说明什么是 JSX 的内联条件渲染
-  在 React 中怎么将参数传递给事件？
-  React 的事件和普通的 HTML 事件有什么不同？
-  在 React 中怎么阻止事件的默认行为？
-  你最喜欢 React 的哪一个特性（说一个就好）？
-  在 React 中什么时候使用箭头函数更方便呢？
-  你最不喜欢 React 的哪一个特性（说一个就好）？
+- React 怎样引入 svg 的文件？
+- 说说你对 Relay 的理解
+- 在 React 中你有经常使用常量吗？
+- 为什么说 React 中的 props 是只读的？
+- 你有使用过 formik 库吗？说说它的优缺点
+- 你有用过哪些 React 的表单库吗？说说它们的优缺点
+- 如果组件的属性没有传值，那么它的默认值是什么？
+- 可以使用 TypeScript 写 React 应用吗？怎么操作？
+- super()和 super(props)有什么区别？
+- 你有使用过 loadable 组件吗？它帮我们解决了什么问题？
+- 你有使用过 suspense 组件吗？它帮我们解决了什么问题？
+- 怎样动态导入组件？
+- 如何给非控组件设置默认的值？
+- 怎么在 React 中引入其它的 UI 库，例如 Bootstrap
+- 怎样将事件传递给子组件？
+- 怎样使用 Hooks 获取服务端数据？
+- 使用 Hooks 要遵守哪些原则？
+- render 方法的原理你有了解吗？它返回的数据类型是什么？
+- useEffect 和 useLayoutEffect 有什么区别？
+- 在 React 项目中你用过哪些动画的包？
+- React 必须使用 JSX 吗？
+- 自定义组件时 render 是可选的吗？为什么？
+- 需要把 keys 设置为全局唯一吗？
+- 怎么定时更新一个组件？
+- React 根据不同的环境打包不同的域名？
+- 使用 webpack 打包 React 项目，怎么减小生成的 js 大小？
+- 在 React 中怎么使用 async/await？
+- 你阅读了几遍 React 的源码？都有哪些收获？你是怎么阅读的？
+- 什么是 React.forwardRef？它有什么作用？
+- 写个例子说明什么是 JSX 的内联条件渲染
+- 在 React 中怎么将参数传递给事件？
+- React 的事件和普通的 HTML 事件有什么不同？
+- 在 React 中怎么阻止事件的默认行为？
+- 你最喜欢 React 的哪一个特性（说一个就好）？
+- 在 React 中什么时候使用箭头函数更方便呢？
+- 你最不喜欢 React 的哪一个特性（说一个就好）？
   说说你对 React 的 reconciliation（一致化算法）的理解
   使用 PropTypes 和 Flow 有什么区别？
   怎样有条件地渲染组件？
