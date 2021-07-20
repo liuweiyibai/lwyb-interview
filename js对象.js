@@ -20,3 +20,15 @@
  * 11. vue 子组件更新父组件会更新嘛，为什么 会
  * 12.
  */
+
+function App(){
+  return <Router route={asyncLoad(()=>import('./component'))}></Router>
+}
+
+function asyncLoad(load){
+  load.then(({default:component})=>{
+    this.setState({
+      component
+    })
+  })
+}

@@ -1,37 +1,43 @@
 # Tree-shaking
-作用：消除无用的js代码
-原理：通过ES6模块的静态分析，得到引用关系。痛过程序流分析，判断哪些变量未被使用、引用，进而删除此代码
+
+作用：消除无用的 js 代码
+原理：通过 ES6 模块的静态分析，得到引用关系。痛过程序流分析，判断哪些变量未被使用、引用，进而删除此代码
 
 - UglifyJS：消除不会执行的代码
-    - 缺点：无法消除无用的引用
-- tree-shaking：找出无用的引用模块，通过搭配UglifyJS消除无用的模块的引用。例如：`import {post} from xxx`
-    - 问题：Tree-shaking + UglifyJS + babel6（失效）
-    - 原因：UglifyJS没有完善的程序流分析，无法剔除立即执行函数（babel6中将ES6语法转化为ES5语法会套上立即执行函数，有可能会产生副作用，所以不剔除，导致树摇失效）
-    - 解决：
-        - Babel6在转化时使用宽松的模式：只是把IIFE换成原型链模式实现，没有解决根本问题，依然不能消除
-        - 升级babel7：可用
-        - sideEffects：无副作用，可安全剔除（立即执行函数等）
-- terser-webpack-plugin：可解决UglifyJS问题
+  - 缺点：无法消除无用的引用
+- tree-shaking：找出无用的引用模块，通过搭配 UglifyJS 消除无用的模块的引用。例如：`import {post} from xxx`
+  - 问题：Tree-shaking + UglifyJS + babel6（失效）
+  - 原因：UglifyJS 没有完善的程序流分析，无法剔除立即执行函数（babel6 中将 ES6 语法转化为 ES5 语法会套上立即执行函数，有可能会产生副作用，所以不剔除，导致树摇失效）
+  - 解决：
+    - Babel6 在转化时使用宽松的模式：只是把 IIFE 换成原型链模式实现，没有解决根本问题，依然不能消除
+    - 升级 babel7：可用
+    - sideEffects：无副作用，可安全剔除（立即执行函数等）
+- terser-webpack-plugin：可解决 UglifyJS 问题
 
-## 1.Tree-shaking问题
-### 1.1 不会清楚IIFE
-因为IIFE比较特殊，它在被翻译时(JS并非编译型的语言)就会被执行，Webpack不做程序流分析，有可能会产生副作用，所以不会删除这部分代码
+## 1.Tree-shaking 问题
+
+### 1.1 不会清楚 IIFE
+
+因为 IIFE 比较特殊，它在被翻译时(JS 并非编译型的语言)就会被执行，Webpack 不做程序流分析，有可能会产生副作用，所以不会删除这部分代码
+
 ```js
 //App.js
 import { cube } from './utils.js';
 console.log(cube(2));
 
 //utils.js
-var square = function(x) {
+var square = (function (x) {
   console.log('square');
-}();
+})();
 
 export function cube(x) {
   console.log('cube');
   return x * x * x;
 }
 ```
+
 打包结果
+
 ```js
 function(e, t, n) {
   "use strict";
@@ -44,9 +50,10 @@ function(e, t, n) {
 ```
 
 ## 1.2 引用模块的问题
+
 ```js
 //App.js
-import { Add } from './utils'
+import { Add } from './utils';
 Add(1 + 2);
 
 //utils.js
@@ -59,48 +66,64 @@ export function array(array) {
 
 export function Add(a, b) {
   console.log('Add');
-  return a + b
+  return a + b;
 }
 ```
-这个`array`函数未被使用，但是lodash-es这个包的部分代码还是会被build到bundle.js中
+
+这个`array`函数未被使用，但是 lodash-es 这个包的部分代码还是会被 build 到 bundle.js 中
 
 ## 1.3 Tree-shaking + babel6
-babel6把类转换成包裹IIFE，导致树摇失效
+
+babel6 把类转换成包裹 IIFE，导致树摇失效
+
 ```js
 // componetns.js
 export class Person {
-  constructor ({ name, age, sex }) {
-    this.className = 'Person'
-    this.name = name
-    this.age = age
-    this.sex = sex
+  constructor({ name, age, sex }) {
+    this.className = 'Person';
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
   }
-  getName () {
-    return this.name
+  getName() {
+    return this.name;
   }
 }
 ```
-babel6转换结果
-```js
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _createClass = function() {
+babel6 转换结果
+
+```js
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError('Cannot call a class as a function');
+  }
+}
+
+var _createClass = (function () {
   function defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0,
-      "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, descriptor.key, descriptor);
+      (descriptor.enumerable = descriptor.enumerable || !1),
+        (descriptor.configurable = !0),
+        'value' in descriptor && (descriptor.writable = !0),
+        Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-  return function(Constructor, protoProps, staticProps) {
-    return protoProps && defineProperties(Constructor.prototype, protoProps), staticProps && defineProperties(Constructor, staticProps),
-    Constructor;
+  return function (Constructor, protoProps, staticProps) {
+    return (
+      protoProps && defineProperties(Constructor.prototype, protoProps),
+      staticProps && defineProperties(Constructor, staticProps),
+      Constructor
+    );
   };
-}()
+})();
 
-var Person = function () {
+var Person = (function () {
   function Person(_ref) {
-    var name = _ref.name, age = _ref.age, sex = _ref.sex;
+    var name = _ref.name,
+      age = _ref.age,
+      sex = _ref.sex;
     _classCallCheck(this, Person);
 
     this.className = 'Person';
@@ -109,19 +132,23 @@ var Person = function () {
     this.sex = sex;
   }
 
-  _createClass(Person, [{
-    key: 'getName',
-    value: function getName() {
-      return this.name;
-    }
-  }]);
+  _createClass(Person, [
+    {
+      key: 'getName',
+      value: function getName() {
+        return this.name;
+      },
+    },
+  ]);
   return Person;
-}();
+})();
 ```
 
-### 1.4 引用的第三方模块不是ES6模块
-- 第三方模块不是ES6模块，那么无法树摇，选择些第三方同时存在ES5和ES6的版本
-- 同时在packages.json中设置入口配置，就可以让Webpack优先读取ES6的文件
+### 1.4 引用的第三方模块不是 ES6 模块
+
+- 第三方模块不是 ES6 模块，那么无法树摇，选择些第三方同时存在 ES5 和 ES6 的版本
+- 同时在 packages.json 中设置入口配置，就可以让 Webpack 优先读取 ES6 的文件
+
 ```js
 //package.json
 "main": "lib/redux.js",
@@ -131,6 +158,7 @@ var Person = function () {
 ```
 
 ## 参考
-- [Tree-Shaking性能优化实践 - 原理篇](https://juejin.im/post/5a4dc842518825698e7279a9#heading-0)
+
+- [Tree-Shaking 性能优化实践 - 原理篇](https://juejin.im/post/5a4dc842518825698e7279a9#heading-0)
 - [Webpack Tree shaking 深入探究](https://juejin.im/post/5bb8ef58f265da0a972e3434#heading-0)
-- [你的Tree-Shaking并没什么卵用](https://juejin.im/post/5a5652d8f265da3e497ff3de#heading-0)
+- [你的 Tree-Shaking 并没什么卵用](https://juejin.im/post/5a5652d8f265da3e497ff3de#heading-0)

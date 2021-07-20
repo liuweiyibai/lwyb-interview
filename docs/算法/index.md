@@ -131,7 +131,7 @@
       // 将key提前
       this.keys.push(k);
       if (this.keys.length > this.max) {
-        //
+        // 
         delete this.cache[this.keys[0]];
         this.keys.shift();
       }
