@@ -120,7 +120,7 @@
 17. React 自测性能的手段
 18. React v16.3 为什么要替换掉一些生命周期？
 
-    xx
+    将三个 will 的生命周期置位 unsafe，包括 componentWillMount、 componentWillReceiveProps、 componentWillUpdate
 
 ## React 组件面试题
 
@@ -321,7 +321,7 @@ React 只会根据 vdom 的 diff 结果更新 DOM 真正发生改变的部分
 
 - render 在什么时候会被触发？
 
-    setState
+  setState
 
 - 写出 React 动态改变 class 切换组件样式
 - React 中怎么操作虚拟 DOM 的 Class 属性？
