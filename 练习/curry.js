@@ -10,7 +10,7 @@ function curry(func) {
   };
 }
 
-function curry2(fn, ...args) {
+function curry(fn, ...args) {
   return function curried(...args2) {
     var currentArgs = [...args, ...args2];
     if (currentArgs.length >= fn.length) {
@@ -30,6 +30,6 @@ function add(a, b, c) {
 var add2 = curry(add);
 // console.log(add2(1)(2)(1));
 
-var add3 = curry2(add,1);
+var add3 = curry2(add, 1);
 add3(1)(1);
 console.log(add3(3)(1));
