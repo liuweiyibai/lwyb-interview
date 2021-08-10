@@ -21,14 +21,14 @@
  * 12.
  */
 
-function App(){
-  return <Router route={asyncLoad(()=>import('./component'))}></Router>
+function App() {
+	return <Router route={asyncLoad(() => import('./component'))}></Router>
 }
 
-function asyncLoad(load){
-  load.then(({default:component})=>{
-    this.setState({
-      component
-    })
-  })
+function asyncLoad(load) {
+	const [component, setComponent] = useState(null)
+	load.then(({ default: component }) => {
+		setComponent(component)
+	})
+	return component
 }
