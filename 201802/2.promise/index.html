@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container .ball {
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+            position: absolute;
+            left: 0
+        }
+
+        .container .ball:nth-child(1) {
+            top: 20px;
+        }
+
+        .container .ball:nth-child(2) {
+            top: 140px;
+        }
+
+        .container .ball:nth-child(3) {
+            top: 260px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+    </div>
+    <script>    
+        let ball = document.querySelectorAll('.ball');
+        let [ball1, ball2, ball3] = [...ball];
+        function move(ele, target, callback) {
+            return new Promise(function (resolve, reject) {
+                let left = parseInt(getComputedStyle(ele)['left']);
+                let timer = setInterval(function () {
+                    if (left >= target) {
+                        clearInterval(timer);
+                        resolve();
+                    } else {
+                        left += 2;
+                        ele.style.left = left + 'px';
+                    }
+                }, 4)
+            })
+        }
+        // async+ await
+        async function a() {
+            await move(ball1, 400);
+            await move(ball2, 400);
+            await move(ball3, 400);
+        }
+        a().then(function(){
+            alert('完成')
+        })
+        // generator的实现
+        // function* m() {
+        //     yield move(ball1, 400);
+        //     yield move(ball2, 400);
+        //     yield move(ball3, 400);
+        // }
+        // function co(it) {
+        //     return new Promise(function (resolve, reject) {
+        //         function next(d) {
+        //             let { value, done } = it.next(d);
+        //             if (!done) {
+        //                 value.then(function (data) { // 2,txt
+        //                     next(data)
+        //                 }, reject)
+        //             } else {
+        //                 resolve(value);
+        //             }
+        //         }
+        //         next();
+        //     });
+        // }
+        // co(m()).then(function(){
+        //     alert('ok')
+        // })
+        // promise实现
+        // move(ball1, 400).then(function () {
+        //     return move(ball2, 400)
+        // }).then(function () {
+        //     return move(ball3, 400)
+        // }).then(function () {
+        //     alert('成功')
+        // })
+
+        // 回调函数处理
+        // move(ball1, 400, function () {
+        //     move(ball2, 400, function () {
+        //         move(ball3, 400, function () {
+        //             alert('结束了')
+        //         })
+        //     })
+        // })
+
+    </script>
+</body>
+
+</html>
+
+
+
+// node (global buffer 字符 模块 fs 文件的操作 流 tcp http express实现 )
+
+// react全家桶 webpack  项目
+
+// koa实现 数据库 测试 项目部署 算法 设计模式 linux运维

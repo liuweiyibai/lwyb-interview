@@ -1,0 +1,14 @@
+body{
+    background: red;
+    transform: rotate(45deg)
+}
+.w1{
+    background-attachment: fixed;
+}
+.a {
+    color:red
+}
+
+.c{
+    background: yellow
+}

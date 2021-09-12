@@ -1,0 +1,22 @@
+{
+  "name": "zf-static-server",
+  "version": "1.0.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "zf-static-server": "bin/www.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "debug": "^3.1.0",
+    "ejs": "^2.5.8",
+    "mime": "^2.3.1",
+    "yargs": "^11.0.0"
+  }
+}
