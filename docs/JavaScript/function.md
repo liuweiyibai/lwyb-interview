@@ -1,5 +1,7 @@
 # JavaScript 函数相关知识点
 
+箭头函数，函数默认参数，arguments，箭头函数可以省略的括号和花括号， 箭头函数的 this 是定死的，指向外层的 this
+
 - call、apply 和 bind 区别
 
   都能改变 this 指向，其中 apply 和 call 返回函数执行结果，bind 返回一个新的函数

@@ -1,5 +1,15 @@
 # JavaScript 对象常见面试题
 
+属性简写、
+
+```js
+// 设置obj3的原型为obj1;
+Object.setPrototypeOf(obj3, obj1);
+obj3.__proto__ = obj1;
+```
+
+原型和原型链，super 在子对象中指向的是\_\_proto\_\_对应的内容
+
 ## 面试题
 
 1. 如何判断函数是普通调用还是 new 调用

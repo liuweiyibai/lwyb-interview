@@ -1,5 +1,17 @@
 # 数组常见面试题
 
+数组常用方法 find findIndex filter some every reduce map forEach reducerRight includes
+reduce 返回的是每一次循环传入函数的执行结果，然后在上一轮循环结果上继续执行函数
+
+迭代器，将伪数组转为 数组
+
+```js
+Array.from;
+Array.prototye.slice.call(伪数组, 0);
+Array.fill;
+Array.of();
+```
+
 1. ['1', '2', '3'].map(parseInt) what & why ?
 
    ['1', '2', '3'].map(parseInt) 的输出结果为 [1, NaN, NaN]。
@@ -28,7 +40,7 @@
    2. es6
 
       ```js
-      var unique = (arr) => [...new Set(arr)];
+      var unique = arr => [...new Set(arr)];
       ```
 
 3. 数组降维，数组扁平化
@@ -36,7 +48,7 @@
    ```js
    function flatten(arr) {
      let res = [];
-     arr.forEach((t) => {
+     arr.forEach(t => {
        if (Array.isArray(t)) {
          res = res.concat(flatten(t));
        } else {
@@ -47,7 +59,7 @@
    }
 
    function flatten(arr) {
-     while (arr.some((t) => Array.isArray(t))) {
+     while (arr.some(t => Array.isArray(t))) {
        arr = [].concat(...arr);
      }
    }
@@ -81,3 +93,42 @@
   Array.from
   Array.prototype.slice.apply(arguments)
 
+## 实现数组的几个方法
+
+```js
+Array.prototype.every = function (fn) {
+  let flag = true;
+  for (let i = 0; i < this.length; i++) {
+    let flag = fn(this[i]);
+    if (!flag) {
+      return false;
+    }
+  }
+  return flag;
+};
+Array.prototype.some = function (fn) {
+  for (let i = 0; i < this.length; i++) {
+    let flag = fn(this[i]);
+    if (flag) {
+      return flag;
+    }
+  }
+  return false;
+};
+Array.prototype.find = function (fn) {
+  for (let i = 0; i < this.length; i++) {
+    let flag = fn(this[i]);
+    if (flag) {
+      return this[i];
+    }
+  }
+};
+Array.prototype.findIndex = function (fn) {
+  for (let i = 0; i < this.length; i++) {
+    let flag = fn(this[i]);
+    if (flag) {
+      return i;
+    }
+  }
+};
+```

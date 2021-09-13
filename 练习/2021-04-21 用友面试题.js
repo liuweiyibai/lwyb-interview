@@ -8,10 +8,6 @@
 
 /**
  * 1. js 实现继承的方式 https://github.com/YvetteLau/Step-By-Step/issues/38
- *
- * https://juejin.cn/post/6844904161071333384
- *
- *
  * 2. js 垃圾回收机制
  * 3. vue mixins 原理
  * 4. vue 预渲染方案
@@ -21,5 +17,18 @@
  * 8. js 基础数据类型
  * 9. nextTick 原理，多次 nextTick 是同步还是异步
  * 10. vue 性能优化
- * 11. vue 子组件更新父组件会更新嘛，为什么
+ * 11. vue 子组件更新父组件会更新嘛，为什么 会
+ * 12.
  */
+
+function App() {
+  return <Router route={asyncLoad(() => import('./component'))}></Router>;
+}
+
+function asyncLoad(load) {
+  const [component, setComponent] = useState(null);
+  load.then(({ default: component }) => {
+    setComponent(component);
+  });
+  return component;
+}
