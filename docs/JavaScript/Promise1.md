@@ -17,19 +17,19 @@
        this.onResolvedCallbacks = [];
        this.onRejectedCallbacks = [];
 
-       let resolve = (value) => {
+       let resolve = value => {
          if (this.status === PENDING) {
            this.status = FULFILLED;
            this.value = value;
-           this.onResolvedCallbacks.forEach((fn) => fn());
+           this.onResolvedCallbacks.forEach(fn => fn());
          }
        };
 
-       let reject = (reason) => {
+       let reject = reason => {
          if (this.status === PENDING) {
            this.status = REJECTED;
            this.reason = reason;
-           this.onRejectedCallbacks.forEach((fn) => fn());
+           this.onRejectedCallbacks.forEach(fn => fn());
          }
        };
 
@@ -40,12 +40,12 @@
        }
      }
 
-     then(onFulfilled = (v) => v, onRejected = (err) => throw err) {
+     then(onFulfilled = v => v, onRejected = err => throw err) {
        // 解决 onFufilled，onRejected 没有传值的问题
-       onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (v) => v;
+       onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v;
        // 因为错误的值要让后面访问到，所以这里也要抛出错误，不然会在之后 then 的 resolve 中捕获
        onRejected =
-         typeof onRejected === 'function' ? onRejected : (err) => throw err;
+         typeof onRejected === 'function' ? onRejected : err => throw err;
        // 每次调用 then 都返回一个新的 promise
        let promise2 = new Promise((resolve, reject) => {
          if (this.status === FULFILLED) {
@@ -105,7 +105,7 @@
        if (value instanceof Promise) {
          return value;
        }
-       return new Promise((resolve) => resolve(value));
+       return new Promise(resolve => resolve(value));
      }
 
      static reject(reason) {
@@ -116,7 +116,7 @@
      // 自己等待自己完成是错误的实现，用一个类型错误，结束掉 promise  Promise/A+ 2.3.1
      if (promise2 === x) {
        return reject(
-         new TypeError('Chaining cycle detected for promise #<Promise>'),
+         new TypeError('Chaining cycle detected for promise #<Promise>')
        );
      }
      // Promise/A+ 2.3.3.3.3 只能调用一次
@@ -130,19 +130,19 @@
            // 不要写成 x.then，直接 then.call 就可以了 因为 x.then 会再次取值，Object.defineProperty  Promise/A+ 2.3.3.3
            then.call(
              x,
-             (y) => {
+             y => {
                // 根据 promise 的状态决定是成功还是失败
                if (called) return;
                called = true;
                // 递归解析的过程（因为可能 promise 中还有 promise） Promise/A+ 2.3.3.3.1
                resolvePromise(promise2, y, resolve, reject);
              },
-             (r) => {
+             r => {
                // 只要失败就失败 Promise/A+ 2.3.3.3.2
                if (called) return;
                called = true;
                reject(r);
-             },
+             }
            );
          } else {
            // 如果 x.then 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.3.4
@@ -162,6 +162,7 @@
    ```
 
 2. Promise 有几种状态, Promise 有什么优缺点 ?
+
 3. Promise 构造函数是同步还是异步执行，then 呢 ?promise 如何实现 then 处理 ?
 
    够造函数只同步执行，then 是微任务，等待事件循环结束
@@ -182,17 +183,34 @@
          // 确保 promises 里每一项都是 Promise 对象
          let item = promises[i];
          Promise.resolve(item)
-           .then((p) => {
+           .then(p => {
              arrs[i] = p;
              // 如果全部执行完毕则返回所有
              if (arrs.length === len) {
                resolve(arrs);
              }
            })
-           .catch((err) => {
+           .catch(err => {
              reject(err);
            });
        }
+     });
+   };
+
+   Promise.all = function (ps) {
+     return new Promise(resolve => {
+       let res = [];
+       let len = ps.length;
+       ps.forEach((p, i) => {
+         Promise.resolve(p)
+           .then(r => {
+             res[i] = r;
+             if (res.length === res.length) {
+               resolve(res);
+             }
+           })
+           .catch(err => {});
+       });
      });
    };
    ```
@@ -212,11 +230,25 @@
    Promise.finally = function (callback) {
      let P = this.constructor; // Promise
      return this.then(
-       (value) => P.resolve(callback()).then(() => value),
-       (reason) =>
+       value => P.resolve(callback()).then(() => value),
+       reason =>
          P.resolve(callback()).then(() => {
            throw reason;
-         }),
+         })
      );
+   };
+   ```
+
+7. Promise.race
+
+   ```js
+   Promise.race = function (ps) {
+     return new Promise(resolve => {
+       ps.forEach(p => {
+         Promsie.resolve(p).then(resp => {
+           resolve(resp);
+         });
+       });
+     });
    };
    ```

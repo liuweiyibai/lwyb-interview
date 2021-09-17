@@ -413,22 +413,6 @@ JavaScript 中基础面试题
 
    5. 不正确使用 delete 会抛出 error:delete 操作（用于从 object 中删除一个属性）不能用于没有配置的属性，在非 strict 模式的代码里删除一个没有配置的属性会失败，但不会有提示，在 strict 模式里，则会抛出 error。
 
-2. js 脚本加载问题，async、defer 问题
-
-   1. defer 要等到整个页面在内存中正常渲染结束（DOM 结构完全生成，以及其他脚本执行完成），在 window.onload 之前执行；如果依赖其他脚本和 DOM 结果，使用 defer
-   2. async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染。如果有多个 defer 脚本，会按照它们在页面出现的顺序加载。多个 async 脚本不能保证加载顺序。如果与 DOM 和其他脚本依赖不强时，使用 async
-
-## BOM & DOM
-
-1. documen.write 和 innerHTML 的区别
-
-   1. document.write 可以重绘整个页面
-   2. innerHTML 只能重绘页面的一部分
-
-2. 什么是 Web Worker
-
-   Web Worker 是为了解决 js 单线程问题的，因为 js 的 ui 和计算是同一个进程，如果计算量比较大就会阻塞 ui 的渲染,所以会引入 Web Worker 来解决这个问题。Web Worker 会独立一个上下文运行一个文件。Web Worker 使用起来非常简单，在“主线程”中执行 new Worker 返回一个 Web Worker 实例，通过监听 onmessage 事件获取消息，通过 postMessage 发送消息：“主线程”和 Worker 之间通过 postMessage 发送消息，通过监听 onmessage 事件来接收消息，从而实现二者的通信。
-
 ## 移动端
 
 1. 移动端和 PC 端有哪些异同
@@ -459,7 +443,7 @@ JavaScript 中基础面试题
    }
 
    function sleep2(ms) {
-     return new Promise((resolve) => {
+     return new Promise(resolve => {
        setTimeout(resolve, ms);
      });
    }
@@ -587,12 +571,12 @@ JavaScript 中基础面试题
     function compose(...args) {
       // 等于零直接执行
       if (args.length === 0) {
-        return (arg) => arg;
+        return arg => arg;
       }
       if (args.length === 1) {
         return args[0]();
       }
-      return args.reduce((fn1, fn2) => (args2) => fn1(fn2(args2)));
+      return args.reduce((fn1, fn2) => args2 => fn1(fn2(args2)));
     }
     ```
 
@@ -722,7 +706,7 @@ JavaScript 中基础面试题
    function clone(obj) {
      if (Array.isArray(obj)) {
        let res = [];
-       obj.forEach((t) => {
+       obj.forEach(t => {
          res.push(clone(t));
        });
        return res;
@@ -963,7 +947,7 @@ JavaScript 中基础面试题
     var str = 'fdsfjkjkjjjkjkjkjjjkjkjjk';
     function findStr(str) {
       let obj = {};
-      str.split('').forEach((t) => {
+      str.split('').forEach(t => {
         if (obj[t]) {
           obj[t] += 1;
         } else {
@@ -971,7 +955,7 @@ JavaScript 中基础面试题
         }
       });
       let max = Math.max.apply(null, Object.values(obj));
-      Object.keys(obj).forEach((t) => {
+      Object.keys(obj).forEach(t => {
         if (obj[t] === max) {
           console.log(t);
         }

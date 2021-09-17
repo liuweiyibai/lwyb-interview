@@ -132,22 +132,3 @@ function new1(ctor) {
   return newObjectPrototype;
 }
 ```
-
-## 手写 object.create
-
-`Object.create()` 方法创建一个新的对象，并以方法的第一个参数作为新对象的`__proto__`属性的值（以第一个参数作为新对象的构造函数的原型对象）
-
-`Object.create()` 方法还有第二个可选参数，是一个对象，对象的每个属性都会作为新对象的自身属性，对象的属性值以 descriptor（Object.getOwnPropertyDescriptor(obj, 'key')）的形式出现，且 enumerable 默认为 false
-
-```js
-// Object.create 实现的效果是将参数 proto 指向新创建对象的 __proto__ 上
-function create(proto, des) {
-  var Fn = function () {};
-  Fn.prototype = proto;
-  var newObj = new Fn();
-  if (des) {
-    Object.defineProperties(newObj, des);
-  }
-  return newObj;
-}
-```

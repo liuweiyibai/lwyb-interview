@@ -5,7 +5,8 @@
 - 什么是微任务
 - 什么是宏任务
 - 为什么要区分微任务宏任务
-- 宏任务，先进先出，执行顺序不可控，需要有更高优先级的任务
+
+  宏任务，先进先出，执行顺序不可控，需要有更高优先级的任务
   浏览器事件循环，完成一次宏任务，清空微任务队列
 
 - node.js 中事件循环
@@ -33,9 +34,9 @@ Promise.all 一个报错
 function PromiseAll(ps) {
   let result = [];
   let counter = 0;
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     for (let p = 0; p < ps.length; p++) {
-      Promise.resolve(ps[p]).then((res) => {
+      Promise.resolve(ps[p]).then(res => {
         result[p] = res;
         counter++;
         if (counter.length === ps.length) {
@@ -45,7 +46,7 @@ function PromiseAll(ps) {
     }
     // 上述方法无法保持 Promise 的顺序
     // 考虑 catch 场景
-  }).catch((err) => {});
+  }).catch(err => {});
 }
 ```
 
@@ -115,4 +116,4 @@ vue 分割任务和 react fiber
 
 vue 模板，watch 组件级别的更新，更新范围很小
 
-react 是根节点整 🌲 运算
+react 是根节点整 🌲 运算，整棵树 diff 通过 fiber 架构，链表来降低 diff 性能消耗

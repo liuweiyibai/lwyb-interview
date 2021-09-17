@@ -1,7 +1,11 @@
 # Tree-shaking
 
+ES6 Module 引入进行静态分析，故而编译的时候正确判断到底加载了那些模块
+
+静态分析程序流，判断那些模块和变量未被使用或者引用，进而删除对应代码
+
 作用：消除无用的 js 代码
-原理：通过 ES6 模块的静态分析，得到引用关系。痛过程序流分析，判断哪些变量未被使用、引用，进而删除此代码
+原理：通过 ES6 模块的静态分析，得到引用关系。通过程序流分析，判断哪些变量未被使用、引用，进而删除此代码
 
 - UglifyJS：消除不会执行的代码
   - 缺点：无法消除无用的引用
@@ -22,16 +26,16 @@
 
 ```js
 //App.js
-import { cube } from './utils.js';
+import { cube } from "./utils.js";
 console.log(cube(2));
 
 //utils.js
 var square = (function (x) {
-  console.log('square');
+  console.log("square");
 })();
 
 export function cube(x) {
-  console.log('cube');
+  console.log("cube");
   return x * x * x;
 }
 ```
@@ -53,19 +57,19 @@ function(e, t, n) {
 
 ```js
 //App.js
-import { Add } from './utils';
+import { Add } from "./utils";
 Add(1 + 2);
 
 //utils.js
-import { isArray } from 'lodash-es';
+import { isArray } from "lodash-es";
 
 export function array(array) {
-  console.log('isArray');
+  console.log("isArray");
   return isArray(array);
 }
 
 export function Add(a, b) {
-  console.log('Add');
+  console.log("Add");
   return a + b;
 }
 ```
@@ -80,7 +84,7 @@ babel6 把类转换成包裹 IIFE，导致树摇失效
 // componetns.js
 export class Person {
   constructor({ name, age, sex }) {
-    this.className = 'Person';
+    this.className = "Person";
     this.name = name;
     this.age = age;
     this.sex = sex;
@@ -96,7 +100,7 @@ babel6 转换结果
 ```js
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
-    throw new TypeError('Cannot call a class as a function');
+    throw new TypeError("Cannot call a class as a function");
   }
 }
 
@@ -106,7 +110,7 @@ var _createClass = (function () {
       var descriptor = props[i];
       (descriptor.enumerable = descriptor.enumerable || !1),
         (descriptor.configurable = !0),
-        'value' in descriptor && (descriptor.writable = !0),
+        "value" in descriptor && (descriptor.writable = !0),
         Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
@@ -126,7 +130,7 @@ var Person = (function () {
       sex = _ref.sex;
     _classCallCheck(this, Person);
 
-    this.className = 'Person';
+    this.className = "Person";
     this.name = name;
     this.age = age;
     this.sex = sex;
@@ -134,7 +138,7 @@ var Person = (function () {
 
   _createClass(Person, [
     {
-      key: 'getName',
+      key: "getName",
       value: function getName() {
         return this.name;
       },
