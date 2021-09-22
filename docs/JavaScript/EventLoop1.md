@@ -1,6 +1,57 @@
 # 事件循环相关
 
+## 相关概念
+
+### 线程
+
+- js 线程 ui 线程 这两个线程是互斥的，目的就是为了保证不产生冲突
+- ui 线程会把更改放到队列中 当 js 线程空闲下来，ui 线程在继续渲染
+
+### webworker 多线程
+
+- 他和 js 主线程不是平级的，主线程可以控制 webworker,webworker 不能操作 dom 不能获取 document,window
+
+### 栈和队列
+
+- 先进后出 函数调用
+
+### node 的特点
+
+- 异步 非阻塞 i/o (libuv)
+
+### 同步和异步 && 阻塞非阻塞
+
+- 阻塞非阻塞指的是调用者的状态
+- 同步和异步指的是被调用者是如何通知的
+
+### 宏任务
+
+- setTimeout setInterval (setImmediate)
+
+### 微任务
+
+Promise.then，then 方法不应该放到宏任务中,默认浏览器的实现放到了微任务中，MutationObserve 不兼容的, MessageChannel 微任务(vue 中 nextTick 实现原理)
+
+> 同步代码先执行 执行是在栈中执行的，微任务会先执行，在执行宏任务，
+
+```js
+console.log(1);
+setTimeout(function () {
+  console.log(2);
+  Promise.resolve(1).then(function () {
+    console.log('promise');
+  });
+});
+setTimeout(function () {
+  console.log(3);
+});
+```
+
+> 先默认走栈 console.log(1); 先走第一个 setTimeout，将微任务放到队列中，执行微任务，微任务执行完再走宏任务 (浏览器过程)
+
 JavaScript 是单线程执行，通过事件循环执行异步任务。
+
+## 面试题
 
 1. JavaScript 是单线程还是多线程的
 
@@ -33,14 +84,14 @@ JavaScript 是单线程执行，通过事件循环执行异步任务。
    new Promise((resolve, reject) => {
      console.log(2);
      resolve();
-   }).then((res) => {
+   }).then(res => {
      console.log(3);
    });
    console.log(4);
    /* 输出
     * 1 -> 2 -> 4 ->3
+    * 解答：第一轮宏任务就是主栈中的同步任务，先输出1，JavaScript 代码执行到promise立即执行输出2， resolve将.then() 中的代码放入到微任务队列，宏任务结束后输出 4，最后执行微任务队列输出3
     */
-   //解答：第一轮宏任务就是主栈中的同步任务，先输出1，JavaScript 代码执行到promise立即执行输出2， resolve将.then() 中的代码放入到微任务队列，宏任务结束后输出 4，最后执行微任务队列输出3
    ```
 
 7. 简单说一下事件循环机制 （Event Loop）
@@ -60,17 +111,17 @@ JavaScript 是单线程执行，通过事件循环执行异步任务。
 
   ```js
   setTimeout(() => console.log(0));
-  new Promise((resolve) => {
+  new Promise(resolve => {
     console.log(1);
     resolve(2);
     console.log(3);
-  }).then((o) => console.log(o));
+  }).then(o => console.log(o));
 
-  new Promise((resolve) => {
+  new Promise(resolve => {
     console.log(4);
     resolve(5);
   })
-    .then((o) => console.log(o))
+    .then(o => console.log(o))
     .then(() => console.log(6));
   // 1 3 4 2 5 6 0
   // Promise 中 then 属于事件循环的微任务
@@ -79,7 +130,7 @@ JavaScript 是单线程执行，通过事件循环执行异步任务。
 
 ## Promise
 
-Promise 的东西有点多，单独拿出来 [地址](/js/promise)
+Promise 的东西有点多，单独拿出来 [地址](/JavaScript/Promise)
 
 ## setTimeout
 

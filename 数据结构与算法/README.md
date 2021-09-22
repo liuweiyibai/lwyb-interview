@@ -7,13 +7,13 @@ JavaScript 中，函数的参数传递方式都是按值传递，没有按引用
 
 ```js
 function factorial(number) {
-	if (number == 1) {
-		return number
-	} else {
-		return number * factorial(number - 1)
-	}
+  if (number == 1) {
+    return number;
+  } else {
+    return number * factorial(number - 1);
+  }
 }
-print(factorial(5))
+print(factorial(5));
 ```
 
 ## 数组
@@ -29,8 +29,15 @@ JavaScript 中的数组是一种特殊的对象，用来表示偏移量的索引
 
 ## 栈
 
+只能从栈顶进行操作。特点是，后入先出
+
+```js
+// 使用 js 模拟栈数据结构实现
+import './stack.js';
+```
+
 ## 队列
 
 ## 阅读位置
 
-[63页](https://clearlywind.com/pdf/数据结构与算法JavaScript描述.pdf)
+[63 页](https://clearlywind.com/pdf/数据结构与算法JavaScript描述.pdf)
